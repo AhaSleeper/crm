@@ -1,5 +1,7 @@
 package com.zhuojh.config;
 
+import java.io.FileInputStream;
+
 /**
  * Created by snow on 2016/2/22.
  */
