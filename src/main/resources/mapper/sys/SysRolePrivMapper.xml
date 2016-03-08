@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.sys.SysRolePrivMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.sys.SysRolePriv" >
+    <id column="PRIV__ROLE_ID" property="privRoleId" jdbcType="VARCHAR" />
+    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+    <result column="PRIV_ID" property="privId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PRIV__ROLE_ID, ROLE_ID, PRIV_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_role_prilivage
+    where PRIV__ROLE_ID = #{privRoleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_role_prilivage
+    where PRIV__ROLE_ID = #{privRoleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.sys.SysRolePriv" >
+    insert into t_role_prilivage (PRIV__ROLE_ID, ROLE_ID, PRIV_ID
+      )
+    values (#{privRoleId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{privId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.sys.SysRolePriv" >
+    insert into t_role_prilivage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="privRoleId != null" >
+        PRIV__ROLE_ID,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="privId != null" >
+        PRIV_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="privRoleId != null" >
+        #{privRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="privId != null" >
+        #{privId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.sys.SysRolePriv" >
+    update t_role_prilivage
+    <set >
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="privId != null" >
+        PRIV_ID = #{privId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PRIV__ROLE_ID = #{privRoleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.sys.SysRolePriv" >
+    update t_role_prilivage
+    set ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      PRIV_ID = #{privId,jdbcType=VARCHAR}
+    where PRIV__ROLE_ID = #{privRoleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

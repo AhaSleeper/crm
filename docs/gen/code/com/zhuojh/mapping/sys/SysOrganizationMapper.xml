@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.sys.SysOrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.sys.SysOrganization" >
+    <id column="ORGANIZATION_ID" property="organizationId" jdbcType="VARBINARY" />
+    <result column="ORGANIZATION_NAME" property="organizationName" jdbcType="VARCHAR" />
+    <result column="ORGANIZATION_NUM" property="organizationNum" jdbcType="VARCHAR" />
+    <result column="ORGANIZATION_DESC" property="organizationDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ORGANIZATION_ID, ORGANIZATION_NAME, ORGANIZATION_NUM, ORGANIZATION_DESC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="byte[]" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_organization
+    where ORGANIZATION_ID = #{organizationId,jdbcType=VARBINARY}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="byte[]" >
+    delete from t_organization
+    where ORGANIZATION_ID = #{organizationId,jdbcType=VARBINARY}
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.sys.SysOrganization" >
+    insert into t_organization (ORGANIZATION_ID, ORGANIZATION_NAME, 
+      ORGANIZATION_NUM, ORGANIZATION_DESC)
+    values (#{organizationId,jdbcType=VARBINARY}, #{organizationName,jdbcType=VARCHAR}, 
+      #{organizationNum,jdbcType=VARCHAR}, #{organizationDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.sys.SysOrganization" >
+    insert into t_organization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="organizationId != null" >
+        ORGANIZATION_ID,
+      </if>
+      <if test="organizationName != null" >
+        ORGANIZATION_NAME,
+      </if>
+      <if test="organizationNum != null" >
+        ORGANIZATION_NUM,
+      </if>
+      <if test="organizationDesc != null" >
+        ORGANIZATION_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=VARBINARY},
+      </if>
+      <if test="organizationName != null" >
+        #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationNum != null" >
+        #{organizationNum,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationDesc != null" >
+        #{organizationDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.sys.SysOrganization" >
+    update t_organization
+    <set >
+      <if test="organizationName != null" >
+        ORGANIZATION_NAME = #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationNum != null" >
+        ORGANIZATION_NUM = #{organizationNum,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationDesc != null" >
+        ORGANIZATION_DESC = #{organizationDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORGANIZATION_ID = #{organizationId,jdbcType=VARBINARY}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.sys.SysOrganization" >
+    update t_organization
+    set ORGANIZATION_NAME = #{organizationName,jdbcType=VARCHAR},
+      ORGANIZATION_NUM = #{organizationNum,jdbcType=VARCHAR},
+      ORGANIZATION_DESC = #{organizationDesc,jdbcType=VARCHAR}
+    where ORGANIZATION_ID = #{organizationId,jdbcType=VARBINARY}
+  </update>
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.sys.SysUserOrgMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.sys.SysUserOrg" >
+    <id column="USER_ORG_ID" property="userOrgId" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zhuojh.model.sys.SysUserOrg" extends="BaseResultMap" >
+    <result column="ORGANIZTION_ID" property="organiztionId" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ORG_ID, USER_ID
+  </sql>
+  <sql id="Blob_Column_List" >
+    ORGANIZTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_user_organization
+    where USER_ORG_ID = #{userOrgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_user_organization
+    where USER_ORG_ID = #{userOrgId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.sys.SysUserOrg" >
+    insert into t_user_organization (USER_ORG_ID, USER_ID, ORGANIZTION_ID
+      )
+    values (#{userOrgId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{organiztionId,jdbcType=VARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.sys.SysUserOrg" >
+    insert into t_user_organization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userOrgId != null" >
+        USER_ORG_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="organiztionId != null" >
+        ORGANIZTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userOrgId != null" >
+        #{userOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="organiztionId != null" >
+        #{organiztionId,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.sys.SysUserOrg" >
+    update t_user_organization
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="organiztionId != null" >
+        ORGANIZTION_ID = #{organiztionId,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where USER_ORG_ID = #{userOrgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhuojh.model.sys.SysUserOrg" >
+    update t_user_organization
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      ORGANIZTION_ID = #{organiztionId,jdbcType=VARBINARY}
+    where USER_ORG_ID = #{userOrgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.sys.SysUserOrg" >
+    update t_user_organization
+    set USER_ID = #{userId,jdbcType=VARCHAR}
+    where USER_ORG_ID = #{userOrgId,jdbcType=VARCHAR}
+  </update>
+</mapper>
