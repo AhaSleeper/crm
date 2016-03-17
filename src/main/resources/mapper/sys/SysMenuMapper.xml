@@ -19,6 +19,30 @@
     from t_menu
     where MENU_ID = #{menuId,jdbcType=VARCHAR}
   </select>
+    <select id="selectByPidIsNull" resultMap="BaseResultMap">
+        select MENU_ID, PID, MENU_NAME, MENU_URL, MENU_TYPE, MENU_ICON, SEQ
+        from t_menu where PID is null ORDER BY SEQ DESC
+    </select>
+    <select id="selectByPid" resultMap="BaseResultMap">
+        select MENU_ID, PID, MENU_NAME, MENU_URL, MENU_TYPE, MENU_ICON, SEQ
+        from t_menu where 1=1
+        <choose>
+            <when test="pid == null">
+                and PID is null ORDER BY SEQ DESC
+            </when>
+            <when test="pid != null and '' !=pid">
+                and PID = #{pid, jdbcType=VARCHAR}
+            </when>
+            <otherwise>
+                !1=1
+            </otherwise>
+        </choose>
+
+    </select>
+    <select id="getMenuList" resultMap="BaseResultMap" parameterType="com.zhuojh.model.sys.SysMenu">
+        select t.MENU_ID, t.PID, t.MENU_NAME, t.MENU_URL, t.MENU_TYPE, t.MENU_ICON, t.SEQ from t_menu t left join t_menu m on t.PID = m.MENU_ID
+        where m.MENU_ID = #{menuId,jdbcType=VARCHAR}
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_menu
     where MENU_ID = #{menuId,jdbcType=VARCHAR}

@@ -14,6 +14,7 @@
         <!--<package name="com.schoolguard.common.school.entity"/>-->
         <!--<package name="com.schoolguard.common.admin.entity"/>-->
         <typeAlias type="com.zhuojh.model.User" alias="user"/>
+        <typeAlias type="com.zhuojh.model.sys.SysMenu" alias="menu"/>
     </typeAliases>
 
     <environments default="production">
@@ -41,5 +42,6 @@
     <mappers>
         <!--<package name="com.schoolguard.commander.domain.admin.mapper"/>-->
         <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/sys/SysMenuMapper.xml"/>
     </mappers>
 </configuration>

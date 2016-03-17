@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/htmlhead :: htmlHead">
+
+</head>
+<body class="no-skin">
+    <!--导航栏-->
+    <div class="navbar" id="navbar" th:include="common/header :: header">
+    </div>
+    <!--页面主体-->
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        </script>
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+            <span class="sr-only">切换菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!--侧边栏 include sidebar-->
+        <div th:replace="common/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <div class="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="#">系统管理</a>
+                    </li>
+                    <li class="active">菜单管理</li>
+                </ul>
+            </div>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <h1>
+                        菜单管理
+                        <small>
+                            <i class="ace-icon fa fa-angle-double-right"></i>
+                            管理系统菜单
+                        </small>
+                    </h1>
+                </div><!-- /.page-header -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="widget-box widget-color-blue2">
+                                    <div class="widget-header">
+                                        <h4 class="widget-title lighter smaller">菜单管理</h4>
+                                    </div>
+
+                                    <div class="widget-body">
+                                        <div class="widget-main padding-8">
+                                            <div id="tree1" class="tree"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <div class="widget-box">
+                                    <div class="widget-header">
+                                        <h4 class="widget-title lighter smaller">菜单详情</h4>
+                                        <div class="pull-right">
+                                            <button id="btnAddMenu" class="btn btn-success" type="button">添加菜单</button>
+                                            <button id="btnEditMenu" class="btn btn-info" type="button">编辑菜单</button>
+                                            <button id="btnDeleteMenu" class="btn btn-danger" type="button">删除菜单</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="widget-body">
+                                        <div class="widget-main padding-8">
+                                            <form class="form-horizontal" role="form">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="pid">父菜单名称</label>
+
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="pid" id="pid" placeholder="" class="col-xs-10 col-sm-5" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="meneName">菜单名称</label>
+
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="menuName" id="meneName" placeholder="菜单名称" class="col-xs-10 col-sm-5" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="menuUrl">Url</label>
+
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="menuUrl" id="menuUrl" placeholder="Url" class="col-xs-10 col-sm-5" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="menuIcon">图标</label>
+
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="menuIcon" id="menuIcon" placeholder="图标" class="col-xs-10 col-sm-5" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="seq">排序码</label>
+
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="seq" id="seq" placeholder="排序码" class="col-xs-10 col-sm-5" />
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix form-actions">
+                                                    <div class="col-md-offset-3 col-md-9">
+                                                        <button class="btn btn-info" type="button">
+                                                            <i class="ace-icon fa fa-check bigger-110"></i>
+                                                            提交
+                                                        </button>
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        <button class="btn" type="reset">
+                                                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                            重置
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                </div><!--/.row-->
+            </div><!--/.page-content-->
+            <!--footer area -->
+        </div><!--/.main-content-->
+    </div>
+
+    <div th:replace="common/htmlfoot :: htmlfoot"></div>
+    <script src="../assets/js/fuelux/fuelux.tree.min.js" th:src="@{/js/fuelux/fuelux.tree.min.js}"></script>
+    <script src="../../static/js/sys/menu.js" th:src="@{/js/sys/menu.js}"></script>
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+
+    </script>
+</body>
+</html>
