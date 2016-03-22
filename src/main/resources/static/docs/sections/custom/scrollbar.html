@@ -91,6 +91,22 @@ $('#my-content').ace_scroll({horizontal: true});
 					<li>
 						<code>touchDrag</code> default=true, which adds touch drag event for touch devices.
 					</li>
+					
+					<li>
+						<code>hideOnIdle</code> will hide scrollbars when user is not scrolling content
+						<br />
+						You may also want to use <code>hideDelay</code> which specifies time before hiding scrollbars
+						and also <code>observeContent</code> which specifies whether content and scrollbar size
+						should be reset before making it visible:
+<pre data-language="javascript">
+ $('#my-content').ace_scroll({
+    //other options
+    hideOnIdle: true,
+    hideDelay: 1500,
+    observeContent: true
+});
+</pre>
+					</li>
 					<!--
 					<li>
 						<code>touchSwipe</code> default=false, which adds touch swipe event instead of drag event.
@@ -209,9 +225,15 @@ $('#some-element').on('ace_drag', function(event) {
 					<li><code>reset</code> resets scrollbar size</li>
 					<li><code>disable</code> disables scrollbars</li>
 					<li><code>enable</code> enables scrollbars</li>
+					<li><code>end</code> scroll to end</li>
+					<li><code>start</code> scroll to start</li>
+					<!--
 					<li><code>destroy</code> destroys scrollbars</li>
-					<li><code>update</code> updates an option (currently only size)</li>
+					-->
+					<li><code>update</code> updates an option (currently only size, style and mousewheel options)</li>
+					<!--
 					<li><code>modify</code> updates options and recreates scrollbars</li>
+					-->
 				</ol>
 			</li>
 			
@@ -323,8 +345,8 @@ $('#my-content').ace_scroll({
 				Each one has several options which you can edit inside:
 				<ol>
 					<li><code>assets/js/ace/ace.js</code></li>
-					<li><code>assets/js/ace.min.js</code></li>
-					<li><code>assets/js/uncompressed/ace.js</code></li>
+					<li><code>assets/js/ace.js</code></li>
+					<li><code>dist/js/ace.min.js</code></li>
 				</ol>
 				<br />
 				Look for <code>sidebar_scrollable</code> and change options as needed.

@@ -24,6 +24,7 @@
 					<li><code>.btn-yellow</code></li>
 					<li><code>.btn-grey</code></li>
 					<li class="space-6"></li>
+					<li><code>.btn-xlg</code></li>
 					<li><code>.btn-mini</code></li>
 					<li><code>.btn-minier</code></li>
 				</ul>
@@ -112,6 +113,10 @@
  </button>
 </pre>
 			</li>
+			
+			<li>
+				Extra <code>.btn-transparent</code> and <code>.no-border</code> options available for <code>.btn-white</code>
+			</li>
 		 </ul>
 		</div>
 		<!-- /section:elements.button.white -->
@@ -134,6 +139,16 @@
    <i class="ace-icon fa fa-floppy-o bigger-160"></i>
    Save
  </button>
+</pre>
+			</li>
+			
+			<li>
+				You can use <code>.width-auto</code> if your text is long:
+<pre data-language="html">
+ <a class="btn btn-app btn-primary width-auto" href="#">
+   <i class="ace-icon fa fa-pencil-square-o fa-2x"></i>
+   &nbsp; Longggggg textttttttt &nbsp;
+ </a>
 </pre>
 			</li>
 		 </ul>
@@ -256,7 +271,26 @@
 		</div>
 		<!-- /section:elements.label -->
 		
-		<h3 class="info-title smaller" data-id="#elements.badge">2. Badges</h3>
+		
+		<h3 class="info-title smaller" data-id="#elements.label.white">2. White Labels</h3>
+		<!-- #section:elements.label.white -->
+		<div class="info-section">
+		 <ul class="info-list list-unstyled">
+			<li>
+<pre data-language="html">
+ <span class="label label-info label-white">Promotion!</span>
+</pre>
+			</li>
+			
+			<li>
+				Please note that white labels don't have "arrow" option
+			</li>
+		 </ul>
+		</div>
+		<!-- /section:elements.label.white -->
+		
+
+		<h3 class="info-title smaller" data-id="#elements.badge">3. Badges</h3>
 		<!-- #section:elements.badge -->
 		<div class="info-section">
 		 <ul class="info-list list-unstyled">
@@ -391,7 +425,7 @@
 			<li>
 				Fontawesome is included and to use it you should have its CSS file included in your document:
 <pre data-language="html">
- &lt;link rel="stylesheet" href="path/to/assets/css/font-awesome.min.css" /&gt;
+ &lt;link rel="stylesheet" href="path/to/assets/css/font-awesome.css" /&gt;
 </pre>
 			Font files should be in the right directory:
 			<code>path/to/assets/fonts</code>
@@ -400,7 +434,7 @@
 			<li>
 				There is also a CDN option in which CSS and font files are hosted for you, which you can use in your production site:
 <pre data-language="html">
- &lt;link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" /&gt;
+ &lt;link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" /&gt;
 </pre>
 			</li>
 		 </ul>
@@ -468,6 +502,14 @@
 				<code>.no-padding-right</code> or <code>.no-padding-left</code> classes to label element.
 			</li>
 			
+			<li>
+				If you want less padding and size for <code>option</code> elements in <code>select</code> dropdowns
+				add <code>.no-option</code> class for example when option element has no value or text:
+<pre data-language="html">
+ <option value="0" class="no-option"></option>
+</pre>
+			</li>
+			
 		 </ul>
 		</div>
 
@@ -514,7 +556,11 @@
 					<li><code>.input-large</code></li>
 					<li><code>.input-xlarge</code></li>
 					<li><code>.input-xxlarge</code></li>
-				</ul>				
+				</ul>
+			</li>
+			
+			<li>
+				<code>.input-transparent</code> can be used for text input and textarea elements.
 			</li>
 			
 			

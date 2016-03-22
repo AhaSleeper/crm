@@ -7,18 +7,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+	<link href="../assets/css/font-awesome.css" rel="stylesheet" />
 
-    <link href="assets/css/docs.css" rel="stylesheet">
     <link href="../assets/css/prettify.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="../assets/css/ace-fonts.css" />
-	<link rel="stylesheet" href="../assets/css/ace.min.css" />
+	<link rel="stylesheet" href="../assets/css/ace.css" class="ace-main-stylesheet" />
 	<!--[if lte IE 9]>
-		<link rel="stylesheet" href="../assets/css/ace-part2.min.css" />
+		<link rel="stylesheet" href="../assets/css/ace-part2.css" class="ace-main-stylesheet" />
 	<![endif]-->
-	<link rel="stylesheet" href="../assets/css/ace-skins.min.css" />
+	<link rel="stylesheet" href="../assets/css/ace-skins.css" />
 	
 	<link href="assets/js/themes/sunburst.css" rel="stylesheet" />
 
@@ -198,17 +197,17 @@
 		<div class="navbar-container container" id="navbar-container">
 			<div class="navbar-header pull-left ace-navbar-brand">
 				<span class="no-skin">
-				 <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+				 <button data-target="#sidebar" type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
 					<span class="sr-only">Toggle sidebar</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				 </button>
 				</span>
-				<a href="#" class="navbar-brand">
+				<a href="#intro" class="navbar-brand">
 					<small>
 						&nbsp;<i class="glyphicon glyphicon-book"></i>&nbsp;
-						Help <span class="smaller-75">(v1.3.1)</span>
+						Help <span class="smaller-75">(v1.3.5)</span>
 					</small>
 				</a><!-- /.brand -->
 			</div>
@@ -249,17 +248,21 @@
 		  <li class="highlight hover">
 			<a href="#changes" class="dropdown-toggle">
 				<span class="menu-icon">&#x2171;.</span>
-				<span class="menu-text">Changes & Updates</span>
+				<span class="menu-text">Changes &amp; Updates</span>
 				<b class="arrow fa fa-angle-right"></b>
 			</a>
 			<b class="arrow"></b>
 			<ul class="submenu">
+			   <li class="hover"><a href="#changes.v10"><i class="menu-icon fa fa-caret-right"></i> v1.3.4 <i class="fa fa-long-arrow-right"></i> v1.3.5</a></li>
+				<li class="hover"><a href="#changes.v9"><i class="menu-icon fa fa-caret-right"></i> v1.3.3 <i class="fa fa-long-arrow-right"></i> v1.3.4</a></li>
+				<li class="hover"><a href="#changes.v8"><i class="menu-icon fa fa-caret-right"></i> v1.3.2 <i class="fa fa-long-arrow-right"></i> v1.3.3</a></li>
+				<li class="hover"><a href="#changes.v7"><i class="menu-icon fa fa-caret-right"></i> v1.3.1 <i class="fa fa-long-arrow-right"></i> v1.3.2</a></li>
 				<li class="hover"><a href="#changes.v6"><i class="menu-icon fa fa-caret-right"></i> v1.3.0 <i class="fa fa-long-arrow-right"></i> v1.3.1</a></li>
 				<li class="hover"><a href="#changes.v5"><i class="menu-icon fa fa-caret-right"></i> v1.2.0 <i class="fa fa-long-arrow-right"></i> v1.3.0</a></li>
 				<li class="hover"><a href="#changes.v4"><i class="menu-icon fa fa-caret-right"></i> v1.1.3 <i class="fa fa-long-arrow-right"></i> v1.2.0</a></li>
 				<li class="hover"><a href="#changes.v3"><i class="menu-icon fa fa-caret-right"></i> v1.1.2 <i class="fa fa-long-arrow-right"></i> v1.1.3</a></li>
 				<li class="hover"><a href="#changes.v2"><i class="menu-icon fa fa-caret-right"></i> v1.1.0 <i class="fa fa-long-arrow-right"></i> v1.1.2</a></li>
-				<li class="hover"><a href="#changes.fontawesome"><i class="menu-icon fa fa-caret-right"></i> Fontawesome & Icons</a></li>
+				<li class="hover"><a href="#changes.fontawesome"><i class="menu-icon fa fa-caret-right"></i> Fontawesome &amp; Icons</a></li>
 			</ul>
 			<b class="arrow"></b>
 		  </li>
@@ -294,6 +297,7 @@
 				<li class="hover"><a href="#basics/content"><i class="menu-icon fa fa-caret-right"></i> Content</a></li>
 				<li class="hover"><a href="#basics/ajax"><i class="menu-icon fa fa-caret-right"></i> Ajax Content</a></li>
 				<li class="hover"><a href="#basics/footer"><i class="menu-icon fa fa-caret-right"></i> Footer</a></li>
+				<li class="hover"><a href="#basics/javascript"><i class="menu-icon fa fa-caret-right"></i> Javascript</a></li>
 			</ul>
 		  </li>
 
@@ -306,12 +310,12 @@
 			<b class="arrow"></b>
 			<ul class="submenu">
 				<li class="hover"><a href="#elements.button"><i class="menu-icon fa fa-caret-right"></i> Buttons</a></li>
-				<li class="hover"><a href="#elements.label-badge"><i class="menu-icon fa fa-caret-right"></i> Labels & Badges</a></li>
+				<li class="hover"><a href="#elements.label-badge"><i class="menu-icon fa fa-caret-right"></i> Labels &amp; Badges</a></li>
 				<li class="hover"><a href="#elements.icon"><i class="menu-icon fa fa-caret-right"></i> Icons</a></li>
 				<li class="hover"><a href="#elements.form"><i class="menu-icon fa fa-caret-right"></i> Form Control</a></li>
 				<li class="hover"><a href="#elements.tab"><i class="menu-icon fa fa-caret-right"></i> Tabs</a></li>
 				<li class="hover"><a href="#elements.accordion"><i class="menu-icon fa fa-caret-right"></i> Accordion</a></li>
-				<li class="hover"><a href="#elements.tooltip"><i class="menu-icon fa fa-caret-right"></i> Tooltip & Popover</a></li>
+				<li class="hover"><a href="#elements.tooltip"><i class="menu-icon fa fa-caret-right"></i> Tooltip &amp; Popover</a></li>
 				<li class="hover"><a href="#elements.dropdown"><i class="menu-icon fa fa-caret-right"></i> Dropdown</a></li>
 				<li class="hover"><a href="#elements.other"><i class="menu-icon fa fa-caret-right"></i> Other</a></li>
 			</ul>
@@ -328,9 +332,10 @@
 				<li class="hover"><a href="#custom/widget-box"><i class="menu-icon fa fa-caret-right"></i> Widget Boxes</a></li>
 				<li class="hover"><a href="#custom/scrollbar"><i class="menu-icon fa fa-caret-right"></i> Scrollbars</a></li>
 				<li class="hover"><a href="#custom/file-input"><i class="menu-icon fa fa-caret-right"></i> File Input</a></li>
-				<li class="hover"><a href="#custom/checkbox"><i class="menu-icon fa fa-caret-right"></i> Checkbox & Switches</a></li>				
+				<li class="hover"><a href="#custom/checkbox"><i class="menu-icon fa fa-caret-right"></i> Checkbox &amp; Switches</a></li>				
 				<li class="hover"><a href="#custom/colorpicker"><i class="menu-icon fa fa-caret-right"></i> Simple Color Picker</a></li>
 				<li class="hover"><a href="#custom/inline-editable"><i class="menu-icon fa fa-caret-right"></i> Inline Editable Addons</a></li>
+				<li class="hover"><a href="#custom/content-slider"><i class="menu-icon fa fa-caret-right"></i> Content Slider</a></li>
 				<li class="hover"><a href="#custom/onpage-help"><i class="menu-icon fa fa-caret-right"></i> Onpage Help</a></li>
 				<li class="hover"><a href="#custom/extra"><i class="menu-icon fa fa-caret-right"></i> Extra Classes</a></li>
 			</ul>
@@ -353,8 +358,12 @@
 				<li class="hover"><a href="#pages/email"><i class="menu-icon fa fa-caret-right"></i> Email Templates</a></li>
 				<li class="hover"><a href="#pages/profile"><i class="menu-icon fa fa-caret-right"></i> Profile</a></li>
 				<li class="hover"><a href="#pages/timeline"><i class="menu-icon fa fa-caret-right"></i> Timeline</a></li>
+				<li class="hover"><a href="#pages/search"><i class="menu-icon fa fa-caret-right"></i> Search Results</a></li>
 				<li class="hover"><a href="#pages/login"><i class="menu-icon fa fa-caret-right"></i> Login</a></li>
 				<li class="hover"><a href="#pages/error"><i class="menu-icon fa fa-caret-right"></i> Error</a></li>
+				
+				<li class="hover"><a href="#pages/frontend"><i class="menu-icon fa fa-caret-right"></i> Frontend</a></li>
+
 			</ul>
 		  </li>
 		  
@@ -379,7 +388,6 @@
 						<li class="hover"><a href="#plugins/tools.less-js">Less.js</a></li>
 						<li class="hover"><a href="#plugins/tools.mustache">Mustache Compilers</a></li>
 						<li class="hover"><a href="#plugins/tools.uglifyjs">UglifyJS</a></li>
-						<li class="hover"><a href="#plugins/tools.yui-compressor">YUI Compressor</a></li>
 					</ul>
 				</li>
 				
@@ -387,7 +395,7 @@
 				<li class="hover"><a href="#plugins/jquery"><i class="menu-icon fa fa-caret-right"></i> jQuery</a></li>
 				<li class="hover">
 					<a href="#plugins/date-time" class="dropdown-toggle">
-						<i class="menu-icon fa fa-caret-right"></i> Date & Time
+						<i class="menu-icon fa fa-caret-right"></i> Date &amp; Time
 						<b class="arrow fa fa-angle-right"></b>
 					</a>
 
@@ -396,6 +404,7 @@
 						<li class="hover"><a href="#plugins/date-time.datepicker">Date picker</a></li>
 						<li class="hover"><a href="#plugins/date-time.daterangepicker">Daterange Picker</a></li>
 						<li class="hover"><a href="#plugins/date-time.timepicker">Time Picker</a></li>
+						<li class="hover"><a href="#plugins/date-time.datetimepicker">Datetime Picker</a></li>
 						<li class="hover"><a href="#plugins/date-time.fullcalendar">FullCalendar</a></li>
 					</ul>
 				</li>
@@ -417,7 +426,7 @@
 				
 				<li class="hover">
 					<a href="#plugins/tables" class="dropdown-toggle">
-						<i class="menu-icon fa fa-caret-right"></i> Table & Grids
+						<i class="menu-icon fa fa-caret-right"></i> Table &amp; Grids
 						<b class="arrow fa fa-angle-right"></b>
 					</a>
 
@@ -430,7 +439,7 @@
 				
 				<li class="hover">
 					<a href="#plugins/input" class="dropdown-toggle">
-						<i class="menu-icon fa fa-caret-right"></i> Input & Controls
+						<i class="menu-icon fa fa-caret-right"></i> Input &amp; Controls
 						<b class="arrow fa fa-angle-right"></b>
 					</a>
 
@@ -439,6 +448,8 @@
 						<li class="hover"><a href="#plugins/input.chosen">Chosen</a></li>
 						<li class="hover"><a href="#plugins/input.select2">Select2</a></li>
 						<li class="hover"><a href="#plugins/input.tag-input">Tag Input</a></li>
+						<li class="hover"><a href="#plugins/input.duallist">Dual listbox</a></li>
+						<li class="hover"><a href="#plugins/input.multiselect">Multiselect</a></li>
 
 						<li class="hover"><a href="#plugins/input.masked-input">Masked Input</a></li>
 						<li class="hover"><a href="#plugins/input.limiter">Input Limiter</a></li>
@@ -493,6 +504,9 @@
 						<li class="hover"><a href="#plugins/misc.gritter">Gritter</a></li>
 						<li class="hover"><a href="#plugins/misc.nestable-list">Nestable Lists</a></li>
 						<li class="hover"><a href="#plugins/misc.slimscroll">SlimScroll</a></li>
+						
+						<li class="hover"><a href="#plugins/misc.raty">Star Rating</a></li>
+						<li class="hover"><a href="#plugins/misc.holder-js">Holder.js</a></li>
 					</ul>
 				</li>
 
@@ -508,11 +522,12 @@
 			</a>
 			<b class="arrow"></b>
 			<ul class="submenu">
+				<li class="hover"><a href="#settings"><i class="menu-icon fa fa-caret-right"></i> Overview</a></li>
 				<li class="hover"><a href="#settings.page"><i class="menu-icon fa fa-caret-right"></i> Page options</a></li>
 				<li class="hover"><a href="#settings.sidebar"><i class="menu-icon fa fa-caret-right"></i> Sidebar options</a></li>
 				<li class="hover"><a href="#settings.skins"><i class="menu-icon fa fa-caret-right"></i> Skins</a></li>
 				<li class="hover"><a href="#settings.rtl"><i class="menu-icon fa fa-caret-right"></i> RTL (right to left)</a></li>
-				<li class="hover"><a href="#settings.storage"><i class="menu-icon fa fa-caret-right"></i> Cookies & Storage</a></li>
+				<li class="hover"><a href="#settings.storage"><i class="menu-icon fa fa-caret-right"></i> Cookies &amp; Storage</a></li>
 			</ul>
 		  </li>
 		  
@@ -528,7 +543,7 @@
 		   <li class="highlight">
 			<a href="#issues">
 				<i class="menu-icon fa fa-gavel"></i>
-				<span class="menu-text">Issues</span>
+				<span class="menu-text">Notes &amp; Issues</span>
 			</a>
 			<b class="arrow"></b>
 		  </li>
@@ -557,18 +572,18 @@
 
 
 	<!--[if !IE]> -->
-	<script src="../assets/js/jquery.min.js"></script>
+	<script src="../assets/js/jquery.js"></script>
 	<!-- <![endif]-->
 	<!--[if IE]>
-	<script src="../assets/js/jquery1x.min.js"></script>
+	<script src="../assets/js/jquery1x.js"></script>
 	<![endif]-->
 	
-	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/bootstrap.js"></script>
     <script src="../assets/js/prettify.js"></script>
 	
-	<script src="../assets/js/ace-extra.min.js"></script>
-	<script src="../assets/js/ace.min.js"></script>
-	<script src="../assets/js/ace-elements.min.js"></script>
+	<script src="../assets/js/ace-extra.js"></script>
+	<script src="../assets/js/ace-elements.js"></script>
+	<script src="../assets/js/ace.js"></script>
 
 
 	<script>
@@ -661,8 +676,10 @@
 			var text = $.trim(link.find('.menu-text').text());
 			if(text.length == 0) text = $.trim(link.text());
 			document.title = text + " - Ace Docs";
+			//if(text == '');
 
-			if(!scrollToTarget(href)) {
+			var ret = scrollToTarget(href);
+			if(ret === false) {
 				$('.page-content').empty().html('<i class="ace-icon fa fa-spinner fa-spin blue fa-2x"></i>');
 			
 				//otherwise try downloading the page
@@ -674,11 +691,14 @@
 					$('.page-content').addClass('hidden').empty().html(result);
 					formatResult();
 					
-					scrollToTarget(href);
+					ret = scrollToTarget(href);
+					if(ret) document.title = ret + " - Ace Docs";
 				}).fail(function() {
 					$('.page-content').empty().html('<div class="alert alert-danger"><i class="fa fa-warning"></i> Unable to load page!</div>');
 				});
 			}
+			else if(ret) document.title = ret + " - Ace Docs";
+
 
 			return true;
 		}
@@ -722,8 +742,8 @@
 				
 				if(!target.is('h1')) target.prepend('<i class="fa fa-angle-right red"></i> ');
 				prev_target = target;
-				
-				return true;
+	
+				return target.text().replace(/^[\d\s\.]+/ig, '');//convert "4. something" to "something"
 			}
 			return false;//section not found, go back and get it via ajax
 		}

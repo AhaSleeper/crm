@@ -315,6 +315,38 @@ input[type=checkbox].ace.ace-switch.ace-switch-4:checked + .lbl::before {
  		 </ul>
 		</div>
 		<!-- /section:custom/checkbox.notes -->
+		
+		<h3 class="info-title smaller">4. Options</h3>
+		<div class="info-section">
+		 <ul class="info-list list-unstyled">
+			<li>
+				For a slightly larger version of checkbox and radio buttons, you can add <code>.input-lg</code>
+				class to the input element:
+<pre data-language="html">
+ <label>
+  <input type="checkbox" name="myoption" class="ace input-lg" />
+  <span class="lbl"></span>
+ </label>
+</pre>
+			</li>
+		 
+			<li>To add space between checkbox and its label you can use <code>.padding-*</code> class for <code>.lbl</code> element:
+			<div class="well well-sm">
+				<label>
+				  <input type="checkbox" name="myoption" class="ace" />
+				  <span class="lbl padding-16">Padding 16</span>
+				</label>
+			</div>
+<pre data-language="html">
+ <label>
+  <input type="checkbox" name="myoption" class="ace" />
+  <span class="lbl padding-8"></span>
+ </label>
+</pre>
+			Possible values are <code>.padding-2</code> <code>.padding-4</code> ... <code>.padding-16</code>
+			</li>
+		 </ul>
+		</div>
 
 		
 	</div>

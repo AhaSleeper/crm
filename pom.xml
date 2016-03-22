@@ -134,19 +134,13 @@
         </filters>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <excludes>
-                    <exclude>static/css/fonts/**</exclude>
-                    <exclude>static/css/font/**</exclude>
-                </excludes>
-            </resource>
-            <resource>
                 <directory>${project.basedir}/src/main/resources</directory>
                 <filtering>false</filtering>
+                <excludes>
+                    <exclude>*.properties</exclude>
+                </excludes>
                 <includes>
-                    <include>static/css/fonts/**</include>
-                    <include>static/css/font/**</include>
+                    <include>**</include>
                 </includes>
             </resource>
         </resources>

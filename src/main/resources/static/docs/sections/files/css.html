@@ -68,10 +68,10 @@ has been changed to:
 		 <ul class="info-list list-unstyled">
 			<li>
 				Third party plugin CSS files are inside
-				<code>assets/css/</code> folder which are mostly uncompressed due to their small size.
+				<code>assets/css/</code> folder.
 			</li>
 			<li>
-				But if some are minified, you can find uncompressed version inside <code>assets/css/<b>uncompressed</b></code> folder.
+				Minified version is find inside <code>dist/css/</code> folder.
 			</li>
 		 </ul>
 		</div>
@@ -148,7 +148,7 @@ has been changed to:
 						<code>ace-ie.css</code> which has some rules for IE9 and below and should be included for IE only using conditional comments:
 <pre class="light-green">
 &lt;!--[if lte IE <span class="light-red bolder">9</span>&gt;
-&lt;link rel="stylesheet" href="<span class="purple bolder">path/to/assets/<span class="light-blue">ace-ie.min.css</span></span>" /&gt;
+&lt;link rel="stylesheet" href="<span class="purple bolder">path/to/assets/<span class="light-blue">ace-ie.css</span></span>" /&gt;
 &lt;![endif]--&gt;
 </pre>
 					</li>
@@ -157,7 +157,7 @@ has been changed to:
 						<code>ace-part2.css</code> which is used when main CSS file (ace.css) is too large for IE9 and below (the 4096 selector limit).
 <pre class="light-green">
 &lt;!--[if lte IE <span class="light-red bolder">9</span>&gt;
-&lt;link rel="stylesheet" href="<span class="purple bolder">path/to/assets/<span class="light-blue">ace-part2.min.css</span></span>" /&gt;
+&lt;link rel="stylesheet" href="<span class="purple bolder">path/to/assets/<span class="light-blue">ace-part2.css</span></span>" /&gt;
 &lt;![endif]--&gt;
 </pre>
 						See the following links for more info about this IE limitation:
@@ -247,7 +247,7 @@ has been changed to:
 						<b>bootstrap.css</b>
 					</li>
 					<li>
-						<b>fontawesome.css</b> if you want to use Fontawesome icons.
+						<b>font-awesome.css</b> if you want to use Fontawesome icons.
 					</li>
 					<li>
 						<b>ace-fonts.css</b>
@@ -307,9 +307,9 @@ has been changed to:
 
  &lt;link href="path/to/ace-fonts.css" rel="stylesheet" /&gt;&lt;!-- you can also use google hosted fonts --&gt;
 
- &lt;link href="path/to/ace.min.css" rel="stylesheet" /&gt;
+ &lt;link href="path/to/ace.min.css" rel="stylesheet" class="ace-main-stylesheet" /&gt;
  &lt;!--[if lte IE 9]&gt;
-  &lt;link href="path/to/ace-part2.min.css" rel="stylesheet" /&gt;
+  &lt;link href="path/to/ace-part2.min.css" rel="stylesheet" class="ace-main-stylesheet" /&gt;
  &lt;![endif]--&gt;
 
  &lt;link href="path/to/ace-skins.min.css" rel="stylesheet" /&gt;&lt;!-- only if needed --&gt;
@@ -375,7 +375,7 @@ has been changed to:
 				Icon font files are located inside: <code>assets/fonts</code>
 				and  you can also serve CDN hosted fonts, for example:
 				<pre data-language="html">
-&lt;link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" /&gt;</pre>
+&lt;link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" /&gt;</pre>
 
 				<div class="space-4"></div>
 				Please also see <a href="#elements.icon" class="help-more">Icons section</a> for more info.

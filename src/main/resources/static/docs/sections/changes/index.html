@@ -11,9 +11,453 @@
   
   
   
+  
+  <div class="hr hr-double hr32"></div>
+  <h2 class="blue lighter help-title" data-id="#changes.v10">
+	Ace v1.3.4 to v1.3.5 (current version)
+  </h2>
+  <div class="space-4"></div>
+
+  <div class="help-content">
+	  <h3 class="info-title smaller">1. New Features / Improvements / Fixes / Updates</h3>
+	  <div class="info-section">
+		<ul class="list-unstyled  info-list">
+			<li>
+				<a href="#pages/search">Search results page</a>
+			</li>
+			
+			<li>
+				<a href="#pages/frontend">Landing &amp; Coming Soon page</a>
+			</li>
+			
+			<li>
+				<a href="#basics/javascript">RequireJS example</a>
+			</li>
+			
+			
+			<li>
+				<code>close_mobile_menu</code> &amp; <code>close_dropdowns</code> options for <a href="#basics/ajax">Ajax</a>
+			</li>
+			
+			<li>
+				<code>hide_open_subs</code> option for <a href="#basics/sidebar">sidebar</a>
+			</li>
+
+			<li>
+				<code>.input-transparent</code> for text input and textarea elements
+			</li>
+			
+			<li>
+				<code>.no-border</code> &amp; <code>.btn-transparent</code> for <code>.btn-white</code> buttons
+			</li>
+		</ul>
+	</div>
+	
+	
+	<h3 class="info-title smaller">2. Ace Changes</h3>
+	<div class="info-section">
+		<ul class="list-unstyled  info-list">
+			<li>
+				Ace demo functions are now part of <code>ace.demo.functions</code> object inside <code>assets/js/ace/ace.js</code> 
+				and to initiate them all you should call <code>ace.demo.init</code>.
+				<br />
+				It's enabled by default in Ace's demo so you don't need to change anything.
+				<br />
+				See <a href="#basics/javascript">Javascript section</a> for more info.
+			</li>
+			
+			<li>
+				Saving/Restoring element states is now different and you don't need <code>try/catch</code> javascript blocks inside HTML.
+				<br />
+				Please see <a href="#settings">settings section</a> for more information about this.
+			</li>
+			
+			<li>
+				Functions that are used to respond to (orange) settings box in Ace's demo were inside <code>assets/js/ace-extra.js</code>
+				and now are moved to <code>assets/js/ace/ace.settings.js</code> (which is later merged into <code>ace/ace.js</code> if required)
+			</li>
+		</ul>
+	</div>
+
+  </div><!-- /.help-content -->
+  
+
+    
+  <div class="hr hr-double hr32"></div>
+  <h2 class="blue lighter help-title" data-id="#changes.v9">
+	Ace v1.3.3 to v1.3.4
+  </h2>
+  <div class="space-4"></div>
+
+  <div class="help-content">
+	  <h3 class="info-title smaller">1. New Features / Improvements / Fixes / Updates</h3>
+	  <div class="info-section">
+		<ul class="list-unstyled  info-list">
+			<li>
+				Ajax has "post" and "reload" methods and new events related to that
+			</li>
+			
+			<li>
+				File input element now triggers a <code>file.preview.ace</code> event and passes info about image width and height
+			</li>
+			
+			<li>
+				Native scrollbars are used for fixed sidebar on touch devices. This only applies if you are using second style in "JS Builder tool"
+			</li>
+			
+			<li>
+				<code>folderSelect</code> option for treeview element is now enabled
+			</li>
+		</ul>
+	</div>
+	
+
+	<h3 class="info-title smaller">2. Third Party Changes</h3>
+	<div class="info-section">
+		<ul class="list-unstyled  info-list">
+			<li>
+				"TableTools" and "ColVis" extensions for dataTables are deprecated and you should use "buttons" extension instead
+			</li>
+			<li>
+				Autosize plugin for textareas does not depend on jQuery and usage syntax is different now. File name is <code>autosize.js</code> now
+			</li>
+			<li>
+				Bootstrap datepicker CSS file was named <i>datepicker.css</i> and has been renamed to <i>bootstrap-datepicker3.css</i>
+			</li>
+			<li>
+				Datetime picker plugin needs <code>icons</code> option to be specified now
+			</li>
+			<li>
+				In order to display timepicker plugin when the input element receives focus, you should explicitly call a function to display it on input focus
+			</li>
+			<li>
+				Dropzone form element needs <code>.well</code> class for propery styling
+			</li>
+			<li>
+				jqGrid file is renamed to <code>jquery.jqGrid.js</code>
+			</li>
+		</ul>
+	</div>
+
+  </div><!-- /.help-content -->
+  
+  
+  
+  
+  <div class="hr hr-double hr32"></div>
+  <h2 class="blue lighter help-title" data-id="#changes.v8">
+	Ace v1.3.2 to v1.3.3
+  </h2>
+  <div class="space-4"></div>
+
+  <div class="help-content">
+	  <h3 class="info-title smaller">1. New Features / Improvements / Fixes / Updates</h3>
+	  <div class="info-section">
+		<ul class="list-unstyled  info-list">
+			<li>
+				Option for larger radio and checkbox size by adding <code>.input-lg</code> class
+			</li>
+			
+			<li>
+				Spinner input has now three sizes by specifying <code>.input-sm</code> or <code>.input-lg</code>
+				class for text input element
+			</li>
+			
+			<li>
+				New white label options by adding <code>.label-white</code> class
+			</li>
+			
+			<li>
+				<code>container</code> option to add content sliders inside another element (for example inside a modal box)
+			</li>
+			
+			<li>
+				New <code>.toolbox-vertical</code> class for vertical toolbox inside a widget box
+			</li>
+			
+			<li>
+				New ajax method <code>loadAddr</code> and some other options such as <code>loading_overlay</code>
+			</li>
+			
+			<li>
+				Option to pass arguments to Ace functions and elements using <code>data-*</code> attributes.
+				<br />
+				Please see <a href="#basics/sidebar.functions">sidebar functions</a>,
+				<a href="#basics/ajax.options">ajax options</a>
+				or custom elements such as file input, scrollbars, content sliders for more info.
+			</li>
+			
+			<li>
+				Optional PACE plugin to display page progess bars in ajax pages
+			</li>
+			
+			<li>
+				TableTools and ColVis extensions for dataTables plugin
+			</li>
+		</ul>
+	</div>
+	
+
+	<h3 class="info-title smaller">2. Ace Changes</h3>
+	<div class="info-section">
+		<ul class="list-unstyled  info-list">
+			<li>
+				Moved "dataTables" plugin and its extenstions to a separate <code>assets/js/dataTables</code>
+				folder
+			</li>
+			<li>
+				"Open Sans" font files have been renamed and moved to <code>assets/fonts</code> directory
+			</li>
+			
+			<li>
+				<code>.btn-lg</code> is now a bit smaller and <code>.btn-xlg</code> is a slightly larger version
+			</li>
+			
+			<li>
+				<code>.btn-xs</code> is now a bit larger and <code>.btn-mini</code> is a slightly smaller version
+			</li>
+			
+			<li>
+				In ajax options,
+				<code>loading_icon</code> now defaults to <code>fa fa-spin fa-spinner fa-2x orange</code>.
+			</li>
+		</ul>
+	</div>
+
+  </div><!-- /.help-content -->
+  
+  
+  
+  
+  <div class="hr hr-double hr32"></div>
+  <h2 class="blue lighter help-title" data-id="#changes.v7">
+	Ace v1.3.1 to v1.3.2
+  </h2>
+  <div class="space-4"></div>
+
+  <div class="help-content">
+	  <h3 class="info-title smaller">1. New Features / Improvements / Fixes / Updates</h3>
+	  <div class="info-section">
+		<ul class="list-unstyled  info-list">
+			<li>
+				<a href="#custom/content-slider">Content sliders</a> based on Bootstrap modals
+			</li>
+			<li>
+				Navbar dropdowns automatically become modal like on small devices
+			</li>
+			<li>
+				Updated sidebar functions allow for <a href="#basics/sidebar.multiple">multiple sidebars</a>.
+				<br />
+				Make sure to see <a href="#basics/sidebar.functions">sidebar functions</a> and apply the necessary changes
+			</li>
+			<li>
+				Automatic scrollbars for sidebar submenus when needed
+			</li>
+			<li>
+				Delay before hiding submenus in minimized mode or horizontal mode
+			</li>
+			<li>
+				Automatic scrollbars for fullscreen widgets
+			</li>
+			<li>
+				Horizontal menu now has minimized style as well
+			</li>
+			<li>
+				Image preview for file input element
+			</li>
+			<li>
+				New custom scroller option 'hideOnIdle'
+			</li>
+			
+			<li>
+				Ajax content loading can now be applied to any element
+			</li>
+			
+			<li>New <code>data-auto-hide="true"</code> option for sidebar allows automatic hiding of sidebar in mobile view when users clicks/taps outside of sidebar area</li>
+			
+			<li>
+				New <a href="#plugins/misc.rating">star rating</a> plugin
+			</li>
+			<li>
+				New <a href="#plugins/input.duallist">dual listbox</a> plugin
+			</li>
+			<li>
+				New <a href="#plugins/input.multiselect">bootstrap multiselect</a> plugin
+			</li>
+			<li>
+				jQuery mousewheel plugin included but not enabled by default.
+				<br />
+				You can use <code>assets/js/jquery.mobile.custom.js</code> to enable it.
+			</li>
+
+			<li>
+				Updated all scripts and plugins to their latest version
+			</li>
+			<li>
+				Several fixes and improvements
+			</li>
+		</ul>
+	</div>
+	
+	<h3 class="info-title smaller">2. Ace Changes</h3>
+	<div class="info-section">
+		<ul class="list-unstyled  info-list">
+			<li>
+				Gruntfile.js build file added.
+				<br />
+				Note that you should run <code>npm install</code> and install required node.js packages first if you want to use it.
+			</li>
+			<li>
+				Also node.js modules inside <code>mustache/js</code> and <code>build</code> folders are removed
+				and you should run <code>npm install</code> command to install them or <code>npm update</code> to update.
+			</li>
+			
+			
+			<li>
+				CSS and JS files inside <code>assets</code> folder are not compressed (non-minified) now
+				and minified files are inside <code>dist</code> folder
+			</li>
+		
+			<li>
+				Ace functions used to be like <em>ace.handle_side_menu()</em>, etc ...
+				<br />
+				Now they are wrapped in jQuery functions and need to be initialized by calling the functions.
+				<br />
+				For more info make sure to see <a href="#basics/sidebar.functions">sidebar functions</a> section.
+			</li>
+			
+			<li>
+				Sidebar toggle buttons such as collapse/expand button or mobile view menu toggler should have
+				<code>data-target="#sidebar_id"</code> attribute
+			</li>
+			
+			<li>
+				<code>.main-content-inner</code> is now necessary and should be inserted immediately
+				inside <code>.main-content</code> as the first and only direct child:
+<pre data-language="html">
+<div class="main-content"><div class="main-content-inner">
+  ... other elements and content here ...
+</div></div>
+</pre>
+			</li>
+			
+			<li>
+				Ajax content loading can now be applied to any element and has several changes and new functions.
+				<br />
+				By default <code>.page-content-area</code> element will have ajax enabled if it has
+				<code>data-ajax-content="true"</code> attribute.
+				<br />
+				Also ajax events are triggered for the specific element, which also can still be captured on document level.
+				<br />
+				Please see <a href="#basics/ajax">ajax section</a> for more info.
+			</li>
+			
+			<li>
+				You should now add <code>.ace-main-stylesheet</code> class to your main stylesheet which 
+				is "ace.css" in demo pages.
+<pre data-language="html">
+ <link href="path/to/ace.min.css" rel="stylesheet" class="ace-main-stylesheet" />
+ <!--[if lte IE 9]>
+  <link href="path/to/ace-part2.min.css" rel="stylesheet" class="ace-main-stylesheet" />
+ <![endif]-->
+</pre>
+			</li>
+			
+			<li>
+				If you've been using functions such as:
+				<br />
+				<code>ace.settings.sidebar_fixed</code>
+				<code>ace.settings.sidebar_collapsed</code>
+				<code>ace.settings.navbar_fixed</code>
+				<br />
+				now there is an extra first argument which is either null
+				or reference to element to be changed:
+<pre data-language="javascript">
+ ace.settings.sidebar_fixed(null, true|false, true|false);//first element is null or reference to sidebar element
+ //or
+ ace.settings.sidebar_fixed(document.getElementById('sidebar'), true|false, true|false);
+</pre>
+			</li>
+
+		</ul>
+	</div>
+	
+	
+	
+	<h3 class="info-title smaller">3. Third Party Changes</h3>
+	<div class="info-section">
+		<ul class="list-unstyled info-list">
+			<li>
+				There are some changes for FuelUX plugin which has been updated from v2.x to v3.x.
+				<br />
+				Please see 
+				<a href="#plugins/fuelux">FuelUX</a> for more info.
+			</li>
+			
+			<li>
+				<a href="#plugins/date-time.fullcalendar">Fullcalendar</a> plugin doesn't need jQuery UI for dragging and resizing now
+				and moment.js is used for date processing and should be included.
+				<br />
+				It's available at:
+				<code>assets/js/date-time/moment.js</code>
+				<br />
+				Also it seems in its latest update, only events with
+				"yyyy-mm-dd" format can be resized (not sure though)
+			</li>
+			
+			<li>
+				jQuery UI has had several changes. For example anchors (<code>A</code> tags) are not used in menu items any more.
+				<br />
+				If you see your jQuery UI code is not working as expected, you should refer its documentation
+				to resolve the issue as a result of recent changes.
+			</li>
+			
+			<li>
+				If you are using internationalization features of date/time plugins date depend on
+				<b>moment.js</b> library, note that <code>lang</code> is deprecated now and
+				you should use <code>locale</code> instead.
+				<br />
+				Please see momentjs docs for more info.
+			</li>
+			
+			<li>
+				<code>respond.src.js</code> has been renamed to <code>respond.js</code>
+			</li>
+			<li>
+				<code>jquery.colorbox-min.js</code> has been renamed to <code>jquery.colorbox.min.js</code>
+			</li>
+			<li>
+				jQuery form validation plugin doesn't validate hidden elements by default.
+				<br />
+				You should use <code>ignore</code> option to perform validation for a hidden element.
+				<br />
+				See <a href="#plugins/misc.jquery-validate">validation plugin</a> for more info.
+			</li>
+			
+			<!--
+			<li>
+				Spin.js plugin (the imageless spinner) has now more options and you may
+				need to specify <code>left</code> <code>top</code> options if you want to use it.
+			</li>
+			-->
+			
+			<li>
+				<a href="#plugins/input.select2">Select2</a> has now an optional tag input styling as well.
+			</li>
+			
+			<li>
+				<a href="#plugins/input.chosen">Chosen</a> does not support touch devices.
+			</li>
+		</ul>
+	</div>
+
+  </div><!-- /.help-content -->
+  
+  
+  
   <div class="hr hr-double hr32"></div>
   <h2 class="blue lighter help-title" data-id="#changes.v6">
-	Ace v1.3.0 to v1.3.1 (current version)
+	Ace v1.3.0 to v1.3.1
   </h2>
   <div class="space-4"></div>
 
@@ -120,7 +564,7 @@
   
   <div class="hr hr-double hr32"></div>
   <h2 class="blue lighter help-title" data-id="#changes.v5">
-	Ace v1.2.0 to v1.3.0 (current version)
+	Ace v1.2.0 to v1.3.0
   </h2>
   <div class="space-4"></div>
 
@@ -988,19 +1432,19 @@
 				<br />
 				Also inside:
 				<br />
-				<code>assets/js/ace.min.js</code>
+				<code>assets/js/ace.js</code>
 				<br />
-				or <code>assets/js/uncompressed/ace.js</code>
+				or <code>dist/js/ace.min.js</code>
 				<br />
 				or
 				<code>assets/js/ace/ace.js</code>,
 				<div class="space-4"></div>
 				and
 				<div class="space-4"></div>
-				<code>assets/js/ace-extra.min.js</code>,
+				<code>assets/js/ace-extra.js</code>,
 				<br />
 				or
-				<code>assets/js/uncompressed/ace-extra.js</code>
+				<code>dist/js/ace-extra.min.js</code>
 				<br />
 				
 				you should change <code>ace.vars['icon']</code> and <code>ace.vars['.icon']</code>

@@ -1,11 +1,15 @@
 .enable_plugin_jqgrid() when(@enable-plugin-jqgrid = true) {
 
 .ui-jqgrid {
+ .ui-jqgrid-view {
+	z-index: auto;
+ }
+ 
  .ui-jqgrid-view,
  .ui-paging-info,
  .ui-pg-table,
  .ui-pg-selbox {
-    font-size: @baseFontSize;
+    font-size: @base-font-size;
  }
 
  .ui-jqgrid-title {
@@ -25,7 +29,7 @@
     color: #FFF;
     background: @table-header-bg; 
 	padding:0;
-	font-size: floor(@baseFontSize * 1.2);
+	font-size: floor(@base-font-size * 1.2);
 }
 
 
@@ -116,8 +120,8 @@
 		line-height: 15px;
 		height: 55px;
 		
-		padding-top:3px !important;
-		padding-bottom:5px !important;
+		padding-top:10px !important;
+		padding-bottom:10px !important;
 		
 		background-color:@modal-footer-bg !important;
 		
@@ -179,9 +183,9 @@
 }
 
 
-.ui-jqgrid .ui-pg-button:hover {
-    padding: 1px;
-}
+//.ui-jqgrid .ui-pg-button:hover {
+    //padding: 1px;
+//}
 
 .ui-jqgrid .ui-pg-button .ui-separator {
 	margin-left:4px;
@@ -195,6 +199,7 @@
 .ui-jqgrid .ui-jqgrid-bdiv {
 	border-top:1px solid #E1E1E1;
 	//.box-sizing(content-box);
+	overflow-x: hidden;
 }
 
 
@@ -215,7 +220,7 @@
 	//display: none;
 	font-weight: bold;
 
-	font-size: @baseFontSize - 1;
+	font-size: @base-font-size - 1;
 	
 	background-color: #FFF;
 	border: 2px solid #8EB8D1;
@@ -256,7 +261,7 @@
 
 .ui-jqgrid-sortable {
   padding-left:4px;
-  font-size:@baseFontSize;
+  font-size:@base-font-size;
   color:#777;
   font-weight:bold;
 
@@ -274,8 +279,8 @@ th[aria-selected=true] {
 
 
 
-.ui-icon {
-  text-indent:0;
+.ui-jqgrid .ui-icon {
+  text-indent: 0;
   color: @table-sort-active;
   float: none;
   right: 2px;
@@ -285,6 +290,13 @@ th[aria-selected=true] {
 	right: auto;
 	left: 2px;
   }
+  
+  &.ui-state-disabled {
+	color: #BBB;
+	&:hover {
+		padding: 0;
+	}
+  }
 }
 
 
@@ -292,14 +304,12 @@ th[aria-selected=true] {
  display: inline;
  content: "\f0d7";
  font-family: FontAwesome;
- font-size: 12px;
+ font-size: @base-font-size - 1;
 }
 .ui-icon-asc:before {
  content:"\f0d8";
 }
-.ui-state-disabled {
- color:#BBB;
-}
+
 
 
 
@@ -351,10 +361,14 @@ th[aria-selected=true] {
 		margin-bottom:0;
 	}
 	select  {
-		padding:1px;
-		height:25px;
-		line-height:25px;
+		padding: 1px;
+		height: 25px;
+		line-height: 25px;
 	}
+}
+
+.ui-jqgrid select.inline-edit-cell {
+ padding: 1px;
 }
 
 .ui-pg-div .ui-icon{
@@ -372,7 +386,7 @@ th[aria-selected=true] {
   vertical-align: middle;
   cursor: pointer;
   
-  font-size: 17px;
+  font-size: @font-size-grid-pager;
   
   &:hover{
 	.transform(~"scale(1.2)");
@@ -386,29 +400,30 @@ th[aria-selected=true] {
   }
 }
 
-.ui-icon-pencil { color:#478FCA; }
-.ui-icon-pencil:before { content:"\f040"; }
-.ui-icon-trash { color:#DD5A43; }
-.ui-icon-trash:before { content:"\f014"; }
-.ui-icon-disk { color:#69AA46; }
-.ui-icon-disk:before { content:"\f00c"; }
-.ui-icon-cancel { color:#DD5A43; }
-.ui-icon-cancel:before { content:"\f00d"; }
-
+.ui-jqgrid {
+ .ui-icon-pencil { color:#478FCA; }
+ .ui-icon-pencil:before { content:"\f040"; }
+ .ui-icon-trash { color:#DD5A43; }
+ .ui-icon-trash:before { content:"\f014"; }
+ .ui-icon-disk { color:#69AA46; }
+ .ui-icon-disk:before { content:"\f00c"; }
+ .ui-icon-cancel { color:#DD5A43; }
+ .ui-icon-cancel:before { content:"\f00d"; }
+}
 
 
 .ui-jqdialog-content, .ui-jqdialog .ui-jqdialog-content {
-	font-size:@baseFontSize;
+	font-size:@base-font-size;
 	padding:4px 0 0;
 
 	.formdata {
-		font-size:@baseFontSize;
+		font-size:@base-font-size;
 		padding:6px 12px;
 	}
 
 	.form-view-data {
 		vertical-align:middle;
-		font-size:@baseFontSize;
+		font-size:@base-font-size;
 	}
 	
 	
@@ -419,7 +434,7 @@ th[aria-selected=true] {
 
 .ui-jqdialog-content {
 	.CaptionTD {
-		font-size: @baseFontSize - 1;
+		font-size: @base-font-size - 1;
 		text-align: right;
 		color: #666;
 	}
@@ -515,7 +530,7 @@ th[aria-selected=true] {
 
  .ui-jqgrid .ui-jqgrid-view {
 	input, select, textarea, button {
-		font-size: @baseFontSize;
+		font-size: @base-font-size;
 	}
  }
 
@@ -548,7 +563,7 @@ th[aria-selected=true] {
  
  .add-group , .add-rule , .delete-group {
 	margin-left: 4px !important;
-	font-size: @baseFontSize + 2 !important;
+	font-size: @base-font-size + 2 !important;
  }
 
  .delete-rule {
@@ -600,7 +615,7 @@ th[aria-selected=true] {
     padding: 6px 10px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	
-	font-size:@baseFontSize;
+	font-size:@base-font-size;
 }
 
 
@@ -638,6 +653,7 @@ th[aria-selected=true] {
 
 .fm-button {
 	margin:0 4px;
+	height: auto;
 }
 .fm-button:not(.btn) {
 	background-color: @btn-default;
@@ -646,7 +662,7 @@ th[aria-selected=true] {
 	color: #FFFFFF ;
 	cursor: pointer;
 	display: inline-block;
-	font-size: @baseFontSize;
+	font-size: @base-font-size;
 	line-height: 28px;padding: 0 12px 1px;
 	margin: 0 8px;
 	position: relative;
@@ -762,6 +778,20 @@ th[aria-selected=true] {
 
 
 
+//override ui.jqgrid.css
+.ui-jqgrid .ui-pg-button:hover { padding: 0 1px;}
+.ui-jqgrid .ui-state-disabled:hover {padding: 0 1px;}
+.ui-jqgrid .ui-pg-table .ui-pg-button.ui-state-disabled:hover > .ui-separator {
+	margin-left: 4px;
+	margin-right: 4px;
+}
+.ui-jqgrid .ui-pg-table .ui-pg-button.ui-state-disabled:hover > .ui-pg-div > .ui-icon {
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+
+
 
 @media only screen and (max-width: @screen-xs-max) {
 
@@ -769,7 +799,7 @@ th[aria-selected=true] {
     height: 90px;
     > .ui-pager-control {
 		height: 85px;
-		padding-top: 9px;
+		padding-top: 10px !important;
 		
 		> .ui-pg-table {
 			> tbody > tr > td { 
@@ -791,6 +821,9 @@ th[aria-selected=true] {
 			}
 		}
     }
+ }
+ .ui-jqgrid .ui-jqgrid-pager .navtable {
+	height: auto;
  }
 }
 

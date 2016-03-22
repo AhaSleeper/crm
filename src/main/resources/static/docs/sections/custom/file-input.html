@@ -279,6 +279,19 @@ $('#my-input').ace_file_input('show_file_list', ['file1.txt']);
 </pre>
 				For example, you may want to edit a file input
 				which has user's previous selection.
+				
+				<div class="alert alert-info">
+					From version 1.3.2 you can also preview images inside file input control.
+				</div>
+<pre data-language="javascript">
+$('#my-input')
+.ace_file_input('show_file_list', [
+    {type: 'image', name: 'name of image', path: 'http://path/to/image/for/preview'},
+    {type: 'file', name: 'hello.txt'}
+]);
+//type can be 'image', 'video', 'audio', 'file'
+</pre>
+				
 			</li>
 			<li>
 				<code>update_settings</code> to update options:
@@ -372,6 +385,21 @@ $('#my-form').on('reset', function(e) {
 				<code>file.error.ace</code> event is triggered with some info about invalid files.
 				<br />
 				You can find more info about it in the <b>File Filtering</b> section.
+			</li>
+			
+			<li>
+				<code>file.preview.ace</code> event is triggered with extra info about image files and you can call <code>e.preventDefault()</code> to prevent 
+				displaying image preview.
+				<br />
+<pre data-language="javascript">
+ $('#my-file-input').on('file.preview.ace', function(e, info) {
+    //info.file is the File object
+    if(info.file.width > 1000) {
+        e.preventDefault();//don't show image preview
+        alert("Invalid image width!");		
+    }
+ }
+</pre>
 			</li>
 			
 			<li>

@@ -50,7 +50,7 @@
 </div><!-- /.sidebar -->
 </pre>
 				Please note that for most Javascript functions to perform without problem,
-				you should specify <b>id</b> attribute of elements, for example, sidebar element should have
+				you should specify <b>id</b> attribute of elements, for example, sidebar element can have
 				<code>#sidebar</code> id attribute.
 			</li>
 
@@ -163,12 +163,15 @@
 			<li>
 				Sidebar collapse/expand button is used to minimize/restore sidebar.
 				<br />
+				<div class="alert alert-info">
+					It should have a <code>data-target</code> attribute which points to sidebar ID.
+				</div>
 <pre data-language="html">
   <div class="sidebar responsive" id="sidebar">
   .
   .
   .
-  <div id="sidebar-collapse" class="sidebar-toggle sidebar-collapse">
+  <div data-target="#sidebar" id="sidebar-collapse" class="sidebar-toggle sidebar-collapse">
      <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
   </div>
  </div><!-- /.sidebar -->
@@ -178,13 +181,15 @@
 			<li>
 				There is also another <code>.sidebar-expand</code> button for sidebar in <a href="#basics/sidebar.mobile.style2" class="help-more">2nd mobile view style</a>.
 				<br />
-				In that case, sidebar is automatically minimized and the button is used to expand it:
+				In that case, sidebar is automatically minimized and the button is used to expand it.
+				<br />
+				Also it should have a <code>data-target</code> attribute which points to sidebar ID.
 <pre data-language="html">
  <div class="sidebar responsive-min" id="sidebar">
    .
    .
    .
-   <div id="sidebar-expand" class="sidebar-toggle sidebar-expand">
+   <div data-target="#sidebar" id="sidebar-expand" class="sidebar-toggle sidebar-expand">
      <i class="ace-icon fa fa-angle-double-right" data-icon1="ace-icon fa fa-angle-double-right" data-icon2="ace-icon fa fa-angle-double-left"></i>
    </div>
  </div><!-- /.sidebar -->
@@ -242,6 +247,214 @@ You can also include a tooltip:
 	<!-- /section:basics/sidebar.layout -->
 
 	
+	
+	
+	
+	<div class="hr hr-double hr32"></div>
+	<h2 class="blue lighter help-title" data-id="#basics/sidebar.functions">
+		Sidebar functions
+	</h2>
+	<div class="space-4"></div>
+
+	<!-- #section:basics/sidebar.functions -->
+	<div class="help-content">
+		<h3 class="info-title smaller">Basic functions</h3>
+		<div class="info-section">
+			<ul class="info-list list-unstyled">
+				<li>
+					To enable sidebar functions on an element you should use the following piece of code:
+<pre data-language="javascript">
+ $('.sidebar').ace_sidebar();
+ //or
+ $('#my-specific-sidebar').ace_sidebar();
+</pre>
+				</li>
+				
+				<li>
+					The following options are available when initiating ace_sidebar function:
+					<br />
+					<ul>
+						<li><b>duration:</b> submenu toggle duration.</li>
+						<li><b>hide_open_subs:</b> whether to hide open submenus when opening a new one.</li>
+					</ul>
+				</li>
+
+				<li>
+				By default all <code>.sidebar</code> elements are initiliazed on page load.
+				</li>
+				
+				<li>
+				The following functions are available for sidebar:
+					<ul>
+						<li><b>toggleMenu:</b> collapses or expands sidebar.
+<pre data-language="javascript">
+ $('.sidebar').ace_sidebar('toggleMenu');
+ $('.sidebar').ace_sidebar('toggleMenu', toggleButton);
+ //if there is an optional toggleButton element, its icons will be flipped
+
+ $('.sidebar').ace_sidebar('toggleMenu', false);
+ //optional false value means don't save changes to cookies
+
+ $('.sidebar').ace_sidebar('toggleMenu', [toggleButton , false/true ]);
+ //optional second value means save or don't save changes to cookies
+</pre>
+						</li>
+						
+						<li>
+							<b>collapse</b> collapses sidebar and <b>expand</b> expands sidebar:
+<pre data-language="javascript">
+ $('#my-sidebar').ace_sidebar('collapse');
+ $('#my-sidebar').ace_sidebar('collapse', toggleButton);
+ //if there is an optional toggleButton element, its icons will be flipped
+</pre>
+							<div class="alert alert-info">
+							Please note that if you want to have minimized sidebar by default you should
+							make the changes using CSS classes as described in <a href="#settings.sidebar" class="help-more">sidebar settings</a>
+							</div>
+						</li>
+						
+						<li>
+							<b>mobileToggle</code> toggles sidebar in mobile view.
+<pre data-language="javascript">
+ $('#sidebar').ace_sidebar('mobileToggle');
+ $('#sidebar').ace_sidebar('mobileShow');
+ $('#sidebar').ace_sidebar('mobileHide');
+</pre>
+						</li>
+						
+						<li>
+							<b>toggle</b>, <b>hide</b> or <b>show</b>
+							are used for submenus:
+<pre data-language="javascript">
+ $('#my-sidebar').ace_sidebar('toggle', [sub, 300]);
+ //first parameter is submenu to toggle and second is duration in milliseconds.
+</pre>
+						</li>
+					</ul>
+				
+				</li>
+			</ul>
+		</div><!-- /.info-section -->
+		
+		
+		<h3 class="info-title smaller">Sidebar scrollbars</h3>
+		<div class="info-section">
+			<ul class="info-list list-unstyled">
+				<li>
+					There are two approaches for sidebar scrollbars which you can choose
+					by using custom JS builder tool.
+				</li>
+				<li>
+					First approach is used by default and works only for fixed sidebar.
+					<br />
+					There is no cropping of elements because of <em>overflow:hidden</em> CSS property.
+				</li>
+				<li>
+					Second approach can be used both by fixed and normal sidebars and
+					uses <em>overflow:hidden</em> CSS property.
+					<br />
+					<b>Native browser scrollbars are used touch devices.</b>
+				<li>				
+					To add scrollbars to sidebar you should use the following function:
+<pre data-language="javascript">
+ $('.sidebar').ace_sidebar_scroll({
+    //options here
+ });
+</pre>
+					By default all <code>.sidebar</code> elements have scrollbars enabled on page load
+					and activated when appropriate.
+				</li>
+				
+				<li>
+					<div class="alert alert-info">
+						Note that you can also specify the following options using <code>data-*</code> attributes.
+						<br />
+<pre data-language="html">
+<div class="sidebar responsive" id="sidebar" data-scroll-to-active="true" data-include-shortcuts="true" data-smooth-scroll="150">
+</div>
+</pre>
+					</div>
+				
+					The following options are available for first approach:
+					<ul>
+						<li><code>scroll_to_active</code> scroll to active item on page load</li>
+						<li><code>include_shortcuts</code> include shortcut buttons in scroll area</li>
+						<li><code>include_toggle</code> include toggle button in scroll area or not</li>
+						<!-- <li><code>scrollbars_outside</code> whether scrollbars should be outside of sidebar area or not</li> -->
+						<li><code>scroll_style</code> scrollbar style as described in custom scrollbars section</li>
+						<li><code>mousewheel_lock</code> whether to lock mouse wheel on sidebar even if it hasn't scrollbars or not</li>
+						
+						<li><code>only_if_fixed</code> used in 2nd approach only</li>
+						<li><code>smooth_scroll</code> used in first approach only. Specify a number to enable smooth scrolling or false to disable</li>
+					</ul>
+				</li>
+				
+				<li>
+					The following functions are also available:
+					<ul>
+						<li><code>reset</code> reset scrollbars</li>
+						<li><code>updateStyle</code> updates scrollbars style class:
+<pre data-language="javascript">
+ $('#my-sidebar').ace_sidebar_scroll('updateStyle', 'scroll-dark no-track');
+ //for example such update is done which switching to another skin in Ace's demo
+</pre>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.info-section -->
+		
+		
+		<h3 class="info-title smaller">Submenu positioning and scrollbars</h3>
+		<div class="info-section">
+			<ul class="info-list list-unstyled">
+				<li>
+					To enable submenu adjustment, hiding delay and scrollbar feature you should use the following function:
+<pre data-language="javascript">
+ $('.sidebar').ace_sidebar_hover({
+    //options here
+ });
+</pre>
+					By default all <code>.sidebar</code> elements have this feature enabled on page load
+					and activated when appropriate.
+				</li>
+				
+				<li>
+					The following options are available:
+					<ul>
+						<li><code>sub_hover_delay</code> time in milliseconds to hide a submenu after mouse leaves it. Default is 750</li>
+						<li><code>sub_scroll_style</code> scrollbar style as described in custom scrollbars section</li>
+					</ul>
+				</li>
+				
+				<li>
+					The following functions are also available:
+					<ul>
+						<li><code>reset</code> reset scrollbars</li>
+						<li><code>updateStyle</code> updates submenu scrollbars style class:
+<pre data-language="javascript">
+ $('#my-sidebar').ace_sidebar_hover('updateStyle', 'scroll-dark no-track');
+ //for example it can be done when switching to another skin dynamically
+</pre>
+						</li>
+						<li><code>changeDir</code> changes scrollbars direction (left) for example if you are using RTL:
+<pre data-language="javascript">
+ $('#my-sidebar').ace_sidebar_hover('changeDir', 'left');
+</pre>
+						</li>
+					</ul>
+				</li>
+				
+			</ul>
+		</div><!-- /.info-section -->
+
+	</div><!-- /.help-content -->
+	<!-- /section:basics/sidebar.functions -->
+	
+	
+	
+	
+	
 	<div class="hr hr-double hr32"></div>
 	<h2 class="blue lighter help-title" data-id="#basics/sidebar.mobile">
 		Responsive Sidebar
@@ -287,6 +500,15 @@ You can also include a tooltip:
  </div>
 </pre>
 			</li>
+			
+			<li>
+				You can add <code>data-auto-hide=true</code> attribute for sidebar to automatically hide when 
+				user clicks outside of its area:
+<pre data-language="html">
+ <div id="sidebar" class="sidebar responsive" data-auto-hide="true">
+ </div>
+</pre>
+			</li>
 		  </ul>
 		</div>
 		<!-- /section:basics/sidebar.mobile.style1 -->
@@ -310,6 +532,10 @@ You can also include a tooltip:
 						<br />
 						An additional <code>.sidebar-toggle.sidebar-expand</code> button, expands sidebar in mobile view:
 						(<a href="#basics/sidebar.layout.minimize" class="help-more">More info</a>)
+						<br />
+						<div class="alert alert-info">
+							It should have a <code>data-target</code> attribute which points to sidebar ID.
+						</div>
 						<div class="space-4"></div>
 <pre data-language="html">
 <a href="#" class="menu-toggler invisible" id="menu-toggler"></a>
@@ -322,10 +548,18 @@ You can also include a tooltip:
     ...
  </div>
  
- <div class="sidebar-toggle sidebar-expand">
+ <div data-target="#sidebar" class="sidebar-toggle sidebar-expand">
     ...
  </div>
 </div>
+</pre>
+			</li>
+			<li>
+				You can add <code>data-auto-hide=true</code> attribute for sidebar to automatically become minimized when 
+				user clicks outside of its area:
+<pre data-language="html">
+ <div id="sidebar" class="sidebar responsive-min" data-auto-hide="true">
+ </div>
 </pre>
 			</li>
 		  </ul>
@@ -370,14 +604,15 @@ You can also include a tooltip:
 				toggle buttons are used to show and hide sidebar.
 			</li>
 			<li>
-				Buttons can are either before brand text container (<code>.navbar-header</code>) or inside it:
+				Buttons can are either before brand text container (<code>.navbar-header</code>) or inside it
+				and	it should have <code>data-target</code> attribute which points to sidebar's ID.
 				<div>
 				 <span class="thumbnail inline">
 					<img src="images/toggle-sidebar-1.png" />
 				 </span>
 				</div>
 <pre data-language="html">
- <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+ <button data-target="#sidebar" type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
    <span class="sr-only">Toggle sidebar</span>
    <span class="icon-bar"></span>
    <span class="icon-bar"></span>
@@ -396,14 +631,15 @@ You can also include a tooltip:
 			
 			<li>
 				If you want to use old style toggle button,
-				you should insert it before <code>.sidebar</code> element:
+				you should insert it before <code>.sidebar</code> element.
+				<br />
 				<div>
 				 <span class="thumbnail inline">
 					<img src="images/toggle-sidebar-11.png" />
 				 </span>
 				</div>
 <pre data-language="html">
- <a href="#" class="menu-toggler" id="menu-toggler">
+ <a href="#" data-target="#sidebar" class="menu-toggler" id="menu-toggler">
    <span class="sr-only">Toggle sidebar</span>
    <span class="toggler-text"></span>
  </a>
@@ -411,6 +647,9 @@ You can also include a tooltip:
    ...
  </div>
 </pre>
+				
+				<br />
+
 				It should have a <code>span.toggler-text</code> inside it and you can change
 				<b>MENU</b> text to something else by modifying
 				<code>@toggler-text</code> variable inside <code>assets/css/less/sidebar/old-toggle-button.less</code>
@@ -509,6 +748,24 @@ You can also include a tooltip:
  </ul>
 </pre>
 			</li>
+			
+			<li>
+				Add <code>.no-gap</code> to horizontal menu to remove gap.
+				<br />
+				Add <code>.lower-highlight</code> to move the highlight bar lower.
+				<br />
+				Add <code>.h-navbar</code> to <code>.navbar</code> to add shadow to it.
+				
+<pre data-language="html">
+<div id="sidebar" class="sidebar h-sidebar no-gap lower-highlight">
+</div>
+</pre>
+
+<pre data-language="html">
+<div id="navbar" class="navbar h-navbar">
+</div>
+</pre>
+			</li>
 
 			<li>
 				Horizontal menu is only visible when screen width is above <b>991px</b>.
@@ -523,6 +780,12 @@ You can also include a tooltip:
 				To enable this, you should include the following code in your page:
 				<br />
 				<code data-open-file="javascript" class="open-file"><span class="brief-show">mustache/app/views/assets/scripts/</span>top-menu.js</code>
+			</li>
+			
+			<li>
+				If you want the header (h1) text to be aligned with content area text,
+				you can either add <code>.no-margin-left</code> class to <code>h1</code> header element or
+				add <code>.no-margin</code> class to the <code>.row</code> element which encloses content area!
 			</li>
 		 </ul><!-- /.info-list -->
 		</div><!-- /.info-section -->
@@ -647,6 +910,61 @@ You can also include a tooltip:
 			</li>
 		 </ul><!-- /.info-list -->
 		</div><!-- /.info-section -->
+		
+		
+		<h3 class="info-title smaller" data-id="#basics/sidebar.multiple">7. Multiple Sidebar</h3>
+		<!-- #section:basics/sidebar.multiple -->
+		<div class="info-section">
+		 <ul class="info-list list-unstyled">
+			<li>
+				You can have more than one sidebar on a page.
+			</li>
+			
+			<li>
+				Each one should have <code>.sidebar</code> class and an ID attribute.
+			</li>
+			
+			<li>
+				First sidebar should be at its default place
+				and second should be inside <code>.main-content-inner</code>:
+<pre data-language="html">
+<div class="main-content">
+  <div class="main-content-inner">
+    <div id="sidebar2" class="sidebar h-sidebar navbar-collapse collapse">
+      <!-- second sidebar, horizontal -->
+    </div>
+
+    <div class="page-content">
+      <!-- page content area -->
+    </div>
+  </div>
+</div>
+</pre>
+			</li>
+			
+			<li>
+				If second sidebar is not horizontal, then <code>.page-content</code> should also
+				have <code>.main-content</code> class and <code>.footer</code> should be moved
+				after it:
+<pre data-language="html">
+<div class="main-content">
+  <div class="main-content-inner">
+    <div id="sidebar2" class="sidebar responsive">
+      <!-- second sidebar, horizontal -->
+    </div>
+
+    <div class="page-content main-content">
+      <!-- page content area -->
+    </div>
+
+    <div class="footer"></div>
+  </div>
+</div>
+</pre>
+			</li>
+		 </ul><!-- /.info-list -->
+		</div><!-- /.info-section -->
+		<!-- /section:basics/sidebar.multiple -->
 
 	</div><!-- /.help-content -->
 	<!-- /section:basics/sidebar.options -->

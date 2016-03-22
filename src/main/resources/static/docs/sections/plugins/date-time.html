@@ -19,9 +19,9 @@
 			<li>
 				To use it, you should include:
 				<br />
-				<code>assets/css/datepicker.css</code>
+				<code>assets/css/bootstrap-datepicker.css</code>
 				<br />
-				<code>assets/js/date-time/bootstrap-datepicker.min.js</code>
+				<code>assets/js/date-time/bootstrap-datepicker.js</code>
 			</li>
 			
 			<li>
@@ -85,9 +85,9 @@ $('#my-date-picker-input').datepicker({
 				<br />
 				<code>assets/css/daterangepicker.css</code>
 				<br />				
-				<code>assets/js/date-time/moment.min.js</code>
+				<code>assets/js/date-time/moment.js</code>
 				<br />
-				<code>assets/js/date-time/daterangepicker.min.js</code>
+				<code>assets/js/date-time/daterangepicker.js</code>
 			</li>
 			
 			<li>
@@ -118,7 +118,7 @@ $('#my-date-picker-input').datepicker({
 				<br />
 				<code>assets/css/bootstrap-timepicker.css</code>
 				<br />
-				<code>assets/js/date-time/bootstrap-timepicker.min.js</code>
+				<code>assets/js/date-time/bootstrap-timepicker.js</code>
 			</li>
 			
 			<li>
@@ -145,6 +145,7 @@ $('#timepicker1').timepicker({
     showSeconds: true,
     showMeridian: false
 })
+$('#timepicker1').timepicker('showWidget');//explicit call to display it whenever needed
 </pre>
 			</li>
 		 </ul>
@@ -170,9 +171,9 @@ $('#timepicker1').timepicker({
 				<br />
 				<code>assets/css/bootstrap-datetimepicker.css</code>
 				<br />				
-				<code>assets/js/date-time/moment.min.js</code>
+				<code>assets/js/date-time/moment.js</code>
 				<br />
-				<code>assets/js/date-time/bootstrap-datetimepicker.min.js</code>
+				<code>assets/js/date-time/bootstrap-datetimepicker.js</code>
 			</li>
 		 </ul>
 		</div>
@@ -189,7 +190,7 @@ $('#timepicker1').timepicker({
 				Full calendar plugin with drag & drop functionality.
 				<br />
 				You can find more info here:
-				<a href="http://arshaw.com/fullcalendar/">arshaw.com/fullcalendar/</a>
+				<a href="http://fullcalendar.io/">http://fullcalendar.io/</a>
 			</li>
 			
 			<li>
@@ -197,9 +198,11 @@ $('#timepicker1').timepicker({
 				<br />
 				<code>assets/css/fullcalendar.css</code>
 				<br />
-				<code>assets/js/jquery-ui.custom.min.js</code> If you want drag & drop and resize functionality.
+				<code>assets/js/jquery-ui.custom.js</code> If you want external event drag &amp; drop functionality.
 				<br />
-				<code>assets/js/fullcalendar.min.js</code>
+				<code>assets/js/date-time/moment.js</code>
+				<br />
+				<code>assets/js/fullcalendar.js</code>
 			</li>
 			
 			<li>
@@ -208,6 +211,16 @@ $('#timepicker1').timepicker({
 				The Javascript code is located at:
 				<br />
 				<code data-open-file="javascript" class="open-file"><span class="brief-show">mustache/app/views/assets/scripts/</span>calendar.js</code>
+			</li>
+			
+			<li>
+				It seems in its latest update, Fullcalendar has event resizing for events
+				with "yyyy-mm-dd" format only (not sure though)
+				<br />
+				For formatting you can use "moment.js" libary.
+<pre data-language="javascript">
+ moment().format('YYYY-MM-DD'),
+</pre>
 			</li>
 		 </ul>
 		</div>

@@ -29,7 +29,7 @@
 
 .dataTables_info {
  // margin:0 0 0 12px;
-  font-size: @baseFontSize + 1;
+  font-size: @base-font-size + 1;
 }
 
 .dataTables_paginate {
@@ -46,7 +46,7 @@
 .dataTables_wrapper {
   label {
 	display: inline-block;
-	font-size: @baseFontSize;
+	font-size: @base-font-size;
   }
   input[type=text] , input[type=search], select {
 	margin-bottom: 0 !important;
@@ -96,7 +96,7 @@
 			
 			content: "\f0dc";
 			font-family: FontAwesome;
-			font-size: 13px;
+			font-size: @base-font-size;
 			font-weight: normal;
 			
 			color: #555;
@@ -215,17 +215,79 @@ div.dataTables_scrollFoot table {
 
 
 
+
+
 ///
-//for tableTools printing
-.DTTT_Print .main-content {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+//table Tools extension
+.tableTools-container {
+	margin-bottom: 8px;
+	position: relative;
+}
+
+.gritter-item-wrapper.dt-button-info {
+	padding: 12px 11px 8px;
+	z-index: 1999;
+	> h2 {
+		margin-top: 0;
+	}
+}
+
+
+
+.dt-button-collection .dropdown-menu {
+ display: block;
+ z-index: 1101;
+ 
+ > li > a {
+	color: #888;
+	text-decoration: line-through;
+ }
+ > li > a.active {
+	color : #333;
+	text-decoration: none;
+ }
+}
+
+
+div.dt-button-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	z-index: 1100;
+	opacity: 0.1;
+}
+
+
+.dataTable>tbody>tr.selected>td {
+ background-color:@state-success-bg;
+}
+.dataTable>tbody>tr.selected:hover>td {
+ background-color: darken(@state-success-bg, 5%);
 }
 
 
 
 
-
+///
+div.dataTables_processing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 60px;
+    margin-left: -40%;
+    margin-top: -25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    background-color: white;
+	border: 2px solid #DDD;
+    background-color: rgba(255,255,255,0.66);
+}
 
 
 }

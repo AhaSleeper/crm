@@ -4,19 +4,22 @@
 	<div class="hr hr-double hr32"></div>
 	<!-- #section:settings -->
 	<div class="help-content">
-		<h3 class="info-title smaller">Settings</h3>
+		<h3 class="info-title smaller">Overview</h3>
 		<div class="info-section">
 		 <ul class="info-list list-unstyled">
 			<li>
-				Ace settings functions and cookie/localStorage feature is saved inside <code>assets/js/ace-extra.js</code>
-			</li>
-			<li>
+				Ace cookie/localStorage feature is inside <code>assets/js/ace-extra.js</code>
+				<br />
 				If you want these features, it's best to include this file
 				inside document head
 			</li>
 			
 			<li>
-				The script to restore user saved settings is placed immediately after the relevant element's HTML code:
+				Ace's demo setting functions are inside <code>assets/js/ace/ace.settings.js</code> (and later merged into <code>assets/js/ace.js</code> for production site)
+			</li>
+
+			<li>
+				In older versions of Ace, you could use an HTML code like following to restore user selected settings:
 <pre data-language="html">
 <div id="navbar" class="navbar navbar-default">
  <script type="text/javascript">
@@ -24,22 +27,79 @@
  </script>
 </div>
 </pre>
+			From Ace v1.3.5 on it's not required.
+			<br />
+			You just need to assign the element an <code>id</code> attribute and use <code>.ace-save-state</code> class for it:
+<pre data-language="html">
+<div id="navbar" class="navbar navbar-default ace-save-state">
+...
+</div>
+</pre>
+			Using CSS3 animation events, the element's saved properties will be restored when it is inserted into DOM.
+			<br />
+			This is almost instant in Firefox and IE but in Chrome there is some delay.
+			<br />
+			You may not notice the delay when restoring navbar or sidebar's fixed state.
+			<br />
+			But restoring collapsed state of sidebar or main container's "inside container" option becomes noticeable.
+			<br />
+			In that case we can put the code right after element in inserted into DOM to restore its properties.
+<pre data-language="html">
+<div id="sidebar" class="sidebar responsive ace-save-state">
+ <script type="text/javascript">
+  try{ace.settings.loadState('sidebar')}catch(e){}
+ </script>
+</div>
+</pre>
 			This will cause the element's status be restored as soon as it is inserted into DOM.
 			<div class="space-4"></div>
-			If you call the functions after page load, for example in jQuery's document ready event,
-			there may be a delay between the initial state and the saved state.
-			<br />
-			It may not be noticeable for fixed navbar, etc, but for collapsed sidebar or other settings, it can get noticeable.
-
-			<div class="space-6"></div>
-			The <code>try/catch</code> block is used so that if you don't want to use  <code>ace-extra.js</code>,
+			The <code>try/catch</code> block is used so that if you don't want to use  <code>ace-extra.js</code> file and its functions,
 			the browser doesn't raise any errors.
-			<br />
-			In that case you can remove the code if it's not necessary.
 			</li>
 			
 		 </ul>
 		</div>
+		
+		
+		<h3 class="info-title smaller" data-id="#settings.breadcrumbs">Setting functions</h3>
+		<!-- #section:settings.functions -->
+		<div class="info-section">
+		 <ul class="info-list list-unstyled">
+			<li>
+				You can use <code>ace.settings.saveState</code> to save an element's property or class name:
+<pre data-language="html">
+ <input type="checkbox" id="mycheckbox" class="ace-save-state" /> 
+</pre>
+<pre data-language="javascript">
+ ace.settings.saveState('mycheckbox', 'checked');
+ ace.settings.saveState('sidebar', 'class', 'sidebar-fixed', true);
+</pre>
+			Available arguements are:
+			<ol>
+				<li>Element ID</li>
+				<li>(Optional) Element property to be Saved. Default is <code>class</code></li>
+				<li>(Optional) Property value.</li>
+				<li>
+					(Optional) Used in conjuction with previous option when property name is <code>class</code>.
+					If <code>true</code> the value will be added to element's class name. If <code>false</code> it will be removed
+				</li>
+			</ol>
+
+			<hr />
+			Later when reloading page, those properties will be restored or you can load it manually by calling:
+<pre data-language="javascript">
+ ace.settings.loadState('mycheckbox');
+</pre>
+			</li>
+			
+			<li>
+				Settings are saved inside localStorage by default.
+				<br />
+				You can change it described in localStorage section.
+			</li>
+		 </ul>
+		</div>
+		<!-- /section:settings.functions -->
 
 	</div>
 	
@@ -69,12 +129,14 @@
 			<li>
 				You can also use the following javascript code to do this:
 <pre data-language="javascript">
- ace.settings.navbar_fixed(true, true);
+ ace.settingFunction.navbar_fixed(null, true, true);//first parameter is null or reference to navbar element
+ ace.settingFunction.navbar_fixed($('#navbar').get(0), true, true);
 </pre>
-				First parameter determines whether navbar should become fixed or not.
+				First parameter is a reference to navbar element. If null <code>#navbar</code> will be used.
 				<br />
-				Second paramtere determines whether you want to save the changes to cookies/localStorage
-				for later retrieval
+				Second parameter determines whether navbar should become fixed or not.
+				<br />
+				Third paramtere determines whether you want to save the changes	for later retrieval.
 			</li>
 		
 			<li>
@@ -82,7 +144,7 @@
 				and ends up in more that two rows.
 				<br />
 				In that case you may need to add extra padding to content area
-				using CSS and media rules or enable <b>auto padding</b> option when building your custom Javascript
+				using CSS and media rules or enable <b>auto padding</b> option when <a href="../build/js.html">building your custom Javascript</a>
 			</li>
 			
 		 </ul>
@@ -107,12 +169,14 @@
 			<li>
 				If you want to do this using Javascript, you can use this code:
 <pre data-language="javascript">
- ace.settings.breadcrumbs_fixed(true, true);
+ ace.settingFunction.breadcrumbs_fixed(null, true, true);//first parameter is null or reference to breadcrumbs element
+ ace.settingFunction.breadcrumbs_fixed($('#breadcrumbs').get(0), true, true);
 </pre>
-				First parameter determines whether breadcrumbs should become fixed or not.
+				First parameter is a reference to breadcrumbs element. If null <code>#breadcrumbs</code> will be used.
 				<br />
-				Second paramtere determines whether you want to save the changes to cookies/localStorage
-				for later retrieval
+				Second parameter determines whether breadcrumbs should become fixed or not.
+				<br />
+				Third paramtere determines whether you want to save the changes for later retrieval.
 			</li>
 			
 			<li>
@@ -128,7 +192,7 @@
 			<li>
 				Anyway, if in smaller devices, your fixed breadcrumbs content is too large
 				and ends up in more that two rows, you may need to add extra padding to content area
-				using CSS and media rules or enable <b>auto padding</b> option when building your custom Javascript
+				using CSS and media rules or enable <b>auto padding</b> option when <a href="../build/js.html">building your custom Javascript</a>
 			</li>
 			
 		 </ul>
@@ -159,12 +223,14 @@
 			<li>
 				If you want to do this using Javascript, you can use this code:
 <pre data-language="javascript">
- ace.settings.main_container_fixed(true, true);
+ ace.settingFunction.main_container_fixed(null, true, true);//first parameter is null or reference to container element
+ ace.settingFunction.main_container_fixed($('#main-container')[0], true, true);
 </pre>
-				First parameter determines whether navbar should become fixed or not.
+				First parameter is a reference to container element. If null <code>#main-container</code> will be used.
 				<br />
-				Second paramtere determines whether you want to save the changes to cookies/localStorage
-				for later retrieval.
+				Second parameter determines whether navbar should become fixed or not.
+				<br />
+				Third paramtere determines whether you want to save the changes	for later retrieval.
 			</li>
 		
 			<li>
@@ -177,7 +243,7 @@
 $(window).on('resize.auto_container', function() {
     var enable = $(this).width() > 1140;
     try {
-       ace.settings.main_container_fixed(enable, false, false);
+       ace.settingFunction.main_container_fixed(enable, false, false);
     } catch(e) {}
 }).triggerHandler('resize.auto_container');
 </pre>
@@ -207,12 +273,14 @@ $(window).on('resize.auto_container', function() {
 			<li>
 				If you want to do this using Javascript, you can use this code:
 <pre data-language="javascript">
- ace.settings.sidebar_fixed(true, true);
+ ace.settingFunction.sidebar_fixed(null, true, true);//first element is null or reference to sidebar element
+ ace.settingFunction.sidebar_fixed($('#sidebar').get(0), true, true);
 </pre>
-				First parameter determines whether sidebar should become fixed or not.
+				First parameter is a reference to sidebar element. If null <code>#sidebar</code> will be used.
 				<br />
-				Second paramtere determines whether you want to save the changes to cookies/localStorage
-				for later retrieval.
+				Second parameter determines whether sidebar should become fixed or not.
+				<br />
+				Third paramtere determines whether you want to save the changes for later retrieval.
 			</li>
 			
 			
@@ -228,12 +296,12 @@ $(window).on('resize.auto_container', function() {
 			<li>
 				If you want to do this using Javascript, you can use this code:
 <pre data-language="javascript">
- ace.settings.sidebar_collapsed(true, true);
+ $('#sidebar').ace_sidebar('collapse', null, true);
+ $('#sidebar').ace_sidebar('expand');
 </pre>
-				First parameter determines whether sidebar should become minimized or not.
+				First parameter is an optional reference to the toggle button.
 				<br />
-				Second paramtere determines whether you want to save the changes to cookies/localStorage
-				for later retrieval.
+				Second paramtere determines whether you want to save the changes for later retrieval.
 			</li>
 			
 			<li>
@@ -261,11 +329,11 @@ $(window).on('resize.auto_container', function() {
 			
 			<li>
 				The event name is <code>settings.ace</code> and 
-				has two extra arguments.
+				has four extra arguments.
 				<br />
-				The first is event name and the second is the new status:
+				The first is event name, the second is the new status (fixed or not), third is the element (navbar, sidebar, etc) and fourth is whether the changes are being saved or not:
 <pre data-language="javascript">
-$(document).on('settings.ace', function(event, name, status) {
+$(document).on('settings.ace', function(event, name, status, source, save) {
     //name is one of the following
     //navbar_fixed
     //sidebar_fixed
@@ -281,6 +349,27 @@ $(document).on('settings.ace', function(event, name, status) {
 }
 </pre>
 			</li>
+			
+			<li>
+				There is also a <code>presettings.ace</code> event triggered before making changes and can be used to prevent it or make some changes before proceeding:
+<pre data-language="javascript">
+$(document).on('presettings.ace', function(event, name, status, source, save) {
+    //name is one of the following
+    //navbar_fixed
+    //sidebar_fixed
+    //breadcrumbs_fixed
+    //main_container_fixed
+    //sidebar_collapsed
+	
+    //status is either true or false
+	
+    if(name == 'sidebar_fixed' && status == false) {
+        event.preventDefault();
+    }
+}
+</pre>
+			</li>
+			
 		 </ul>
 		</div>
 		<!-- /section:settings.events -->
@@ -459,13 +548,17 @@ echo '&lt;li class="'.some_modification_based_on_selected_skin($skin).'"&gt;';
 
 	<div class="hr hr-double hr32"></div>
 	<div class="help-content">
-		<h3 class="info-title smaller" data-id="#settings.storage">Cookies & Storage</h3>
+		<h3 class="info-title smaller" data-id="#settings.storage">Cookies &amp; Storage</h3>
 		<!-- #section:settings.storage -->
 		<div class="info-section">
 		 <ul class="info-list list-unstyled">
 			<li>
 				Cookie and localStorage functionality has been added to save/load variables and settings
 				which is defined inside <code>ace-extra.js</code>
+			</li>
+			
+			<li>
+				You can open <code>ace-extra.js</code> and change <code>ace.config</code> values.
 			</li>
 			
 			<li>
@@ -487,11 +580,14 @@ ace.storage.remove(key);
 			<li>
 				<code>ace.data_storage</code> is a wrapper which by default chooses localStorage if available.
 				<br />
-				Otherwise it will use cookies for saving data which you can change that by specifying an optional argument:
+				And <code>ace.data</code> is initiated by default:
+				
 <pre data-language="javascript">
+/**
 ace.data = new ace.data_storage();//use localStorage if available otherwise use cookies
 ace.data = new ace.data_storage(1);//use localStorage
 ace.data = new ace.data_storage(2);//use cookies
+*/
 
 //save/load values with namespace (for example 'settings')
 //ace.data.set(namespace, key, value);
@@ -506,6 +602,16 @@ ace.data.remove('username');
 </pre>
 			</li>
 			
+			<li>
+				When saving objects or arrays, you should use a parameter which specifies this:
+<pre data-language="javascript">
+var widget_list = {};//an object
+ace.data.set('demo', 'widget-order', widget_list, null, true);
+ace.data.get('demo', 'widget-order', true);
+</pre>
+				The <code>true</code> value indicates that the value being saved/restored is an object.
+			</li>
+
 		 </ul>
 		</div>
 		<!-- /section:settings.storage -->
@@ -538,7 +644,7 @@ ace.data.remove('username');
     <div id="ace-settings-box" class="ace-settings-box clearfix open">
       <div class="pull-left width-50">
         <div class="ace-settings-item">
-            <input type="checkbox" id="ace-settings-navbar" class="ace" />
+            <input type="checkbox" id="ace-settings-navbar" class="ace ace-save-state" />
             <label for="ace-settings-navbar" class="lbl"> Fixed Navbar</label>
         </div>
       </div><!-- /.pull-left -->

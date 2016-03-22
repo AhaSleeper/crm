@@ -14,8 +14,8 @@
 				five additional editables have been defined which you can use by including
 				the following scripts:
 <pre data-language="html">
- &lt;script src="assets/js/x-editable/bootstrap-editable.min.js" /&gt;
- &lt;script src="assets/js/x-editable/ace-editable.min.js" /&gt;
+ &lt;script src="dist/js/x-editable/bootstrap-editable.min.js" /&gt;
+ &lt;script src="dist/js/x-editable/ace-editable.min.js" /&gt;
 </pre>
 			</li>
  		 </ul>
@@ -88,6 +88,19 @@ $('#avatar').editable({
     //see "examples/profile-avatar-update.js"
   }
 });
+</pre>
+			</li>
+			
+			<li>
+				If you want the editable image displayed in edit mode at first, you can use something like this:
+<pre data-language="javascript">
+$('#avatar').editable('show').on('hidden', function(e, reason) {
+  if(reason == 'onblur') {
+     $('#avatar').editable('show');
+     return;
+  }
+  $('#avatar').off('hidden');
+})
 </pre>
 			</li>
  		 </ul>

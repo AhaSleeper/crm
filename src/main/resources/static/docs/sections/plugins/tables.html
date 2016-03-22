@@ -18,14 +18,14 @@
 			<li>
 				To use it, you should include:
 				<br />
-				<code>assets/js/jquery.dataTables.min.js</code>
+				<code>assets/js/dataTables/jquery.dataTables.js</code>
 				<br />
-				<code>assets/js/jquery.dataTables.bootstrap.js</code>
+				<code>assets/js/dataTables/jquery.dataTables.bootstrap.js</code>
 			</li>
 			
 			<li>
 				To enable or disable pagination buttons such as 'next', 'prev', 'last' and 'first',
-				you should edit <code>assets/js/jquery.dataTables.bootstrap.js</code>
+				you should edit <code>assets/js/dataTables/jquery.dataTables.bootstrap.js</code>
 				and modify the part that says <span class="green">//Pagination Buttons</span>
 			</li>
 			
@@ -69,6 +69,40 @@ var myTable =
  });
 </pre>
 			</li>
+			
+			<li>
+				"buttons" and "select" extensions are also included.
+				<br />
+				To use "buttons" you should include the following files:
+				<br />
+				<code>assets/js/dataTables/extensions/Buttons/js/dataTables.buttons.js</code>
+				<br />
+				<code>assets/js/dataTables/extensions/Buttons/js/buttons.print.js</code> (for print button)
+				<br />
+				<code>assets/js/dataTables/extensions/Buttons/js/buttons.html5.js</code> (for html5 buttons)
+				<br />
+				<code>assets/js/dataTables/extensions/Buttons/js/buttons.flash.js</code> (for flash buttons)
+				<br />
+				<code>assets/js/dataTables/extensions/Buttons/js/buttons.colVis.js</code>(for column visibility button)
+				<br />
+				<br />
+				To use "select" you should include the following file:
+				<br />
+				<code>assets/js/dataTables/extensions/Select/js/dataTables.select.js</code>
+			</li>
+			
+			<li>
+				If you want "html5" buttons to export table data to "PDF" or "Excel", you need extra plugins.
+				<br />
+				Please see <a href="https://datatables.net/extensions/buttons/examples/html5/simple.html" target="_blank">https://datatables.net/extensions/buttons/examples/html5/simple.html</a> for more info.
+			</li>
+			
+			<li>
+				For an example please see:
+				<code data-open-file="javascript" class="open-file"><span class="brief-show">mustache/app/views/assets/scripts/</span>tables.js</code>
+				<br />
+				Note the changes dynamically done to make the extensions styling look like Ace.
+			</li>
 
 		 </ul>
 		</div>
@@ -96,7 +130,7 @@ var myTable =
 				<br />
 				<code>assets/css/ui.jqgrid.css</code>
 				<br />
-				<code>assets/js/jqGrid/jquery.jqGrid.min.js</code>
+				<code>assets/js/jqGrid/jquery.jqGrid.src.js</code>
 			</li>
 			
 			<li>			
