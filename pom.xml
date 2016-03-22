@@ -17,7 +17,9 @@
         <mysql-connector.version>5.1.38</mysql-connector.version>
         <java.version>1.8</java.version>
         <env>dev</env>
+        <project.sources>src/main/resources</project.sources>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -37,6 +39,14 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
+
+        <!--热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!--模板引擎-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -124,8 +134,14 @@
         </filters>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>*.properties</exclude>
+                </excludes>
+                <includes>
+                    <include>**</include>
+                </includes>
             </resource>
         </resources>
         <plugins>
@@ -143,6 +159,21 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+
+            <!--<plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>1.2.3.RELEASE</version>
+                    </dependency>
+                </dependencies>
+            </plugin>-->
         </plugins>
     </build>
 </project>

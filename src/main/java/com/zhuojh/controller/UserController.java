@@ -29,4 +29,26 @@ public class UserController {
         logger.info("-----------CRM getUserById--------------");
         return "userInfo";
     }
+
+
+    @RequestMapping("/index")
+    public String index1(){
+        return "index";
+    }
+
+    @RequestMapping("/sidebar")
+    public String sidebar(){
+        return "sidebar";
+    }
+
+    @RequestMapping("/htmlhead")
+    public String htmlHead(){
+        return "htmlhead";
+    }
+
+    @RequestMapping("/htmlfoot")
+    public String htmlfoot(){
+        return "htmlfoot";
+    }
+
 }
