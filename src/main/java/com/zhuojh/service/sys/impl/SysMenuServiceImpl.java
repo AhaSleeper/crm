@@ -57,7 +57,7 @@ public class SysMenuServiceImpl implements SysMenuService {
         attr.put("data-icon", menu.getMenuIcon());
         attr.put("style", null);
 //        node.setText(menu.getMenuName());
-        treeItem.setName(menu.getMenuName());
+        treeItem.setText(menu.getMenuName());
 //        node.setAttr(attr);
         AdditionalParameters additionalParameters = new AdditionalParameters();
         additionalParameters.setId(menu.getMenuId());

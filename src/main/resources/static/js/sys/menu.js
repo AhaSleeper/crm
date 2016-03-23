@@ -1,84 +1,6 @@
 /**
  * Created by snow on 2016/3/14.
  */
-/*var DataSourceTree = function(options) {
-    this._data 	= options.data;
-    this._delay = options.delay;
-}
-
-DataSourceTree.prototype.data = function(options, callback) {
-    var self = this;
-    var $data = null;
-
-    if(!("name" in options) && !("type" in options)){
-        $data = this._data;//the root tree
-        callback({ data: $data });
-        return;
-    }
-    else if("type" in options && options.type == "folder") {
-        if("additionalParameters" in options && "children" in options.additionalParameters)
-            $data = options.additionalParameters.children;
-        else $data = {}//no data
-    }
-
-    if($data != null)//this setTimeout is only for mimicking some random delay
-        setTimeout(function(){callback({ data: $data });} , parseInt(Math.random() * 500) + 200);
-
-    //we have used static data here
-    //but you can retrieve your data dynamically from a server using ajax call
-    //checkout examples/treeview.html and examples/treeview.js for more info
-};
-
-var tree_data = {
-    '客户管理' : {name: '客户管理', type: 'folder'}	,
-    '营销管理' : {name: '营销管理', type: 'folder'}	,
-    '服务管理' : {name: '服务管理', type: 'folder'}	,
-    '统计报表管理' : {name: '统计报表管理', type: 'folder'},
-    '基础数据管理' : {name: '基础数据管理', type: 'folder'}	,
-    '系统管理' : {name: '系统管理', type: 'folder'}
-}
-tree_data['客户管理']['additionalParameters'] = {
-    'children' : {
-        '客户信息管理' : {name: '客户信息管理', type: 'item'},
-        '客户流失管理' : {name: '客户流失管理', type: 'item'}
-    }
-}
-tree_data['营销管理']['additionalParameters'] = {
-    'children' : {
-        '销售机会管理' : {name: '销售机会管理', type: 'item'},
-        '客户开发计划' : {name: '客户开发计划', type: 'item'}
-    }
-}
-
-tree_data['服务管理']['additionalParameters'] = {
-    'children' : {
-        '服务创建' : {name: '服务创建', type: 'item'},
-        '服务分配' : {name: '服务分配', type: 'item'},
-        '服务处理' : {name: '服务处理', type: 'item'},
-        '服务反馈' : {name: '服务反馈', type: 'item'},
-        '服务归档' : {name: '服务归档', type: 'item'}
-    }
-}
-tree_data['统计报表管理']['additionalParameters'] = {
-    'children' : {
-        '客户贡献分析' : {name: '客户贡献分析', type: 'item'},
-        '客户构成分析' : {name: '客户构成分析', type: 'item'},
-        '客户流失分析' : {name: '客户流失分析', type: 'item'},
-        '客户服务分析' : {name: '客户服务分析', type: 'item'}
-    }
-}
-tree_data['基础数据管理']['additionalParameters'] = {
-    'children' : {
-        '数据字典管理' : {name: '数据字典管理', type: 'item'}
-    }
-}
-tree_data['系统管理']['additionalParameters'] = {
-    'children' : {
-        '用户管理' : {name: '用户管理', type: 'item'},
-        '菜单管理' : {name: '菜单管理', type: 'item'},
-        '角色管理' : {name: '角色管理', type:'item'}
-    }
-}*/
 var DataSourceTree = function (options) {
     this.url = options.url;
 }
@@ -123,8 +45,67 @@ jQuery(function($){
         }
     };
     var dataSource = new DataSourceTree({url:"/menu/tree"});
+    var TreeData = function(options, callback) {
+        var self = this;
+        var param = null
+        console.log(options.type);
+        if ("type" in options && options.type == "folder") {
+            if ("dataAttributes" in options && "children" in options.dataAttributes) {
+                param = options.dataAttributes["id"];
+            }
+        }
+
+        if (param != null) {
+            $.ajax({
+                url: this.options.url,
+                data: 'id=' + param,
+                type: 'POST',
+                dataType: 'json',
+                success: function (response) {
+                    callback(response)
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            })
+        }
+    setTimeout(function () {
+        callback({ data: [
+            { name: 'Ascending and Descending', type: 'folder', dataAttributes: { id: 'folder1' } },
+            { name: 'Sky and Water I (with custom icon)', type: 'item', dataAttributes: { id: 'item1', 'data-icon': 'glyphicon glyphicon-file' } },
+            { name: 'Drawing Hands', type: 'folder', dataAttributes: { id: 'folder2' } },
+            { name: 'Waterfall', type: 'item', dataAttributes: { id: 'item2' } },
+            { name: 'Belvedere', type: 'folder', dataAttributes: { id: 'folder3' } },
+            { name: 'Relativity (with custom icon)', type: 'item', dataAttributes: { id: 'item3', 'data-icon': 'glyphicon glyphicon-picture' } },
+            { name: 'House of Stairs', type: 'folder', dataAttributes: { id: 'folder4' } },
+            { name: 'Convex and Concave', type: 'item', dataAttributes: { id: 'item4' } }
+        ]});
+
+    }, 400);
+}
+    function dynamicDataSource(openedParentData, callback) {
+        var childNodesArray = [];
+
+        // call API, posting options
+        $.ajax({
+            'type': 'post',
+            'url': '/menu/tree',
+            'data': openedParentData  // first call with be an empty object
+        })
+            .done(function(data) {
+                // configure datasource
+                var childObjectsArray = data;
+
+                // pass an array with the key 'data' back to the tree
+                // [ {'name': [string], 'type': [string], 'attr': [object] } ]
+                callback({
+                    data: childNodesArray
+                });
+
+            });
+    }
     $('#tree1').ace_tree({
-        dataSource: dataSource ,
+        dataSource: new dynamicDataSource(null,callback) ,
         multiSelect:false,
         loadingHTML:'<div class="tree-loading"></div>',
         'open-icon' : 'ace-icon tree-minus',
@@ -150,7 +131,6 @@ jQuery(function($){
             //result.eventType >> (selected or unselected)
         })
         .on('selected', function(e) {
-            alert("selected");
         })
         .on('unselected', function(e) {
         })

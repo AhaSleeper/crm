@@ -6884,3 +6884,161 @@ Caused by: java.lang.IllegalStateException: Tomcat connector in failed state
 [2016-03-21 23:11:28] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
 [2016-03-21 23:11:29] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
 [2016-03-21 23:11:35] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.161 seconds (JVM running for 8.222)
+[2016-03-22 17:10:38] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 2804 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 17:10:38] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 17:10:38] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 17:10:53] [restartedMain] ERROR o.a.coyote.http11.Http11NioProtocol - Failed to start end point associated with ProtocolHandler ["http-nio-8080"]
+java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_51]
+	at sun.nio.ch.Net.bind(Net.java:437) ~[na:1.8.0_51]
+	at sun.nio.ch.Net.bind(Net.java:429) ~[na:1.8.0_51]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_51]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_51]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:340) ~[tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:765) ~[tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:473) ~[tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:986) [tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) [tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:239) [tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:194) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:151) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) [spring-context-4.2.4.RELEASE.jar:4.2.4.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at com.zhuojh.Application.main(Application.java:12) [classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_51]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) [spring-boot-devtools-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+[2016-03-22 17:10:53] [restartedMain] ERROR o.a.catalina.core.StandardService - Failed to start connector [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Failed to start component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:154) ~[tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:239) ~[tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:194) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:151) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) [spring-context-4.2.4.RELEASE.jar:4.2.4.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at com.zhuojh.Application.main(Application.java:12) [classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_51]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) [spring-boot-devtools-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+Caused by: org.apache.catalina.LifecycleException: service.getName(): "Tomcat";  Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:993) ~[tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) ~[tomcat-embed-core-8.0.30.jar:8.0.30]
+	... 18 common frames omitted
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_51]
+	at sun.nio.ch.Net.bind(Net.java:437) ~[na:1.8.0_51]
+	at sun.nio.ch.Net.bind(Net.java:429) ~[na:1.8.0_51]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_51]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_51]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:340) ~[tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:765) ~[tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:473) ~[tomcat-embed-core-8.0.30.jar:8.0.30]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:986) ~[tomcat-embed-core-8.0.30.jar:8.0.30]
+	... 19 common frames omitted
+[2016-03-22 17:10:53] [restartedMain] ERROR o.s.boot.SpringApplication - Application startup failed
+org.springframework.boot.context.embedded.EmbeddedServletContainerException: Unable to start embedded Tomcat servlet container
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:165) ~[spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) ~[spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) ~[spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) ~[spring-context-4.2.4.RELEASE.jar:4.2.4.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) ~[spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at com.zhuojh.Application.main(Application.java:12) [classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_51]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) [spring-boot-devtools-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+Caused by: java.lang.IllegalStateException: Tomcat connector in failed state
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:159) ~[spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	... 15 common frames omitted
+[2016-03-22 17:11:31] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 10996 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 17:11:31] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 17:11:32] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 17:11:46] [restartedMain] INFO  com.zhuojh.Application - Started Application in 15.273 seconds (JVM running for 17.734)
+[2016-03-22 17:25:26] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 1568 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 17:25:26] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 17:25:28] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 17:25:38] [restartedMain] INFO  com.zhuojh.Application - Started Application in 12.612 seconds (JVM running for 14.075)
+[2016-03-22 22:43:55] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 676 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 22:43:55] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 22:43:57] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 22:44:05] [restartedMain] INFO  com.zhuojh.Application - Started Application in 10.437 seconds (JVM running for 11.694)
+[2016-03-22 22:45:42] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 5952 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 22:45:42] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 22:45:43] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 22:45:54] [restartedMain] INFO  com.zhuojh.Application - Started Application in 12.129 seconds (JVM running for 13.533)
+[2016-03-22 22:49:38] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 10848 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 22:49:38] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 22:49:40] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 22:49:51] [restartedMain] INFO  com.zhuojh.Application - Started Application in 13.921 seconds (JVM running for 15.475)
+[2016-03-22 22:50:34] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 6768 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 22:50:34] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 22:50:35] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 22:50:46] [restartedMain] INFO  com.zhuojh.Application - Started Application in 12.779 seconds (JVM running for 13.991)
+[2016-03-22 22:52:26] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 12048 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 22:52:26] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 22:52:27] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 22:52:41] [restartedMain] INFO  com.zhuojh.Application - Started Application in 15.662 seconds (JVM running for 17.096)
+[2016-03-22 22:53:42] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 3344 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 22:53:42] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 22:53:43] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 22:53:54] [restartedMain] INFO  com.zhuojh.Application - Started Application in 12.367 seconds (JVM running for 13.998)
+[2016-03-22 23:04:41] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 10752 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 23:04:41] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 23:04:42] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 23:04:58] [restartedMain] INFO  com.zhuojh.Application - Started Application in 18.436 seconds (JVM running for 19.869)
+[2016-03-22 23:06:06] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 17392 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 23:06:06] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 23:06:07] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 23:06:22] [restartedMain] INFO  com.zhuojh.Application - Started Application in 16.81 seconds (JVM running for 18.208)
+[2016-03-22 23:16:48] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 8660 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 23:16:48] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 23:16:49] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 23:17:01] [restartedMain] INFO  com.zhuojh.Application - Started Application in 13.688 seconds (JVM running for 15.436)
+[2016-03-22 23:17:43] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 9444 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 23:17:43] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 23:17:44] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 23:17:57] [restartedMain] INFO  com.zhuojh.Application - Started Application in 14.887 seconds (JVM running for 16.353)
+[2016-03-22 23:34:08] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 2744 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 23:34:08] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 23:34:09] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 23:34:23] [restartedMain] INFO  com.zhuojh.Application - Started Application in 15.843 seconds (JVM running for 17.273)
+[2016-03-22 23:34:37] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 2744 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 23:34:37] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 23:34:44] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.324 seconds (JVM running for 38.071)
+[2016-03-22 23:34:48] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 2744 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 23:34:48] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 23:34:53] [restartedMain] INFO  com.zhuojh.Application - Started Application in 5.302 seconds (JVM running for 47.349)
+[2016-03-22 23:35:22] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 2744 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 23:35:22] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 23:35:25] [restartedMain] INFO  com.zhuojh.Application - Started Application in 3.936 seconds (JVM running for 79.045)
+[2016-03-22 23:38:34] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 2744 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 23:38:34] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 23:38:38] [restartedMain] INFO  com.zhuojh.Application - Started Application in 4.209 seconds (JVM running for 272.46)
+[2016-03-22 23:38:53] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 16684 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-22 23:38:53] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-22 23:38:53] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-22 23:39:07] [restartedMain] INFO  com.zhuojh.Application - Started Application in 15.46 seconds (JVM running for 16.631)

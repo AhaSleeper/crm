@@ -8,16 +8,16 @@ public class TreeItem {
     public static final String TYPE_FOLDER = "folder";
     public static final String TYPE_ITEM = "item";
 
-    private String name;
+    private String text;
     private String type;
     private AdditionalParameters additionalParameters;
 
-    public String getName() {
-        return name;
+    public String getText() {
+        return text;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getType() {
