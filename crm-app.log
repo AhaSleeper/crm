@@ -7042,3 +7042,99 @@ Caused by: java.lang.IllegalStateException: Tomcat connector in failed state
 [2016-03-22 23:38:53] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
 [2016-03-22 23:38:53] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
 [2016-03-22 23:39:07] [restartedMain] INFO  com.zhuojh.Application - Started Application in 15.46 seconds (JVM running for 16.631)
+[2016-03-23 23:32:55] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 15084 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-23 23:32:55] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-23 23:32:56] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-23 23:33:05] [restartedMain] INFO  com.zhuojh.Application - Started Application in 11.821 seconds (JVM running for 14.687)
+[2016-03-23 23:36:13] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 1320 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-23 23:36:13] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-23 23:36:14] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-23 23:36:21] [restartedMain] INFO  com.zhuojh.Application - Started Application in 8.33 seconds (JVM running for 9.853)
+[2016-03-23 23:43:13] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 9928 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-23 23:43:13] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-23 23:43:13] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-23 23:43:19] [restartedMain] INFO  com.zhuojh.Application - Started Application in 6.933 seconds (JVM running for 8.223)
+[2016-03-23 23:45:41] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 10520 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-23 23:45:41] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-23 23:45:42] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-23 23:45:47] [restartedMain] INFO  com.zhuojh.Application - Started Application in 6.677 seconds (JVM running for 7.674)
+[2016-03-23 23:50:29] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 6228 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-23 23:50:29] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-23 23:50:29] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-23 23:50:35] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.128 seconds (JVM running for 8.146)
+[2016-03-23 23:52:56] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 13468 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-23 23:52:56] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-23 23:52:57] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-23 23:53:03] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.213 seconds (JVM running for 8.227)
+[2016-03-23 23:56:40] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 14096 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-23 23:56:40] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-23 23:56:40] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-23 23:56:47] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.979 seconds (JVM running for 8.851)
+[2016-03-24 00:01:13] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 15768 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 00:01:13] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 00:01:13] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 00:01:19] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.154 seconds (JVM running for 8.076)
+[2016-03-24 00:15:05] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 15516 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 00:15:05] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 00:15:06] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 00:15:13] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.623 seconds (JVM running for 8.691)
+[2016-03-24 00:17:04] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 13196 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 00:17:04] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 00:17:05] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 00:17:11] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.631 seconds (JVM running for 8.583)
+[2016-03-24 16:53:16] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 10936 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 16:53:16] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 16:53:17] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 16:53:26] [restartedMain] INFO  com.zhuojh.Application - Started Application in 11.168 seconds (JVM running for 13.098)
+[2016-03-24 16:57:59] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 2344 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 16:57:59] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 16:57:59] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 16:58:05] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.13 seconds (JVM running for 8.141)
+[2016-03-24 17:00:05] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 11616 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:00:05] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:00:06] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:00:12] [restartedMain] INFO  com.zhuojh.Application - Started Application in 6.89 seconds (JVM running for 7.764)
+[2016-03-24 17:01:44] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 8160 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:01:44] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:01:45] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:01:52] [restartedMain] INFO  com.zhuojh.Application - Started Application in 8.43 seconds (JVM running for 9.412)
+[2016-03-24 17:06:24] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 10752 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:06:24] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:06:25] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:06:32] [restartedMain] INFO  com.zhuojh.Application - Started Application in 9.023 seconds (JVM running for 10.505)
+[2016-03-24 17:07:32] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 11296 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:07:32] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:07:33] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:07:40] [restartedMain] INFO  com.zhuojh.Application - Started Application in 8.6 seconds (JVM running for 9.992)
+[2016-03-24 17:08:41] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 4916 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:08:41] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:08:42] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:08:48] [restartedMain] INFO  com.zhuojh.Application - Started Application in 8.121 seconds (JVM running for 9.698)
+[2016-03-24 17:10:28] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 784 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:10:28] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:10:29] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:10:35] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.717 seconds (JVM running for 9.125)
+[2016-03-24 17:12:16] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 11680 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:12:16] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:12:17] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:12:24] [restartedMain] INFO  com.zhuojh.Application - Started Application in 8.972 seconds (JVM running for 10.412)
+[2016-03-24 17:14:41] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 7268 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:14:41] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:14:42] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:14:48] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.861 seconds (JVM running for 9.426)
+[2016-03-24 17:15:19] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 9340 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:15:19] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:15:21] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:15:28] [restartedMain] INFO  com.zhuojh.Application - Started Application in 9.359 seconds (JVM running for 10.444)
+[2016-03-24 17:16:17] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 9920 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:16:17] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:16:18] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:16:26] [restartedMain] INFO  com.zhuojh.Application - Started Application in 9.231 seconds (JVM running for 10.325)
+[2016-03-24 17:17:02] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 11504 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:17:02] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:17:02] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:17:09] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.098 seconds (JVM running for 8.408)
+[2016-03-24 17:19:54] [restartedMain] INFO  com.zhuojh.Application - Starting Application on Lenovo with PID 2712 (F:\SpringBoot\crm\target\classes started by snow in F:\SpringBoot\crm)
+[2016-03-24 17:19:54] [restartedMain] INFO  com.zhuojh.Application - No active profile set, falling back to default profiles: default
+[2016-03-24 17:19:54] [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.2.Final
+[2016-03-24 17:20:01] [restartedMain] INFO  com.zhuojh.Application - Started Application in 7.583 seconds (JVM running for 8.535)
