@@ -49,22 +49,16 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     public TreeItem tree(SysMenu menu,boolean isRecursive){
-//        TreeVo node = new TreeVo();
         TreeItem treeItem = new TreeItem();
-        Map<String, Object> attr = new HashMap<String, Object>();
-        attr.put("id",menu.getMenuId());
-        attr.put("pid",menu.getPid());
-        attr.put("data-icon", menu.getMenuIcon());
-        attr.put("style", null);
-//        node.setText(menu.getMenuName());
         treeItem.setText(menu.getMenuName());
-//        node.setAttr(attr);
         AdditionalParameters additionalParameters = new AdditionalParameters();
         additionalParameters.setId(menu.getMenuId());
+        additionalParameters.setPid(menu.getPid());
+        additionalParameters.setIcon(menu.getMenuIcon());
+        additionalParameters.setUrl(menu.getMenuUrl());
         treeItem.setAdditionalParameters(additionalParameters);
         List<SysMenu> sysMenuParentList = sysMenuMapper.getMenuList(menu);
         if(sysMenuParentList!=null && sysMenuParentList.size() >0){
-//            node.setType(TreeVo.TYPE_FOLDER);
             treeItem.setType(TreeItem.TYPE_FOLDER);
             if(isRecursive){
                 List<TreeItem> childMenuList = new ArrayList<TreeItem>();
@@ -72,7 +66,6 @@ public class SysMenuServiceImpl implements SysMenuService {
                     childMenuList.add(tree(sysMenu,true));
                 }
                 additionalParameters.setChildren(childMenuList);
-//                node.setChildren(childMenuList);
                 treeItem.setAdditionalParameters(additionalParameters);
             }
         } else {

@@ -17,6 +17,18 @@ public class AdditionalParameters {
      */
     private String id;
 
+    /**
+     * 父节点id
+     */
+    private String pid;
+
+    /**
+     * 图标
+     */
+    private String icon;
+
+    private String url;
+
     private boolean itemSelected;
 
     public List<TreeItem> getChildren() {
@@ -33,6 +45,30 @@ public class AdditionalParameters {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public boolean isItemSelected() {

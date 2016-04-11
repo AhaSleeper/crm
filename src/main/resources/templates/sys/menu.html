@@ -53,7 +53,7 @@
 
                                     <div class="widget-body">
                                         <div class="widget-main padding-8">
-                                            <ul id="tree1"></ul>
+                                            <ul id="menuTree"></ul>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +71,8 @@
                                     </div>
 
                                     <div class="widget-body">
-                                        <div class="widget-main padding-8">
+                                        <!--编辑区-->
+                                        <div id="editPanel" class="widget-main padding-8" style="display: none">
                                             <form class="form-horizontal" role="form">
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label no-padding-right" for="pid">父菜单名称</label>
@@ -119,6 +120,46 @@
                                                             <i class="ace-icon fa fa-undo bigger-110"></i>
                                                             重置
                                                         </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!--信息显示区-->
+                                        <div id="infoPanel" class="widget-main padding-8">
+                                            <form class="form-horizontal" role="form">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="pid">父菜单名称</label>
+
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="pid" id="infoPid" placeholder="" class="col-xs-10 col-sm-5" readonly="true"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="meneName">菜单名称</label>
+
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="menuName" id="infoMenuName" placeholder="菜单名称" class="col-xs-10 col-sm-5" readonly="true"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="menuUrl">Url</label>
+
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="menuUrl" id="infoMenuUrl" placeholder="Url" class="col-xs-10 col-sm-5" readonly="true"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="menuIcon">图标</label>
+
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="menuIcon" id="infoIcon" placeholder="图标" class="col-xs-10 col-sm-5" readonly="true"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="seq">排序码</label>
+
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="seq" id="infoSeq" placeholder="排序码" class="col-xs-10 col-sm-5" readonly="true"/>
                                                     </div>
                                                 </div>
                                             </form>

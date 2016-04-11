@@ -7,7 +7,7 @@ jQuery(function($){
     var remoteUrl = '/menu/tree';
 
     var remoteDateSource = function(options, callback) {
-        var parent_id = null
+        var parent_id = null;
         if( !('text' in options || 'type' in options) ){
             parent_id = 0;//load first level data
         }
@@ -32,7 +32,7 @@ jQuery(function($){
             })
         }
     }
-    $('#tree1').ace_tree({
+    $('#menuTree').ace_tree({
         dataSource: remoteDateSource ,
         loadingHTML:'<div class="tree-loading"><i class="ace-icon fa fa-refresh fa-spin blue"></i></div>',
         'open-icon' : 'ace-icon fa fa-folder-open',
@@ -45,13 +45,14 @@ jQuery(function($){
         'folder-open-icon' : 'ace-icon tree-plus',
         'folder-close-icon' : 'ace-icon tree-minus'
     });
-    $('#tree1')
+    $('#menuTree')
         .on('updated', function(e, result) {
             //result.info  >> an array containing selected items
             //result.item
             //result.eventType >> (selected or unselected)
         })
         .on('selected', function(e) {
+            console.log("tree selected");
         })
         .on('unselected', function(e) {
         })
@@ -59,18 +60,23 @@ jQuery(function($){
         })
         .on('closed', function(e) {
         }).on('click',function(e){
+
+        }).on('selected.fu.tree',function(event,data){
+            var node = data.selected[0];
+            console.log("selected.fu.tree data.text="+node.text+",node.type="+node.type+",node.additionalParameters=["+"pid="+node.additionalParameters.pid
+            +",id="+node.additionalParameters.id+",icon="+node.additionalParameters.icon+",url="+node.additionalParameters.url+"]");
         });
     /**
-     $('#tree1').on('loaded', function (evt, data) {
+     $('#menuTree').on('loaded', function (evt, data) {
 		});
 
-     $('#tree1').on('opened', function (evt, data) {
+     $('#menuTree').on('opened', function (evt, data) {
 		});
 
-     $('#tree1').on('closed', function (evt, data) {
+     $('#menuTree').on('closed', function (evt, data) {
 		});
 
-     $('#tree1').on('selected', function (evt, data) {
+     $('#menuTree').on('selected', function (evt, data) {
 		});
      */
 });

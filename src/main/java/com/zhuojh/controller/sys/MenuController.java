@@ -33,6 +33,15 @@ public class MenuController {
         return "sys/menu";
     }
 
+    /**
+     * 去菜单管理页面
+     * @return
+     */
+    @RequestMapping("/main1")
+    public String main1(){
+        return "sys/menu";
+    }
+
 
     /**
      * 获取菜单树
