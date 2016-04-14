@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.json.Json;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -29,17 +32,10 @@ public class MenuController {
      * @return
      */
     @RequestMapping("/main")
-    public String main(){
-        return "sys/menu";
-    }
-
-    /**
-     * 去菜单管理页面
-     * @return
-     */
-    @RequestMapping("/main1")
-    public String main1(){
-        return "sys/menu";
+    public String main(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        
+        return "sys/menu/menu";
     }
 
 
@@ -60,51 +56,31 @@ public class MenuController {
     }
 
     /**
-     *
-     * @param id
-     * @return
-     */
-    public JsonData getMenuById(String id){
-        return null;
-    }
-    /**
-     * 添加菜单
+     * 保存菜单
      * @param sysMenu
      * @return
      */
-    @RequestMapping("/addMenu")
+    @RequestMapping("/save")
     @ResponseBody
-    public JsonData addMenu(SysMenu sysMenu){
-        boolean flag = sysMenuService.addMenu(sysMenu);
-        if(flag){
-            return new JsonData(true,"添加成功",null);
-        } else {
-            return new JsonData(false, "添加失败", null);
-        }
-    }
-
-    /**
-     * 更新菜单
-     * @param sysMenu
-     * @return
-     */
-    @RequestMapping("/updateMenu")
-    @ResponseBody
-    public JsonData updateMenu(SysMenu sysMenu){
-        boolean flag = sysMenuService.updateMenu(sysMenu);
-        if(flag){
-            return new JsonData(true,"更新成功",null);
-        } else {
-            return new JsonData(false, "更新失败", null);
-        }
-    }
+   public JsonData saveMenu(SysMenu sysMenu){
+       boolean flag = false;
+       JsonData jsonData = null;
+       if(sysMenu.getMenuId()==null || sysMenu.getMenuId().equals("")){
+           flag = sysMenuService.addMenu(sysMenu);
+       } else {
+           flag = sysMenuService.updateMenu(sysMenu);
+       }
+       if(flag) jsonData = new JsonData(true, "操作成功", null);
+       else jsonData = new JsonData(false, "操作失败", null);
+       return jsonData;
+   }
 
     /**
      * 删除菜单
      * @param id
      * @return
      */
-    @RequestMapping("/deleteMenu")
+    @RequestMapping("/delete")
     @ResponseBody
     public JsonData deleteMenu(String id){
         boolean flag = sysMenuService.deleteMenu(id);

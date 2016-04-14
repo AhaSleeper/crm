@@ -8,6 +8,7 @@ public class SysMenu {
 
     private String pid;
 
+    private String pName;
     private String menuName;
 
     private String menuUrl;
@@ -32,6 +33,14 @@ public class SysMenu {
 
     public void setPid(String pid) {
         this.pid = pid == null ? null : pid.trim();
+    }
+
+    public String getpName() {
+        return pName;
+    }
+
+    public void setpName(String pName) {
+        this.pName = pName;
     }
 
     public String getMenuName() {
@@ -72,5 +81,18 @@ public class SysMenu {
 
     public void setSeq(Integer seq) {
         this.seq = seq;
+    }
+
+    public String getMenuTypeStr(){
+        if(menuType!=null){
+            if(menuType.equals(3)){
+                return "系统";
+            } else if(menuType.equals(2)){
+                return "模块";
+            } else if(menuType.equals(1)){
+                return "菜单";
+            }
+        }
+        return null;
     }
 }

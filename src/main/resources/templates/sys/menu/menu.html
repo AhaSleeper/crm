@@ -52,7 +52,7 @@
                                     </div>
 
                                     <div class="widget-body">
-                                        <div class="widget-main padding-8">
+                                        <div class="widget-main padding-8" id="menuTreeDiv">
                                             <ul id="menuTree"></ul>
                                         </div>
                                     </div>
@@ -64,28 +64,41 @@
                                     <div class="widget-header">
                                         <h4 class="widget-title lighter smaller">菜单详情</h4>
                                         <div class="pull-right">
-                                            <button id="btnAddMenu" class="btn btn-success" type="button">添加菜单</button>
-                                            <button id="btnEditMenu" class="btn btn-info" type="button">编辑菜单</button>
-                                            <button id="btnDeleteMenu" class="btn btn-danger" type="button">删除菜单</button>
+                                            <button id="btnAddMenu" class="btn btn-success" type="button" style="display:none">添加菜单</button>
+                                            <button id="btnEditMenu" class="btn btn-info" type="button" style="display:none">编辑菜单</button>
+                                            <button id="btnDeleteMenu" class="btn btn-danger" type="button" style="display:none">删除菜单</button>
+                                            <!--<button class="btn btn-info" id="bootbox-confirm">Confirm</button>-->
                                         </div>
                                     </div>
 
                                     <div class="widget-body">
                                         <!--编辑区-->
                                         <div id="editPanel" class="widget-main padding-8" style="display: none">
-                                            <form class="form-horizontal" role="form">
+                                            <form class="form-horizontal" role="form" id="menuForm">
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label no-padding-right" for="pid">父菜单名称</label>
-
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="pid" id="pid" placeholder="" class="col-xs-10 col-sm-5" />
+                                                        <input type="text" id="pName" class="col-xs-10 col-sm-5" readonly="true"/>
+                                                        <input type="hidden" name="pid" id="pid" placeholder="" class="col-xs-10 col-sm-5" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-3 control-label no-padding-right" for="meneName">菜单名称</label>
+                                                    <label class="col-sm-3 control-label no-padding-right" for="menuName">菜单名称</label>
 
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="menuName" id="meneName" placeholder="菜单名称" class="col-xs-10 col-sm-5" />
+                                                        <input type="hidden" name="menuId" id="id" />
+                                                        <input type="text" name="menuName" id="menuName" placeholder="菜单名称" class="col-xs-10 col-sm-5" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="menuType">菜单类型</label>
+
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" id="menuType" name="menuType">
+                                                            <option value="3">系统</option>
+                                                            <option value="2">模块</option>
+                                                            <option value="1">菜单</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -111,55 +124,62 @@
                                                 </div>
                                                 <div class="clearfix form-actions">
                                                     <div class="col-md-offset-3 col-md-9">
-                                                        <button class="btn btn-info" type="button">
+                                                        <button class="btn btn-info" type="button" id="btnSave">
                                                             <i class="ace-icon fa fa-check bigger-110"></i>
                                                             提交
                                                         </button>
                                                         &nbsp; &nbsp; &nbsp;
-                                                        <button class="btn" type="reset">
+                                                        <button class="btn">
                                                             <i class="ace-icon fa fa-undo bigger-110"></i>
-                                                            重置
+                                                            取消
                                                         </button>
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
                                         <!--信息显示区-->
-                                        <div id="infoPanel" class="widget-main padding-8">
+                                        <div id="infoPanel" class="widget-main padding-8" style="display:none">
                                             <form class="form-horizontal" role="form">
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label no-padding-right" for="pid">父菜单名称</label>
 
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="pid" id="infoPid" placeholder="" class="col-xs-10 col-sm-5" readonly="true"/>
+                                                        <input type="text" id="infoPName" placeholder="" class="col-xs-10 col-sm-5" readonly="true"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-3 control-label no-padding-right" for="meneName">菜单名称</label>
+                                                    <label class="col-sm-3 control-label no-padding-right" for="infoMenuName">菜单名称</label>
 
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="menuName" id="infoMenuName" placeholder="菜单名称" class="col-xs-10 col-sm-5" readonly="true"/>
+                                                        <input type="text" name="menuName" id="infoMenuName" class="col-xs-10 col-sm-5" readonly="true"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="infoMenuType">菜单类型</label>
+
+                                                    <div class="col-sm-9">
+                                                        <input type="text" id="infoMenuType" class="col-xs-10 col-sm-5" readonly="true"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label no-padding-right" for="menuUrl">Url</label>
 
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="menuUrl" id="infoMenuUrl" placeholder="Url" class="col-xs-10 col-sm-5" readonly="true"/>
+                                                        <input type="text" name="menuUrl" id="infoMenuUrl" class="col-xs-10 col-sm-5" readonly="true"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label no-padding-right" for="menuIcon">图标</label>
 
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="menuIcon" id="infoIcon" placeholder="图标" class="col-xs-10 col-sm-5" readonly="true"/>
+                                                        <input type="text" name="menuIcon" id="infoIcon"  class="col-xs-10 col-sm-5" readonly="true"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label no-padding-right" for="seq">排序码</label>
 
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="seq" id="infoSeq" placeholder="排序码" class="col-xs-10 col-sm-5" readonly="true"/>
+                                                        <input type="text" name="seq" id="infoSeq" class="col-xs-10 col-sm-5" readonly="true"/>
                                                     </div>
                                                 </div>
                                             </form>
@@ -179,10 +199,19 @@
     <script src="../assets/js/fuelux/fuelux.tree.min.js" th:src="@{/js/fuelux/fuelux.tree.js}"></script>
     <script src="../assets/js/ace/elements.treeview.js" th:src="@{/js/ace/elements.treeview.js}"></script>
     <!--<script src="../../static/js/sys/menu.js" th:src="@{/js/sys/menu.js}"></script>-->
-    <script src="../../static/js/sys/menu.js" th:src="@{/js/sys/menu.js}"></script>
+    <script src="../../../static/js/sys/menu/menu.js" th:src="@{/js/sys/menu/menu.js}"></script>
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
-
+        jQuery(function($) {
+            $("#bootbox-confirm").on(ace.click_event, function() {
+                $("#menuTree").tree("discloseAll");
+//                bootbox.confirm("Are you sure?", function(result) {
+//                    if(result) {
+//                        //
+//                    }
+//                });
+            });
+        })
     </script>
 </body>
 </html>

@@ -7,6 +7,7 @@ import com.zhuojh.vo.AdditionalParameters;
 import com.zhuojh.vo.TreeItem;
 import com.zhuojh.vo.TreeRespVo;
 import com.zhuojh.vo.TreeVo;
+import common.util.GuidCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class SysMenuServiceImpl implements SysMenuService {
     private SysMenuMapper sysMenuMapper;
     @Override
     public boolean addMenu(SysMenu sysMenu) {
+        sysMenu.setMenuId(GuidCreator.getUUID());
         return sysMenuMapper.insert(sysMenu) > 0;
     }
 
@@ -56,6 +58,10 @@ public class SysMenuServiceImpl implements SysMenuService {
         additionalParameters.setPid(menu.getPid());
         additionalParameters.setIcon(menu.getMenuIcon());
         additionalParameters.setUrl(menu.getMenuUrl());
+        additionalParameters.setpName(menu.getpName());
+        additionalParameters.setSeq(menu.getSeq());
+        additionalParameters.setMenuType(menu.getMenuType());
+        additionalParameters.setMenuTypeStr(menu.getMenuTypeStr());
         treeItem.setAdditionalParameters(additionalParameters);
         List<SysMenu> sysMenuParentList = sysMenuMapper.getMenuList(menu);
         if(sysMenuParentList!=null && sysMenuParentList.size() >0){

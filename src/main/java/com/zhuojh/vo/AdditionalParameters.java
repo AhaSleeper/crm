@@ -23,6 +23,15 @@ public class AdditionalParameters {
     private String pid;
 
     /**
+     * 父节点名称
+     */
+    private String pName;
+
+    private Integer menuType;
+
+    private String menuTypeStr;
+
+    /**
      * 图标
      */
     private String icon;
@@ -30,6 +39,8 @@ public class AdditionalParameters {
     private String url;
 
     private boolean itemSelected;
+
+    private Integer seq;
 
     public List<TreeItem> getChildren() {
         return children;
@@ -77,5 +88,37 @@ public class AdditionalParameters {
 
     public void setItemSelected(boolean itemSelected) {
         this.itemSelected = itemSelected;
+    }
+
+    public String getpName() {
+        return pName;
+    }
+
+    public void setpName(String pName) {
+        this.pName = pName;
+    }
+
+    public Integer getSeq() {
+        return seq;
+    }
+
+    public void setSeq(Integer seq) {
+        this.seq = seq;
+    }
+
+    public String getMenuTypeStr() {
+        return menuTypeStr;
+    }
+
+    public void setMenuTypeStr(String menuTypeStr) {
+        this.menuTypeStr = menuTypeStr;
+    }
+
+    public Integer getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(Integer menuType) {
+        this.menuType = menuType;
     }
 }
