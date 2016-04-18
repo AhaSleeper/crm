@@ -1,6 +1,9 @@
 package com.zhuojh.mapper.sys;
 
 import com.zhuojh.model.sys.SysUser;
+import common.page.Pagination;
+
+import java.util.List;
 
 public interface SysUserMapper {
     int deleteByPrimaryKey(String userId);
@@ -14,4 +17,6 @@ public interface SysUserMapper {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
+
+    List<SysUser> selectByPage(SysUser sysUser, Pagination page);
 }

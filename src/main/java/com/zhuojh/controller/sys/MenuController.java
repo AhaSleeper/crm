@@ -3,15 +3,13 @@ package com.zhuojh.controller.sys;
 import com.zhuojh.model.sys.SysMenu;
 import com.zhuojh.service.sys.SysMenuService;
 import com.zhuojh.vo.TreeItem;
-import com.zhuojh.vo.TreeRespVo;
-import com.zhuojh.vo.TreeVo;
+import com.zhuojh.vo.TreeView;
 import common.web.JsonData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.json.Json;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -53,6 +51,24 @@ public class MenuController {
             sysMenu.setPid(pid);
         }
         return sysMenuService.getMenuTree(sysMenu);
+    }
+
+    /**
+     * zTree
+     * @param id
+     * @return
+     */
+    @RequestMapping("/treeView")
+    @ResponseBody
+    public List<TreeView> getTreeList(String id){
+        SysMenu sysMenu = new SysMenu();
+        if(id==null||"".equals(id)){
+            sysMenu.setMenuId("-1");
+        } else {
+            sysMenu.setPid(id);
+        }
+        List<TreeView> treeViews = sysMenuService.getMenuList(sysMenu);
+        return treeViews;
     }
 
     /**

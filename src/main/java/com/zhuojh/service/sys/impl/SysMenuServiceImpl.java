@@ -6,8 +6,9 @@ import com.zhuojh.service.sys.SysMenuService;
 import com.zhuojh.vo.AdditionalParameters;
 import com.zhuojh.vo.TreeItem;
 import com.zhuojh.vo.TreeRespVo;
-import com.zhuojh.vo.TreeVo;
+import com.zhuojh.vo.TreeView;
 import common.util.GuidCreator;
+import common.util.PublicUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,11 @@ public class SysMenuServiceImpl implements SysMenuService {
         return sysMenuMapper.deleteByPrimaryKey(id) > 0;
     }
 
+    /**
+     * Fuel ux Tree
+     * @param menu
+     * @return
+     */
     @Override
     public Map<String,TreeItem> getMenuTree(SysMenu menu) {
         List<SysMenu> sysMenuParentList = sysMenuMapper.selectByPid(menu);
@@ -50,6 +56,12 @@ public class SysMenuServiceImpl implements SysMenuService {
         return treeMap;
     }
 
+    /**
+     * Fuel ux Tree
+     * @param menu
+     * @param isRecursive
+     * @return
+     */
     public TreeItem tree(SysMenu menu,boolean isRecursive){
         TreeItem treeItem = new TreeItem();
         treeItem.setText(menu.getMenuName());
@@ -78,5 +90,52 @@ public class SysMenuServiceImpl implements SysMenuService {
             treeItem.setType(TreeItem.TYPE_ITEM);
         }
         return treeItem;
+    }
+
+    /**
+     * zTree
+     * @param sysMenu
+     * @return
+     */
+    @Override
+    public List<TreeView> getMenuList(SysMenu sysMenu) {
+        List<SysMenu> sysMenuList = sysMenuMapper.getMenuList(sysMenu);
+        List<TreeView> treeViews = new ArrayList<>();
+        for(SysMenu menu : sysMenuList){
+            treeViews.add(treeView(menu,true));
+        }
+        return treeViews;
+    }
+
+    /**
+     * zTree
+     * @param sysMenu
+     * @param recursive
+     * @return
+     */
+    public TreeView treeView(SysMenu sysMenu, boolean recursive){
+        TreeView node = new TreeView();
+        node.setId(sysMenu.getMenuId());
+        node.setpId(sysMenu.getPid());
+        node.setName(sysMenu.getMenuName());
+        Map<String, Object> attributes = new HashMap<String, Object>();
+        attributes.put("pid",sysMenu.getPid());
+        attributes.put("seq", sysMenu.getSeq());
+        node.setAttributes(attributes);
+        SysMenu res = new SysMenu();
+        res.setPid(sysMenu.getMenuId());
+        List<SysMenu> childrendList = sysMenuMapper.getMenuList(sysMenu);
+        if(!PublicUtil.checkEmptyList(childrendList)){
+            if(recursive){
+                List<TreeView> childrendNode = new ArrayList<TreeView>();
+                for(SysMenu menu : childrendList){
+                    TreeView childrend = treeView(menu, true);
+                    childrendNode.add(childrend);
+                }
+                node.setChildren(childrendNode);
+            }
+
+        }
+        return node;
     }
 }

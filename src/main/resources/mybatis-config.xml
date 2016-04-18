@@ -8,14 +8,23 @@
         <setting name="cacheEnabled" value="false" />
         <setting name="lazyLoadingEnabled" value="true"/>
     </settings>
-
     <typeAliases>
         <!-- 打包成jar包后，package声明alias方式似乎有问题-->
         <!--<package name="com.schoolguard.common.school.entity"/>-->
         <!--<package name="com.schoolguard.common.admin.entity"/>-->
-        <typeAlias type="com.zhuojh.model.User" alias="user"/>
         <typeAlias type="com.zhuojh.model.sys.SysMenu" alias="menu"/>
+        <typeAlias type="com.zhuojh.model.sys.SysRole" alias="role"/>
+        <typeAlias type="com.zhuojh.model.sys.SysUser" alias="user"/>
+        <typeAlias type="com.zhuojh.model.sys.SysUserRole" alias="userRole"/>
+        <typeAlias type="com.zhuojh.model.sys.SysRoleMenu" alias="roleMenu"/>
+        <typeAlias type="com.zhuojh.model.sys.SysDataDict" alias="dataDict" />
     </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.zhuojh.core.interceptor.PaginationInterceptor">
+            <property name="databaseType" value="mysql"/>
+        </plugin>
+    </plugins>
 
     <environments default="production">
         <environment id="production">
@@ -41,7 +50,12 @@
 
     <mappers>
         <!--<package name="com.schoolguard.commander.domain.admin.mapper"/>-->
-        <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/sys/SysMenuMapper.xml"/>
+        <mapper resource="mapper/sys/SysRoleMapper.xml"/>
+        <mapper resource="mapper/sys/SysUserMapper.xml"/>
+        <mapper resource="mapper/sys/SysUserRoleMapper.xml"/>
+        <mapper resource="mapper/sys/SysRoleMenuMapper.xml"/>
+        <mapper resource="mapper/sys/SysDataDictMapper.xml"/>
     </mappers>
+
 </configuration>

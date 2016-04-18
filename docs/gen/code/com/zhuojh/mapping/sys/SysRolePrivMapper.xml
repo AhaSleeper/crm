@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zhuojh.mapper.sys.SysRolePrivMapper" >
-  <resultMap id="BaseResultMap" type="com.zhuojh.model.sys.SysRolePriv" >
+<mapper namespace="com.zhuojh.mapper.sys.SysRoleMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.sys.SysRoleMenu" >
     <id column="PRIV__ROLE_ID" property="privRoleId" jdbcType="VARCHAR" />
     <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
     <result column="PRIV_ID" property="privId" jdbcType="VARCHAR" />
@@ -19,13 +19,13 @@
     delete from t_role_prilivage
     where PRIV__ROLE_ID = #{privRoleId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zhuojh.model.sys.SysRolePriv" >
+  <insert id="insert" parameterType="com.zhuojh.model.sys.SysRoleMenu" >
     insert into t_role_prilivage (PRIV__ROLE_ID, ROLE_ID, PRIV_ID
       )
     values (#{privRoleId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{privId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zhuojh.model.sys.SysRolePriv" >
+  <insert id="insertSelective" parameterType="com.zhuojh.model.sys.SysRoleMenu" >
     insert into t_role_prilivage
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="privRoleId != null" >
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.sys.SysRolePriv" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.sys.SysRoleMenu" >
     update t_role_prilivage
     <set >
       <if test="roleId != null" >
@@ -62,7 +62,7 @@
     </set>
     where PRIV__ROLE_ID = #{privRoleId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.sys.SysRolePriv" >
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.sys.SysRoleMenu" >
     update t_role_prilivage
     set ROLE_ID = #{roleId,jdbcType=VARCHAR},
       PRIV_ID = #{privId,jdbcType=VARCHAR}

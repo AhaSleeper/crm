@@ -1,5 +1,8 @@
 package com.zhuojh.model.sys;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("user")
 public class SysUser {
     private String userId;
 

@@ -1,17 +1,17 @@
 package com.zhuojh.mapper.sys;
 
-import com.zhuojh.model.sys.SysRolePriv;
+import com.zhuojh.model.sys.SysRoleMenu;
 
 public interface SysRolePrivMapper {
     int deleteByPrimaryKey(String privRoleId);
 
-    int insert(SysRolePriv record);
+    int insert(SysRoleMenu record);
 
-    int insertSelective(SysRolePriv record);
+    int insertSelective(SysRoleMenu record);
 
-    SysRolePriv selectByPrimaryKey(String privRoleId);
+    SysRoleMenu selectByPrimaryKey(String privRoleId);
 
-    int updateByPrimaryKeySelective(SysRolePriv record);
+    int updateByPrimaryKeySelective(SysRoleMenu record);
 
-    int updateByPrimaryKey(SysRolePriv record);
+    int updateByPrimaryKey(SysRoleMenu record);
 }

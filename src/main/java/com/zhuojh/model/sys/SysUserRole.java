@@ -1,5 +1,8 @@
 package com.zhuojh.model.sys;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("userRole")
 public class SysUserRole {
     private String userRoleId;
 

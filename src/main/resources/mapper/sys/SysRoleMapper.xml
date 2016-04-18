@@ -15,9 +15,21 @@
     from t_role
     where ROLE_ID = #{roleId,jdbcType=VARCHAR}
   </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhuojh.model.sys.SysRole">
+    select <include refid="Base_Column_List" /> from t_role where 1=1
+    <!--<if test="sysRole.roleName != null and '' != sysRole.roleName">
+      and ROLE_NAME like #{sysRole.roleName, jdbcType=VARCHAR}
+    </if>-->
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_role
     where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByIds" parameterType="java.util.List">
+    delete from t_role where ROLE_ID IN
+    <foreach  item="item" index="index" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.zhuojh.model.sys.SysRole" >
     insert into t_role (ROLE_ID, ROLE_NAME, ROLE_DESC

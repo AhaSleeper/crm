@@ -1,5 +1,8 @@
 package com.zhuojh.model.sys;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("role")
 public class SysRole {
     private String roleId;
 

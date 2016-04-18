@@ -29,14 +29,37 @@
             <div class="page-content">
                 <div class="row">
                     <div class="col-xs-12">
-                        <table id="role-grid-table"></table>
+                        <table id="grid-table"></table>
+                        <div id="grid-pager"></div>
                     </div><!--/.col-->
                 </div><!--/.row-->
             </div><!--/.page-content-->
             <!--footer area -->
         </div><!--/.main-content-->
     </div>
+    <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">角色授权</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="width:auto;height: auto;margin: 0 auto;">
+                        <!--加载资源树-->
+                        <ul id="tree" class="ztree" style="width:700px; overflow:auto;margin-left: 20px;"></ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="cancelAuth()">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmAuth()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="" th:href="@{/css/zTreeStyle/metro.css}"/>
     <div th:replace="common/htmlfoot :: htmlfoot"></div>
-
+    <script th:src="@{/js/jquery.ztree.all-3.5.min.js}"></script>
+    <script th:src="@{/js/sys/role/role.js}"></script>
 </body>
 </html>
