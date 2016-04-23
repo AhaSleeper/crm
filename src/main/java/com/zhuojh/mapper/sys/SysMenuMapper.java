@@ -21,4 +21,6 @@ public interface SysMenuMapper {
     List<SysMenu> getMenuList(SysMenu sysMenu);
 
     List<SysMenu> selectByPid(SysMenu sysMenu);
+
+    List<SysMenu> getMenuListByUserId(String userId);
 }

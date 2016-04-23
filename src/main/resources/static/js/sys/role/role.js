@@ -67,8 +67,8 @@ $(document).ready(function(){
 
 //zTree end
 jQuery(function($) {
-    var grid_selector = "#grid-table";
-    var pager_selector = "#grid-pager";
+    var grid_selector = "#role-grid-table";
+    var pager_selector = "#role-grid-pager";
 
 
     var parent_column = $(grid_selector).closest('[class*="col-"]');
@@ -115,7 +115,7 @@ jQuery(function($) {
         colModel:[
             {name:'id',index:"id"},
             {name:'roleId',index:"roleId",hidden:true, editable:true,edittype:"text"},
-            {name:'roleName',index:"roleName", width:90, editable:true,edittype:"text"},
+            {name:'roleName',index:"roleName", width:90, editable:true,edittype:"text",editrules:{required:true}},
             {name:'roleDesc',index:"roleDesc", width:150, editable: true,edittype:"textarea"}
         ],
 
@@ -322,6 +322,8 @@ jQuery(function($) {
                             } else alert(data.msg);
                         }
                     })
+                } else {
+                    alert("请选择记录!");
                 }
             },
             position:"first"
@@ -467,7 +469,6 @@ function confirmAuth(){
     for(var i = 0; i < nodes.length; i++){
         menuIds.push(nodes[i].id);
     }
-    console.log("11menuIds="+menuIds);
     $.ajax({
         url:"/role/setRoleMenu?menuIds="+menuIds+"&roleId="+roleId,
         type:"GET",

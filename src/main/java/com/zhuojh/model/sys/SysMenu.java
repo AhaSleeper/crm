@@ -2,6 +2,8 @@ package com.zhuojh.model.sys;
 
 import org.apache.ibatis.type.Alias;
 
+import java.util.List;
+
 @Alias("menu")
 public class SysMenu {
     private String menuId;
@@ -18,6 +20,11 @@ public class SysMenu {
     private String menuIcon;
 
     private Integer seq;
+
+    private List<SysMenu> children;
+
+    public SysMenu() {
+    }
 
     public String getMenuId() {
         return menuId;
@@ -94,5 +101,13 @@ public class SysMenu {
             }
         }
         return null;
+    }
+
+    public List<SysMenu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<SysMenu> children) {
+        this.children = children;
     }
 }

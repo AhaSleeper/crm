@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/htmlhead :: htmlHead">
+
+</head>
+<body class="no-skin">
+    <!--导航栏-->
+    <div class="navbar" id="navbar" th:include="common/header :: header">
+    </div>
+    <!--页面主体-->
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        </script>
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+            <span class="sr-only">切换菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!--侧边栏 include sidebar-->
+        <div th:replace="common/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <div class="breadcrumbs">
+                数据字典管理
+            </div>
+
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table id="grid-table"></table>
+                        <div id="grid-pager"></div>
+                    </div><!--/.col-->
+                </div><!--/.row-->
+            </div><!--/.page-content-->
+            <!--footer area -->
+        </div><!--/.main-content-->
+    </div>
+
+    <div th:replace="common/htmlfoot :: htmlfoot"></div>
+    <script th:src="@{/js/setting/dict/data-dict.js}"></script>
+</body>
+</html>

@@ -23,20 +23,39 @@
         <div th:replace="common/sidebar :: sidebar"></div>
         <div class="main-content">
             <div class="breadcrumbs">
-
+                用户管理
             </div>
 
             <div class="page-content">
                 <div class="row">
                     <div class="col-xs-12">
-
+                        <table id="grid-table"></table>
+                        <div id="grid-pager"></div>
                     </div><!--/.col-->
                 </div><!--/.row-->
             </div><!--/.page-content-->
             <!--footer area -->
         </div><!--/.main-content-->
     </div>
-
+    <div class="modal fade" id="userRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">角色授权</h4>
+                </div>
+                <div class="modal-body">
+                    <table id="role-grid-table"></table>
+                    <div id="role-grid-pager"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="cancelAuthRole()">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmAuthRole()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div th:replace="common/htmlfoot :: htmlfoot"></div>
+    <script th:src="@{/js/sys/user/user.js}"></script>
 </body>
 </html>

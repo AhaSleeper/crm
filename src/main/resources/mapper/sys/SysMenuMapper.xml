@@ -45,6 +45,11 @@
          t.SEQ as SEQ from t_menu t left join t_menu m on t.PID = m.MENU_ID
         where m.MENU_ID = #{menuId,jdbcType=VARCHAR}
     </select>
+  <select id="getMenuListByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select t.MENU_ID, t.PID, t.MENU_NAME, t.MENU_URL, t.MENU_TYPE, t.MENU_ICON, t.SEQ
+    from t_menu t where t.MENU_ID in (select DISTINCT rm.MENU_ID from t_role_menu rm join t_role r on rm.ROLE_ID = r.ROLE_ID join t_user_role ur on r.ROLE_ID = ur.ROLE_ID JOIN
+    t_user u on ur.USER_ID = u.USER_ID where u.USER_ID = #{userId, jdbcType=VARCHAR}) order by t.MENU_TYPE, t.SEQ
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_menu
     where MENU_ID = #{menuId,jdbcType=VARCHAR}

@@ -10,6 +10,7 @@ public interface SysUserService {
     boolean save(SysUser user);
     boolean update(SysUser user);
     boolean delete(String id);
+    boolean deleteByIds(String ids);
     SysUser selectByPrimaryKey(String id);
     /**
      * 分页查询用户
@@ -19,4 +20,6 @@ public interface SysUserService {
      * @return
      */
     Pagination getUserByPage(SysUser sysUser, Integer pageNo, Integer pageSize);
+
+    SysUser loadUserByName(String userName);
 }

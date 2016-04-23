@@ -17,7 +17,7 @@
         <typeAlias type="com.zhuojh.model.sys.SysUser" alias="user"/>
         <typeAlias type="com.zhuojh.model.sys.SysUserRole" alias="userRole"/>
         <typeAlias type="com.zhuojh.model.sys.SysRoleMenu" alias="roleMenu"/>
-        <typeAlias type="com.zhuojh.model.sys.SysDataDict" alias="dataDict" />
+        <typeAlias type="com.zhuojh.model.setting.SysDataDict" alias="dataDict" />
     </typeAliases>
 
     <plugins>
@@ -55,7 +55,7 @@
         <mapper resource="mapper/sys/SysUserMapper.xml"/>
         <mapper resource="mapper/sys/SysUserRoleMapper.xml"/>
         <mapper resource="mapper/sys/SysRoleMenuMapper.xml"/>
-        <mapper resource="mapper/sys/SysDataDictMapper.xml"/>
+        <mapper resource="mapper/setting/SysDataDictMapper.xml"/>
     </mappers>
 
 </configuration>

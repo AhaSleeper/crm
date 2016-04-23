@@ -107,6 +107,11 @@ public class SysMenuServiceImpl implements SysMenuService {
         return treeViews;
     }
 
+    @Override
+    public List<SysMenu> getMenuByUserId(String userId) {
+        return sysMenuMapper.getMenuListByUserId(userId);
+    }
+
     /**
      * zTree
      * @param sysMenu

@@ -2,6 +2,8 @@ package com.zhuojh.mapper.sys;
 
 import com.zhuojh.model.sys.SysUserRole;
 
+import java.util.List;
+
 public interface SysUserRoleMapper {
     int deleteByPrimaryKey(String userRoleId);
 
@@ -14,4 +16,8 @@ public interface SysUserRoleMapper {
     int updateByPrimaryKeySelective(SysUserRole record);
 
     int updateByPrimaryKey(SysUserRole record);
+
+    void deleteByUserId(String userId);
+
+    List<SysUserRole> selectUserRoleByUserId(String userId);
 }

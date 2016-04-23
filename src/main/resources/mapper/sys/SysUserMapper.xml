@@ -15,9 +15,23 @@
     from t_user
     where USER_ID = #{userId,jdbcType=VARCHAR}
   </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+    from t_user order by USER_NAME
+  </select>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List"/>
+    from t_user where USER_NAME = #{userName, jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_user
     where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByIds" parameterType="java.util.List">
+    delete from t_user where USER_ID in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.zhuojh.model.sys.SysUser" >
     insert into t_user (USER_ID, USER_NAME, PASSWORD

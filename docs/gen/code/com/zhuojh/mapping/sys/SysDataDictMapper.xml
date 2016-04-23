@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zhuojh.mapper.sys.SysDataDictMapper" >
-  <resultMap id="BaseResultMap" type="com.zhuojh.model.sys.SysDataDict" >
+<mapper namespace="com.zhuojh.mapper.setting.SysDataDictMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.setting.SysDataDict" >
     <id column="DATA_DICTIONARY_ID" property="dataDictionaryId" jdbcType="VARCHAR" />
     <result column="CODE" property="code" jdbcType="INTEGER" />
     <result column="TYPE" property="type" jdbcType="VARCHAR" />
@@ -22,7 +22,7 @@
     delete from t_data_dictionary
     where DATA_DICTIONARY_ID = #{dataDictionaryId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zhuojh.model.sys.SysDataDict" >
+  <insert id="insert" parameterType="com.zhuojh.model.setting.SysDataDict" >
     insert into t_data_dictionary (DATA_DICTIONARY_ID, CODE, TYPE, 
       ITEM, VALUE, IS_EDITABLE
       )
@@ -30,7 +30,7 @@
       #{item,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{isEditable,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zhuojh.model.sys.SysDataDict" >
+  <insert id="insertSelective" parameterType="com.zhuojh.model.setting.SysDataDict" >
     insert into t_data_dictionary
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="dataDictionaryId != null" >
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.sys.SysDataDict" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.setting.SysDataDict" >
     update t_data_dictionary
     <set >
       <if test="code != null" >
@@ -94,7 +94,7 @@
     </set>
     where DATA_DICTIONARY_ID = #{dataDictionaryId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.sys.SysDataDict" >
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.setting.SysDataDict" >
     update t_data_dictionary
     set CODE = #{code,jdbcType=INTEGER},
       TYPE = #{type,jdbcType=VARCHAR},

@@ -18,4 +18,6 @@ public interface SysMenuService {
     public Map<String,TreeItem> getMenuTree(SysMenu sysMenu);
 
     public List<TreeView> getMenuList(SysMenu sysMenu);
+
+    List<SysMenu> getMenuByUserId(String userId);
 }

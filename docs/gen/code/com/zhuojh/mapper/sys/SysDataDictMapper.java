@@ -1,6 +1,6 @@
 package com.zhuojh.mapper.sys;
 
-import com.zhuojh.model.sys.SysDataDict;
+import com.zhuojh.model.setting.SysDataDict;
 
 public interface SysDataDictMapper {
     int deleteByPrimaryKey(String dataDictionaryId);

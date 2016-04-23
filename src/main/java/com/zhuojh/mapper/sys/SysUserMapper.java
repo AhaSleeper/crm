@@ -19,4 +19,8 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
 
     List<SysUser> selectByPage(SysUser sysUser, Pagination page);
+
+    boolean deleteByIds(List<String> idList);
+
+    SysUser selectByUserName(String userName);
 }

@@ -15,9 +15,17 @@
     from t_user_role
     where USER_ROLE_ID = #{userRoleId,jdbcType=VARCHAR}
   </select>
+  <select id="selectUserRoleByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+    from t_user_role where USER_ID = #{userId, jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_user_role
     where USER_ROLE_ID = #{userRoleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByUserId" parameterType="java.lang.String">
+    delete from t_user_role
+    where USER_ID = #{userId, jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.zhuojh.model.sys.SysUserRole" >
     insert into t_user_role (USER_ROLE_ID, USER_ID, ROLE_ID
