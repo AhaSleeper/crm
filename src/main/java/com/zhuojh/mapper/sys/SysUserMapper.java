@@ -23,4 +23,6 @@ public interface SysUserMapper {
     boolean deleteByIds(List<String> idList);
 
     SysUser selectByUserName(String userName);
+
+    List<SysUser> listAll();
 }

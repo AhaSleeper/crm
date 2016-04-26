@@ -58,6 +58,17 @@ public class UserController {
     }
 
     /**
+     * 查询所有用户
+     * @return
+     */
+    @RequestMapping("/listAll")
+    @ResponseBody
+    public List<SysUser> listAll(){
+        List<SysUser> userList = sysUserService.listAll();
+        return userList;
+    }
+
+    /**
      * 添加用户
      * @param user
      * @return

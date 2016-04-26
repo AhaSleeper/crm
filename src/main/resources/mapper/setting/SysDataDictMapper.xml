@@ -22,6 +22,10 @@
     select <include refid="Base_Column_List" />
     from t_data_dictionary order by type
   </select>
+  <select id="getListByType" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+    from t_data_dictionary where type = #{type,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_data_dictionary
     where DATA_DICTIONARY_ID = #{dataDictionaryId,jdbcType=VARCHAR}

@@ -22,4 +22,6 @@ public interface SysDataDictMapper {
     List<SysDataDict> selectByPage(@Param("sysDataDict") SysDataDict sysDataDict, @Param("page") Pagination page);
 
     int deleteByIds(List<String> idList);
+
+    List<SysDataDict> getListByType(String type);
 }

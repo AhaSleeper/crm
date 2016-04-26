@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.customer.ContactHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.customer.ContactHistory" >
+    <id column="CONTACT_HIST_ID" property="contactHistId" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_ID" property="customerId" jdbcType="VARCHAR" />
+    <result column="CONTACT_CONTENT" property="contactContent" jdbcType="VARCHAR" />
+    <result column="CONTACT_CUSTOMER" property="contactCustomer" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR" />
+    <result column="CONTACT_TYPE" property="contactType" jdbcType="INTEGER" />
+    <result column="CONTACT_WAY" property="contactWay" jdbcType="VARCHAR" />
+    <result column="OUR_PERSON" property="ourPerson" jdbcType="VARCHAR" />
+    <result column="NOTE_DATE" property="noteDate" jdbcType="DATE" />
+    <result column="NOTE_BY" property="noteBy" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CONTACT_HIST_ID, CUSTOMER_ID, CONTACT_CONTENT, CONTACT_CUSTOMER, CONTACT_PERSON, 
+    CONTACT_TYPE, CONTACT_WAY, OUR_PERSON, NOTE_DATE, NOTE_BY, CREATE_BY, CREATE_TIME, 
+    MODIFY_BY, MODIFY_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_contact_history
+    where CONTACT_HIST_ID = #{contactHistId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_contact_history
+    where CONTACT_HIST_ID = #{contactHistId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.customer.ContactHistory" >
+    insert into t_contact_history (CONTACT_HIST_ID, CUSTOMER_ID, CONTACT_CONTENT, 
+      CONTACT_CUSTOMER, CONTACT_PERSON, CONTACT_TYPE, 
+      CONTACT_WAY, OUR_PERSON, NOTE_DATE, 
+      NOTE_BY, CREATE_BY, CREATE_TIME, 
+      MODIFY_BY, MODIFY_TIME)
+    values (#{contactHistId,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, #{contactContent,jdbcType=VARCHAR}, 
+      #{contactCustomer,jdbcType=VARCHAR}, #{contactPerson,jdbcType=VARCHAR}, #{contactType,jdbcType=INTEGER}, 
+      #{contactWay,jdbcType=VARCHAR}, #{ourPerson,jdbcType=VARCHAR}, #{noteDate,jdbcType=DATE}, 
+      #{noteBy,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.customer.ContactHistory" >
+    insert into t_contact_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contactHistId != null" >
+        CONTACT_HIST_ID,
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID,
+      </if>
+      <if test="contactContent != null" >
+        CONTACT_CONTENT,
+      </if>
+      <if test="contactCustomer != null" >
+        CONTACT_CUSTOMER,
+      </if>
+      <if test="contactPerson != null" >
+        CONTACT_PERSON,
+      </if>
+      <if test="contactType != null" >
+        CONTACT_TYPE,
+      </if>
+      <if test="contactWay != null" >
+        CONTACT_WAY,
+      </if>
+      <if test="ourPerson != null" >
+        OUR_PERSON,
+      </if>
+      <if test="noteDate != null" >
+        NOTE_DATE,
+      </if>
+      <if test="noteBy != null" >
+        NOTE_BY,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contactHistId != null" >
+        #{contactHistId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactContent != null" >
+        #{contactContent,jdbcType=VARCHAR},
+      </if>
+      <if test="contactCustomer != null" >
+        #{contactCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactType != null" >
+        #{contactType,jdbcType=INTEGER},
+      </if>
+      <if test="contactWay != null" >
+        #{contactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="ourPerson != null" >
+        #{ourPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="noteDate != null" >
+        #{noteDate,jdbcType=DATE},
+      </if>
+      <if test="noteBy != null" >
+        #{noteBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.customer.ContactHistory" >
+    update t_contact_history
+    <set >
+      <if test="customerId != null" >
+        CUSTOMER_ID = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactContent != null" >
+        CONTACT_CONTENT = #{contactContent,jdbcType=VARCHAR},
+      </if>
+      <if test="contactCustomer != null" >
+        CONTACT_CUSTOMER = #{contactCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        CONTACT_PERSON = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactType != null" >
+        CONTACT_TYPE = #{contactType,jdbcType=INTEGER},
+      </if>
+      <if test="contactWay != null" >
+        CONTACT_WAY = #{contactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="ourPerson != null" >
+        OUR_PERSON = #{ourPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="noteDate != null" >
+        NOTE_DATE = #{noteDate,jdbcType=DATE},
+      </if>
+      <if test="noteBy != null" >
+        NOTE_BY = #{noteBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=DATE},
+      </if>
+    </set>
+    where CONTACT_HIST_ID = #{contactHistId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.customer.ContactHistory" >
+    update t_contact_history
+    set CUSTOMER_ID = #{customerId,jdbcType=VARCHAR},
+      CONTACT_CONTENT = #{contactContent,jdbcType=VARCHAR},
+      CONTACT_CUSTOMER = #{contactCustomer,jdbcType=VARCHAR},
+      CONTACT_PERSON = #{contactPerson,jdbcType=VARCHAR},
+      CONTACT_TYPE = #{contactType,jdbcType=INTEGER},
+      CONTACT_WAY = #{contactWay,jdbcType=VARCHAR},
+      OUR_PERSON = #{ourPerson,jdbcType=VARCHAR},
+      NOTE_DATE = #{noteDate,jdbcType=DATE},
+      NOTE_BY = #{noteBy,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=DATE},
+      MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=DATE}
+    where CONTACT_HIST_ID = #{contactHistId,jdbcType=VARCHAR}
+  </update>
+</mapper>

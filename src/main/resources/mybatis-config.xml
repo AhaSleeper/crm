@@ -21,8 +21,20 @@
     </typeAliases>
 
     <plugins>
-        <plugin interceptor="com.zhuojh.core.interceptor.PaginationInterceptor">
+        <!--<plugin interceptor="com.zhuojh.core.interceptor.PaginationInterceptor">
             <property name="databaseType" value="mysql"/>
+        </plugin>-->
+        <plugin interceptor="com.zhuojh.core.interceptor.OffsetLimitInterceptor">
+            <!--<property name="oracle" value="com.jiesai.issp.dao.base.OracleDialect"/>
+            <property name="mysql" value="com.hotent.core.mybatis.dialect.MySQLDialect"/>-->
+            <property name="mysql" value="com.zhuojh.mapper.base.MySQLDialect"/>
+
+            <!-- <property name="mssql" value="com.hotent.core.mybatis.dialect.SQLServer2005Dialect"/>
+            <property name="mysql" value="com.hotent.core.mybatis.dialect.MySQLDialect"/>
+            <property name="db2" value="com.hotent.core.mybatis.dialect.DB2Dialect"/>
+            <property name="h2" value="com.hotent.core.mybatis.dialect.H2Dialect"/>
+            <property name="dm" value="com.hotent.core.mybatis.dialect.DmDialect"/> -->
+            <property name="pageSqlId" value=".*Page$" />
         </plugin>
     </plugins>
 
@@ -56,6 +68,10 @@
         <mapper resource="mapper/sys/SysUserRoleMapper.xml"/>
         <mapper resource="mapper/sys/SysRoleMenuMapper.xml"/>
         <mapper resource="mapper/setting/SysDataDictMapper.xml"/>
+        <mapper resource="mapper/customer/CustomerMapper.xml"/>
+        <mapper resource="mapper/customer/ContactMapper.xml"/>
+        <mapper resource="mapper/customer/ContactHistoryMapper.xml"/>
+
     </mappers>
 
 </configuration>

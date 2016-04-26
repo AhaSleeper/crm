@@ -1,35 +1,12 @@
 /**
- * Created by Administrator on 2016/4/15.
+ * Created by Administrator on 2016/4/24.
  */
-//zTree begin
-var setting = {
-    check: {
-        enable: true,
-        chkStyle:"checkbox"
-    },
-    data: {
-        simpleData: {
-            enable: true
-        }
-    },
-    edit: {
-        enable: false
-    },
-    async:{
-        enable:true,
-        url:'/menu/treeView'
-    }
-};
-var roleId;
-$(document).ready(function(){
-    $.fn.zTree.init($("#tree"), setting, null);
-});
-//-->
-
-//zTree end
+/**
+ * Created by Administrator on 2016/4/20.
+ */
 jQuery(function($) {
-    var grid_selector = "#role-grid-table";
-    var pager_selector = "#role-grid-pager";
+    var grid_selector = "#customer-grid-table";
+    var pager_selector = "#customer-grid-pager";
 
 
     var parent_column = $(grid_selector).closest('[class*="col-"]');
@@ -68,16 +45,95 @@ jQuery(function($) {
 
 
     jQuery(grid_selector).jqGrid({
-        url:"/role/list",
+        //direction: "rtl",
+
+        //subgrid options
+        subGrid : true,
+        //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
+        //datatype: "xml",
+        subGridOptions : {
+            minusicon  : "ace-icon fa fa-minus center bigger-110 blue"
+            /* openicon : "ace-icon fa fa-chevron-right center orange"*/
+        },
+        url: "/customer/list",
         datatype: "json",
         mtype:"get",
-        height: 250,
-        colNames:[ 'ID','角色ID','角色名称', '描述'],
+        height: 350,
+        colNames:[' ', 'ID','客户编号','名称','法人', '地址', '邮编','电话','传真','Email','网址','登记时间','下次联系时间','跟踪曲线','所属人员',
+            '客户等级','客户来源','客户类型','客户状态','客户性质','区域','开户行','银行账号','税号','信用','积分','备注'],
         colModel:[
-            {name:'id',index:"id"},
-            {name:'roleId',index:"roleId",hidden:true, editable:true,edittype:"text"},
-            {name:'roleName',index:"roleName", width:90, editable:true,edittype:"text",editrules:{required:true}},
-            {name:'roleDesc',index:"roleDesc", width:150, editable: true,edittype:"textarea"}
+            {name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
+                formatter:'actions',
+                formatoptions:{
+                    keys:true,
+                    //delbutton: false,//disable delete button
+
+                    delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
+                    //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+                }
+            },
+            {name:'customerId',index:'customerId',hidden:true,width:90, editable:true,},
+            {name:'customerCode',index:'customerCode',hidden:true,width:90, editable:true,},
+            {name:'customerName',index:'customerName', width:90,editable: true},
+            {name:'legalRepresentative',index:'legalRepresentative', width:70, editable: true},
+            {name:'address',index:'address', hidden:true, width:90, editable: true},
+            {name:'postCode',index:'idEditable',hidden:true, width:80, sortable:false,editable: true},
+            {name:'phoneOne',index:'phoneOne', width:80, sortable:false,editable: true},
+            {name:'fax',index:'fax', width:80, sortable:false,editable: true},
+            {name:'email',index:'email', width:80, hidden:true, sortable:false,editable: true},
+            {name:'webSite',index:'webSite', width:80, sortable:false,editable: true},
+            {name:'registerDate',index:'registerDate', width:80, sortable:false,editable: true,formatter:'date',formatoptions:{srcformat: 'U/1000', newformat:'Y-m-d'},unformat:pickDate},
+            {name:'nextContactTime',index:'nextContactTime', width:100, sortable:false,editable: true,formatter:'date',formatoptions:{srcformat: 'U/1000', newformat:'Y-m-d'},unformat:pickDate},
+            {name:'trackingCurve',index:'trackingCurve', hidden:true, width:80, sortable:false,editable: false},
+            {name:'belongTo',index:'belongTo', width:80,hidden:false, sortable:false,edittype:'select',editable: true,
+                editoptions:{dataUrl:"/user/listAll",buildSelect:function(list){
+                    var data = jQuery.parseJSON(list);
+                    var selectContent = "<select><option value=''>--请选择</option>";
+                    if(data && data.length){
+                        for(var i in data){
+                            selectContent+= "<option value='"+data[i].userId+"'>"+data[i].userName+"</option>";
+                        }
+                    }
+                    selectContent = selectContent + "</select>";
+                    return selectContent;
+                }}
+            },
+            {name:'rank',index:'rank', width:80, sortable:false,edittype:'select',editable: true,
+                editoptions:{dataUrl:"/data/listByType?type=企业客户等级",buildSelect:function(list){
+                    var data = jQuery.parseJSON(list);
+                    var selectContent = "<select><option value=''>--请选择</option>";
+                    if(data && data.length){
+                        for(var i in data){
+                            selectContent+= "<option value='"+data[i].value+"'>"+data[i].item+"</option>";
+                        }
+                    }
+                    selectContent = selectContent + "</select>";
+                    return selectContent;
+                }}
+            },
+            {name:'source',index:'source', width:80, hidden:true,sortable:false,editable: false},
+            {name:'type',index:'type', width:80, hidden:true,sortable:false,editable: false},
+            {name:'state',index:'state', width:80, hidden:true, sortable:false,editable: false},
+            {name:'properties',index:'properties', hidden:true, width:80, sortable:false,editable: false},
+            {name:'area',index:'area', width:80, hidden:true, sortable:false,editable: true},
+            {name:'bank',index:'bank', width:80, hidden:true,sortable:false,editable: true},
+            {name:'bankAccount',index:'bankAccount',hidden:true, width:80, sortable:false,editable: true},
+            {name:'taxNo',index:'taxNo', width:80, hidden:true, sortable:false,editable: true},
+            {name:'credit',index:'credit', width:80, sortable:false,edittype:'select',editable: true,
+                editoptions:{dataUrl:"/data/listByType?type=信用度",buildSelect:function(list){
+                    var data = jQuery.parseJSON(list);
+                    var selectContent = "<select><option value=''>--请选择</option>";
+                    if(data && data.length){
+                        for(var i in data){
+                            selectContent+= "<option value='"+data[i].value+"'>"+data[i].item+"</option>";
+                        }
+                    }
+                    selectContent = selectContent + "</select>";
+                    return selectContent;
+                }}
+            },
+            {name:'integral',index:'integral', width:80,hidden:true, sortable:false,editable: true},
+            {name:'remark',index:'remark', width:80, sortale:false,editable: true}
         ],
 
         viewrecords : true,
@@ -86,6 +142,11 @@ jQuery(function($) {
         pager : pager_selector,
         altRows: true,
         //toppager: true,
+
+        multiselect: true,
+        //multikey: "ctrlKey",
+        multiboxonly: false,
+
         loadComplete : function() {
             var table = this;
             setTimeout(function(){
@@ -96,11 +157,24 @@ jQuery(function($) {
                 enableTooltips(table);
             }, 0);
         },
-        multiselect: true,
-        //multikey: "ctrlKey",
-        multiboxonly: true,
-        editurl: "/role/update",//nothing is saved
-        caption: "角色列表"
+
+        editurl: "/customer/update",//nothing is saved
+        caption: "客户列表"
+
+        //,autowidth: true,
+
+
+        /**
+         ,
+         grouping:true,
+         groupingView : {
+						 groupField : ['name'],
+						 groupDataSorted : true,
+						 plusicon : 'fa fa-chevron-down bigger-110',
+						 minusicon : 'fa fa-chevron-up bigger-110'
+					},
+         caption: "Grouping"
+         */
 
     });
     $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
@@ -149,34 +223,32 @@ jQuery(function($) {
             //edit record form
             //closeAfterEdit: true,
             //width: 700,
-            url:"/role/update",
-            mtype:"POST",
+            url:"/customer/update",
+            closeAfterEdit: true,
             recreateForm: true,
             beforeShowForm : function(e) {
                 var form = $(e[0]);
                 form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
                 style_edit_form(form);
-            },
-            closeAfterEdit:true
+            }
         },
         {
             //new record form
             //width: 700,
-            url:"/role/save",
-            mtype:"POST",
+            url:"/customer/save",
+            closeAfterAdd: true,
             recreateForm: true,
             viewPagerButtons: false,
             beforeShowForm : function(e) {
                 var form = $(e[0]);
-              /*  form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
-                    .wrapInner('<div class="widget-header" />')*/
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+                    .wrapInner('<div class="widget-header" />')
                 style_edit_form(form);
-            },
-            closeAfterAdd:true
+            }
         },
         {
             //delete record form
-            url:"/role/deleteByIds",
+            url:"/customer/delete",
             recreateForm: true,
             beforeShowForm : function(e) {
                 var form = $(e[0]);
@@ -193,7 +265,7 @@ jQuery(function($) {
         },
         {
             //search form
-            url:"/role/list",
+            url:"/customer/list",
             recreateForm: true,
             afterShowSearch: function(e){
                 var form = $(e[0]);
@@ -209,7 +281,6 @@ jQuery(function($) {
              multipleGroup:true,
              showQuery: true
              */
-            closeAfterSearch:true
         },
         {
             //view record form
@@ -221,44 +292,6 @@ jQuery(function($) {
         }
     ).navButtonAdd(pager_selector,{
             caption:"",
-            buttonicon:"fa-cog",
-            onClickButton:function(){
-                var rows = $(grid_selector).jqGrid("getGridParam","selarrrow");
-                if(rows.length <= 0){
-                    alert("请选择角色?");
-                    return;
-                }
-                if(rows.length > 1){
-                    alert("一次只能选择一个角色!");
-                    return;
-                }
-                roleId = $(grid_selector).jqGrid("getRowData", rows[0]).roleId;
-                $.ajax({
-                    url:"/role/getSysRoleMenu?roleId="+roleId,
-                    type:"GET",
-                    dataType:"json",
-                    success:function(data){
-                        if(data!=null && data!=undefined&&data.length>0){
-                            var resIds = [];
-                            for(var i = 0; i < data.length; i++){
-                                resIds.push(data[i].menuId);
-                            }
-                            var treeObj = $.fn.zTree.getZTreeObj("tree");
-                            treeObj.checkAllNodes(false);
-                            for(var i = 0 ; i < resIds.length; i ++ ) {
-                                treeObj.checkNode( treeObj.getNodeByParam("id",resIds[i]),true );
-                            }
-                        } else {
-                            var treeObj = $.fn.zTree.getZTreeObj("tree");
-                            treeObj.checkAllNodes(false);
-                        }
-                    }
-                })
-                $("#authModal").modal("show");
-            },
-            position:"first"
-        }).navButtonAdd(pager_selector,{
-            caption:"",
             buttonicon:"ace-icon fa fa-trash-o red",
             onClickButton:function(){
                 var rows = $(grid_selector).jqGrid("getGridParam","selarrrow");
@@ -267,12 +300,12 @@ jQuery(function($) {
                 var rowData;
                 for(var i in rows){
                     rowData = $(grid_selector).jqGrid("getRowData", rows[i]);
-                    ids = ids+rowData.roleId+",";
+                    ids = ids+rowData.customerId+",";
                 }
                 if(ids !=''){
                     if(!confirm("确定删除这些记录？"))return;
                     $.ajax({
-                        url:"/role/deleteByIds",
+                        url:"/customer/deleteByIds",
                         type:"POST",
                         data:{ids:ids},
                         dataType:"json",
@@ -287,14 +320,61 @@ jQuery(function($) {
                     alert("请选择记录!");
                 }
             },
-            position:"first"
+            position:"last"
+        }).navButtonAdd(pager_selector,{
+            caption:"",
+            buttonicon:"ace-icon fa fa-group",
+            onClickButton:function(){
+                var rows = $(grid_selector).jqGrid("getGridParam","selarrrow");
+                if(rows.length>1){
+                    alert("每次只能选择一条记录");
+                    return;
+                }
+                var selectData = new Array();
+                var ids = '';
+                var rowData;
+                for(var i in rows){
+                    rowData = $(grid_selector).jqGrid("getRowData", rows[i]);
+                    ids = ids+rowData.customerId+",";
+                }
+                if(ids !=''){
+                    window.open("/contact/main?customerId="+$(grid_selector).jqGrid("getRowData", rows[0]).customerId,"_self");
+                } else {
+                    alert("请选择记录!");
+                }
+            },
+            position:"last"
+        }).navButtonAdd(pager_selector,{
+            caption:"",
+            buttonicon:"ace-icon fa fa-comments",
+            onClickButton:function(){
+                var rows = $(grid_selector).jqGrid("getGridParam","selarrrow");
+                if(rows.length>1){
+                    alert("每次只能选择一条记录");
+                    return;
+                }
+                var selectData = new Array();
+                var ids = '';
+                var rowData;
+                for(var i in rows){
+                    rowData = $(grid_selector).jqGrid("getRowData", rows[i]);
+                    ids = ids+rowData.customerId+",";
+                }
+                if(ids !=''){
+                    window.open("/contactHistory/main?customerId="+$(grid_selector).jqGrid("getRowData", rows[0]).customerId,"_self");
+                } else {
+                    alert("请选择记录!");
+                }
+            },
+            position:"last"
         })
 
 
 
     function style_edit_form(form) {
         //enable datepicker on "sdate" field and switches for "stock" field
-        //form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+        form.find('input[name=registerDate]').datepicker({format:'yyyy-mm-dd' , autoclose:true});
+        form.find('input[name=nextContactTime]').datepicker({format:'yyyy-mm-dd' , autoclose:true});
         //
         //form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
         //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
@@ -417,28 +497,3 @@ jQuery(function($) {
         $('.ui-jqdialog').remove();
     });
 });
-//取消授权
-function cancelAuth(){
-    $("#authModal").modal("hide");
-}
-
-//授权
-function confirmAuth(){
-    var treeObj = $.fn.zTree.getZTreeObj("tree");
-    var nodes = treeObj.getCheckedNodes(true);
-    var menuIds = [];
-    for(var i = 0; i < nodes.length; i++){
-        menuIds.push(nodes[i].id);
-    }
-    $.ajax({
-        url:"/role/setRoleMenu?menuIds="+menuIds+"&roleId="+roleId,
-        type:"GET",
-        dataType:"json",
-        success:function(data){
-            if(data.success){
-                alert(data.msg);
-                $("#authModal").modal("hide");
-            } else alert(data.msg);
-        }
-    })
-}

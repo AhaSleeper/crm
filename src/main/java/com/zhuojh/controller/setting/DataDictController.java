@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,6 +40,12 @@ public class DataDictController {
         map.put("records", pagination.getTotalCount());
         map.put("rows",pagination.getList());
         return map;
+    }
+
+    @RequestMapping("/listByType")
+    @ResponseBody
+    public List<SysDataDict> getListByType(String type){
+        return sysDataDictService.getListByType(type);
     }
 
     @RequestMapping("/save")

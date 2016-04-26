@@ -3,6 +3,8 @@ package com.zhuojh.service.sys;
 import com.zhuojh.model.sys.SysUser;
 import common.page.Pagination;
 
+import java.util.List;
+
 /**
  * Created by snow on 2016/3/9.
  */
@@ -22,4 +24,6 @@ public interface SysUserService {
     Pagination getUserByPage(SysUser sysUser, Integer pageNo, Integer pageSize);
 
     SysUser loadUserByName(String userName);
+
+    List<SysUser> listAll();
 }

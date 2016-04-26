@@ -46,4 +46,9 @@ public class SysDataDictServiceImpl implements SysDataDictService{
         page.setList(list);
         return page;
     }
+
+    @Override
+    public List<SysDataDict> getListByType(String type) {
+        return sysDataDictMapper.getListByType(type);
+    }
 }

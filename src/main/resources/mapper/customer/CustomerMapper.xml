@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.customer.CustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.customer.Customer" >
+    <id column="CUSTOMER_ID" property="customerId" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_CODE" property="customerCode" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_NAME" property="customerName" jdbcType="VARCHAR" />
+    <result column="LEGAL_REPRESENTATIVE" property="legalRepresentative" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="POST_CODE" property="postCode" jdbcType="VARCHAR" />
+    <result column="PHONE_ONE" property="phoneOne" jdbcType="VARCHAR" />
+    <result column="PHONE_TWO" property="phoneTwo" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="WEB_SITE" property="webSite" jdbcType="VARCHAR" />
+    <result column="REGISTER_DATE" property="registerDate" jdbcType="DATE" />
+    <result column="NEXT_CONTACT_TIME" property="nextContactTime" jdbcType="TIMESTAMP" />
+    <result column="TRACKING_CURVE" property="trackingCurve" jdbcType="INTEGER" />
+    <result column="BELONG_TO" property="belongTo" jdbcType="VARCHAR" />
+    <result column="RANK" property="rank" jdbcType="VARCHAR" />
+    <result column="SOURCE" property="source" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="INTEGER" />
+    <result column="PROPERTIES" property="properties" jdbcType="INTEGER" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="BANK" property="bank" jdbcType="VARCHAR" />
+    <result column="BANK_ACCOUNT" property="bankAccount" jdbcType="VARCHAR" />
+    <result column="TAX_NO" property="taxNo" jdbcType="VARCHAR" />
+    <result column="CREDIT" property="credit" jdbcType="VARCHAR" />
+    <result column="INTEGRAL" property="integral" jdbcType="INTEGER" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CUSTOMER_ID, CUSTOMER_CODE, CUSTOMER_NAME, LEGAL_REPRESENTATIVE, ADDRESS, POST_CODE, 
+    PHONE_ONE, PHONE_TWO, FAX, EMAIL, WEB_SITE, REGISTER_DATE, NEXT_CONTACT_TIME, TRACKING_CURVE, 
+    BELONG_TO, RANK, SOURCE, TYPE, STATE, PROPERTIES, AREA, BANK, BANK_ACCOUNT, TAX_NO, 
+    CREDIT, INTEGRAL, REMARK, CREATE_BY, CREATE_TIME, MODIFY_BY, MODIFY_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer
+    where CUSTOMER_ID = #{customerId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhuojh.model.customer.Customer">
+    select <include refid="Base_Column_List" />
+    from t_customer order by CREATE_TIME
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_customer
+    where CUSTOMER_ID = #{customerId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByIds" parameterType="java.util.List">
+    delete from t_customer
+    where 1=1  and CUSTOMER_ID in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.customer.Customer" >
+    insert into t_customer (CUSTOMER_ID, CUSTOMER_CODE, CUSTOMER_NAME, 
+      LEGAL_REPRESENTATIVE, ADDRESS, POST_CODE, 
+      PHONE_ONE, PHONE_TWO, FAX, 
+      EMAIL, WEB_SITE, REGISTER_DATE, 
+      NEXT_CONTACT_TIME, TRACKING_CURVE, BELONG_TO, 
+      RANK, SOURCE, TYPE, 
+      STATE, PROPERTIES, AREA, 
+      BANK, BANK_ACCOUNT, TAX_NO, 
+      CREDIT, INTEGRAL, REMARK, 
+      CREATE_BY, CREATE_TIME, MODIFY_BY, 
+      MODIFY_TIME)
+    values (#{customerId,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{legalRepresentative,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{postCode,jdbcType=VARCHAR}, 
+      #{phoneOne,jdbcType=VARCHAR}, #{phoneTwo,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{webSite,jdbcType=VARCHAR}, #{registerDate,jdbcType=DATE}, 
+      #{nextContactTime,jdbcType=TIMESTAMP}, #{trackingCurve,jdbcType=INTEGER}, #{belongTo,jdbcType=VARCHAR}, 
+      #{rank,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{properties,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, 
+      #{bank,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR}, #{taxNo,jdbcType=VARCHAR}, 
+      #{credit,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{modifyBy,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.customer.Customer" >
+    insert into t_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        CUSTOMER_ID,
+      </if>
+      <if test="customerCode != null" >
+        CUSTOMER_CODE,
+      </if>
+      <if test="customerName != null" >
+        CUSTOMER_NAME,
+      </if>
+      <if test="legalRepresentative != null" >
+        LEGAL_REPRESENTATIVE,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="postCode != null" >
+        POST_CODE,
+      </if>
+      <if test="phoneOne != null" >
+        PHONE_ONE,
+      </if>
+      <if test="phoneTwo != null" >
+        PHONE_TWO,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="webSite != null" >
+        WEB_SITE,
+      </if>
+      <if test="registerDate != null" >
+        REGISTER_DATE,
+      </if>
+      <if test="nextContactTime != null" >
+        NEXT_CONTACT_TIME,
+      </if>
+      <if test="trackingCurve != null" >
+        TRACKING_CURVE,
+      </if>
+      <if test="belongTo != null" >
+        BELONG_TO,
+      </if>
+      <if test="rank != null" >
+        RANK,
+      </if>
+      <if test="source != null" >
+        SOURCE,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="properties != null" >
+        PROPERTIES,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="bank != null" >
+        BANK,
+      </if>
+      <if test="bankAccount != null" >
+        BANK_ACCOUNT,
+      </if>
+      <if test="taxNo != null" >
+        TAX_NO,
+      </if>
+      <if test="credit != null" >
+        CREDIT,
+      </if>
+      <if test="integral != null" >
+        INTEGRAL,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null" >
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalRepresentative != null" >
+        #{legalRepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneOne != null" >
+        #{phoneOne,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneTwo != null" >
+        #{phoneTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="webSite != null" >
+        #{webSite,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDate != null" >
+        #{registerDate,jdbcType=DATE},
+      </if>
+      <if test="nextContactTime != null" >
+        #{nextContactTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trackingCurve != null" >
+        #{trackingCurve,jdbcType=INTEGER},
+      </if>
+      <if test="belongTo != null" >
+        #{belongTo,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="properties != null" >
+        #{properties,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNo != null" >
+        #{taxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.customer.Customer" >
+    update t_customer
+    <set >
+      <if test="customerCode != null" >
+        CUSTOMER_CODE = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalRepresentative != null" >
+        LEGAL_REPRESENTATIVE = #{legalRepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        POST_CODE = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneOne != null" >
+        PHONE_ONE = #{phoneOne,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneTwo != null" >
+        PHONE_TWO = #{phoneTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="webSite != null" >
+        WEB_SITE = #{webSite,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDate != null" >
+        REGISTER_DATE = #{registerDate,jdbcType=DATE},
+      </if>
+      <if test="nextContactTime != null" >
+        NEXT_CONTACT_TIME = #{nextContactTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trackingCurve != null" >
+        TRACKING_CURVE = #{trackingCurve,jdbcType=INTEGER},
+      </if>
+      <if test="belongTo != null" >
+        BELONG_TO = #{belongTo,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        RANK = #{rank,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        SOURCE = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="properties != null" >
+        PROPERTIES = #{properties,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        BANK = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNo != null" >
+        TAX_NO = #{taxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null" >
+        CREDIT = #{credit,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null" >
+        INTEGRAL = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=DATE},
+      </if>
+    </set>
+    where CUSTOMER_ID = #{customerId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.customer.Customer" >
+    update t_customer
+    set CUSTOMER_CODE = #{customerCode,jdbcType=VARCHAR},
+      CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      LEGAL_REPRESENTATIVE = #{legalRepresentative,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=VARCHAR},
+      PHONE_ONE = #{phoneOne,jdbcType=VARCHAR},
+      PHONE_TWO = #{phoneTwo,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      WEB_SITE = #{webSite,jdbcType=VARCHAR},
+      REGISTER_DATE = #{registerDate,jdbcType=DATE},
+      NEXT_CONTACT_TIME = #{nextContactTime,jdbcType=TIMESTAMP},
+      TRACKING_CURVE = #{trackingCurve,jdbcType=INTEGER},
+      BELONG_TO = #{belongTo,jdbcType=VARCHAR},
+      RANK = #{rank,jdbcType=VARCHAR},
+      SOURCE = #{source,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=INTEGER},
+      PROPERTIES = #{properties,jdbcType=INTEGER},
+      AREA = #{area,jdbcType=VARCHAR},
+      BANK = #{bank,jdbcType=VARCHAR},
+      BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+      TAX_NO = #{taxNo,jdbcType=VARCHAR},
+      CREDIT = #{credit,jdbcType=VARCHAR},
+      INTEGRAL = #{integral,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=DATE},
+      MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=DATE}
+    where CUSTOMER_ID = #{customerId,jdbcType=VARCHAR}
+  </update>
+</mapper>

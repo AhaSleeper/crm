@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.customer.ContactMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.customer.Contact" >
+    <id column="CONTACT_ID" property="contactId" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_ID" property="customerId" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="NICK_NAME" property="nickName" jdbcType="VARCHAR" />
+    <result column="GENDER" property="gender" jdbcType="INTEGER" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="DATE" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
+    <result column="JOB" property="job" jdbcType="VARCHAR" />
+    <result column="IS_DEFAULT_CONTACT" property="isDefaultContact" jdbcType="BIT" />
+    <result column="OFFICE_PHONE_NO" property="officePhoneNo" jdbcType="VARCHAR" />
+    <result column="HOUSE_PHONE_NO" property="housePhoneNo" jdbcType="INTEGER" />
+    <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="POSTCODE" property="postcode" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="MSN" property="msn" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CONTACT_ID, CUSTOMER_ID, NAME, NICK_NAME, GENDER, BIRTHDAY, CODE, DEPARTMENT, JOB, 
+    IS_DEFAULT_CONTACT, OFFICE_PHONE_NO, HOUSE_PHONE_NO, MOBILE_PHONE, EMAIL, ADDRESS, 
+    POSTCODE, QQ, MSN, REMARK, CREATE_BY, CREATE_TIME, MODIFY_BY, MODIFY_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_contact
+    where CONTACT_ID = #{contactId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhuojh.model.customer.Contact">
+    select <include refid="Base_Column_List" /> from t_contact where CUSTOMER_ID = #{contact.customerId, jdbcType=VARCHAR} order by CREATE_TIME
+  </select>
+  <delete id="deleteByIds" parameterType="java.util.List">
+    delete from t_contact where 1=1 and CONTACT_ID in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_contact
+    where CONTACT_ID = #{contactId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.customer.Contact" >
+    insert into t_contact (CONTACT_ID, CUSTOMER_ID, NAME, 
+      NICK_NAME, GENDER, BIRTHDAY, 
+      CODE, DEPARTMENT, JOB, 
+      IS_DEFAULT_CONTACT, OFFICE_PHONE_NO, HOUSE_PHONE_NO, 
+      MOBILE_PHONE, EMAIL, ADDRESS, 
+      POSTCODE, QQ, MSN, 
+      REMARK, CREATE_BY, CREATE_TIME, 
+      MODIFY_BY, MODIFY_TIME)
+    values (#{contactId,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, 
+      #{code,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
+      #{isDefaultContact,jdbcType=BIT}, #{officePhoneNo,jdbcType=VARCHAR}, #{housePhoneNo,jdbcType=INTEGER}, 
+      #{mobilePhone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{postcode,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{msn,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.customer.Contact" >
+    insert into t_contact
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contactId != null" >
+        CONTACT_ID,
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="nickName != null" >
+        NICK_NAME,
+      </if>
+      <if test="gender != null" >
+        GENDER,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="department != null" >
+        DEPARTMENT,
+      </if>
+      <if test="job != null" >
+        JOB,
+      </if>
+      <if test="isDefaultContact != null" >
+        IS_DEFAULT_CONTACT,
+      </if>
+      <if test="officePhoneNo != null" >
+        OFFICE_PHONE_NO,
+      </if>
+      <if test="housePhoneNo != null" >
+        HOUSE_PHONE_NO,
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="postcode != null" >
+        POSTCODE,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="msn != null" >
+        MSN,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contactId != null" >
+        #{contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefaultContact != null" >
+        #{isDefaultContact,jdbcType=BIT},
+      </if>
+      <if test="officePhoneNo != null" >
+        #{officePhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="housePhoneNo != null" >
+        #{housePhoneNo,jdbcType=INTEGER},
+      </if>
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="msn != null" >
+        #{msn,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.customer.Contact" >
+    update t_contact
+    <set >
+      <if test="customerId != null" >
+        CUSTOMER_ID = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        GENDER = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        DEPARTMENT = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        JOB = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefaultContact != null" >
+        IS_DEFAULT_CONTACT = #{isDefaultContact,jdbcType=BIT},
+      </if>
+      <if test="officePhoneNo != null" >
+        OFFICE_PHONE_NO = #{officePhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="housePhoneNo != null" >
+        HOUSE_PHONE_NO = #{housePhoneNo,jdbcType=INTEGER},
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        POSTCODE = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="msn != null" >
+        MSN = #{msn,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=DATE},
+      </if>
+    </set>
+    where CONTACT_ID = #{contactId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.customer.Contact" >
+    update t_contact
+    set CUSTOMER_ID = #{customerId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=INTEGER},
+      BIRTHDAY = #{birthday,jdbcType=DATE},
+      CODE = #{code,jdbcType=VARCHAR},
+      DEPARTMENT = #{department,jdbcType=VARCHAR},
+      JOB = #{job,jdbcType=VARCHAR},
+      IS_DEFAULT_CONTACT = #{isDefaultContact,jdbcType=BIT},
+      OFFICE_PHONE_NO = #{officePhoneNo,jdbcType=VARCHAR},
+      HOUSE_PHONE_NO = #{housePhoneNo,jdbcType=INTEGER},
+      MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      POSTCODE = #{postcode,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      MSN = #{msn,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=DATE},
+      MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=DATE}
+    where CONTACT_ID = #{contactId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -10,6 +10,10 @@ import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.reflection.MetaObject;
+import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
+import org.apache.ibatis.reflection.factory.ObjectFactory;
+import org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory;
+import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
 import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.RowBounds;
@@ -25,7 +29,7 @@ import java.util.Properties;
 /**
  * Created by Administrator on 2016/4/16.
  */
-/*@Intercepts({@Signature(type= StatementHandler.class, method="prepare", args=Connection.class)})*/
+@Intercepts({@Signature(type= StatementHandler.class, method="prepare", args=Connection.class)})
 public class OffsetLimitInterceptor implements Interceptor {
     private static final Logger log = LoggerFactory.getLogger(OffsetLimitInterceptor.class);
     static int MAPPED_STATEMENT_INDEX = 0;
@@ -36,6 +40,9 @@ public class OffsetLimitInterceptor implements Interceptor {
     private Properties properties;
     private String defaultPageSqlId = ".*Page$";
 
+    private static final ObjectFactory DEFAULT_OBJECT_FACTORY = new DefaultObjectFactory();
+    private static final ObjectWrapperFactory DEFAULT_OBJECT_WRAPPER_FACTORY = new DefaultObjectWrapperFactory();
+
     public OffsetLimitInterceptor(){this.properties = null;}
 
     private void getDialect() throws Exception{
@@ -44,22 +51,22 @@ public class OffsetLimitInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        /*getDialect();
+        getDialect();
         StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
         MetaObject metaStatementHandler = MetaObject.forObject(statementHandler,
-                MetaObject.DEFAULT_OBJECT_FACTORY,MetaObject.DEFAULT_OBJECT_WRAPPER_FACTORY);
+                DEFAULT_OBJECT_FACTORY,DEFAULT_OBJECT_WRAPPER_FACTORY);
         //分离代理对象链（由于目标类可能被多个拦截器拦截，从而形成多次代理，通过下面的两次循环
         //可以分离出最原始的目标类）
         while(metaStatementHandler.hasGetter("h")){
             Object object = metaStatementHandler.getValue("h");
-            metaStatementHandler = MetaObject.forObject(object, MetaObject.DEFAULT_OBJECT_FACTORY,
-                    MetaObject.DEFAULT_OBJECT_WRAPPER_FACTORY);
+            metaStatementHandler = MetaObject.forObject(object, DEFAULT_OBJECT_FACTORY,
+                    DEFAULT_OBJECT_WRAPPER_FACTORY);
         }
         //分离最后一个代理对象的目标类
         while(metaStatementHandler.hasGetter("target")){
             Object object = metaStatementHandler.getValue("target");
-            metaStatementHandler = MetaObject.forObject(object, MetaObject.DEFAULT_OBJECT_FACTORY,
-                    MetaObject.DEFAULT_OBJECT_WRAPPER_FACTORY);
+            metaStatementHandler = MetaObject.forObject(object, DEFAULT_OBJECT_FACTORY,
+                    DEFAULT_OBJECT_WRAPPER_FACTORY);
         }
         Configuration configuration = (Configuration) metaStatementHandler.getValue("delegate.configuration");
 
@@ -92,7 +99,7 @@ public class OffsetLimitInterceptor implements Interceptor {
                 setPageParameter(sql, connection, mappedStatement, boundSql, page);
             }
         }
-        //将执行权交给下一个拦截器*/
+        //将执行权交给下一个拦截器
         return invocation.proceed();
     }
 
