@@ -20,7 +20,7 @@
 
     <div class="navbar-buttons navbar-header pull-right" role="navigation">
         <ul class="nav ace-nav">
-            <li class="grey">
+            <!--<li class="grey">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <i class="ace-icon fa fa-tasks"></i>
                     <span class="badge badge-grey">4</span>
@@ -53,8 +53,8 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li class="green">
+            </li>-->
+            <!--<li class="green">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <i class="ace-icon fa fa-bell icon-animated-bell">
                     </i>
@@ -70,12 +70,12 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
             <li class="light-blue">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <img class="nav-user-photo" src="assets/avatars/user.jpg" th:src="@{/avatars/user.jpg}"/>
                             <span class="user-info">
-                                <small>welcome,</small>Tom
+                                <small>欢迎,</small><span th:text="${session.user.userName}"></span>
                             </span>
                     <i class="ace-icon fa fa-caret-down"></i>
                 </a>

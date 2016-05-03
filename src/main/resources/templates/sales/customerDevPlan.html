@@ -25,23 +25,21 @@
             <div class="breadcrumbs">
                 <ul class="breadcrumb">
                     <li>
-                        <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="#">客户管理</a>
+                        <i class="ace-icon fa fa-user user-icon"></i>
+                        <a href="#">营销管理</a>
                     </li>
 
-                    <li>
-                        <a href="#">客户信息管理</a>
+                    <li class="active">
+                        <a href="#">客户开发计划</a>
                     </li>
-                    <li class="active">交往记录</li>
                 </ul>
             </div>
 
             <div class="page-content">
                 <div class="row">
                     <div class="col-xs-12">
-                        <input id="customerId" type="hidden" th:value="${session.customerId}" />
-                        <table id="grid-table"></table>
-                        <div id="grid-pager"></div>
+                        <table id="sales-oppo-grid-table"></table>
+                        <div id="sales-oppo-grid-pager"></div>
                     </div><!--/.col-->
                 </div><!--/.row-->
             </div><!--/.page-content-->
@@ -50,6 +48,6 @@
     </div>
 
     <div th:replace="common/htmlfoot :: htmlfoot"></div>
-    <script th:src="@{/js/customer/contactHistory.js}"></script>
+    <script th:src="@{/js/sales/customer-dev-plan.js}"></script>
 </body>
 </html>

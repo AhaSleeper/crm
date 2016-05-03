@@ -2,6 +2,7 @@ package com.zhuojh.mapper.sys;
 
 import com.zhuojh.model.sys.SysUser;
 import common.page.Pagination;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface SysUserMapper {
 
     int updateByPrimaryKey(SysUser record);
 
-    List<SysUser> selectByPage(SysUser sysUser, Pagination page);
+    List<SysUser> selectByPage(@Param("user") SysUser sysUser, @Param("page") Pagination page);
 
     boolean deleteByIds(List<String> idList);
 

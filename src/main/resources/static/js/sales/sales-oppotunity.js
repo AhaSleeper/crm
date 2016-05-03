@@ -1,14 +1,15 @@
 /**
- * Created by Administrator on 2016/4/26.
+ * Created by Administrator on 2016/4/30.
  */
 jQuery(function($) {
-    var contact_history_grid_selector = "#grid-table";
-    var contact_history_pager_selector = "#grid-pager";
-    var customerId = $("#customerId").val();
-    var parent_column = $(contact_history_grid_selector).closest('[class*="col-"]');
+    var grid_selector = "#grid-table";
+    var pager_selector = "#grid-pager";
+
+
+    var parent_column = $(grid_selector).closest('[class*="col-"]');
     //resize to fit page size
     $(window).on('resize.jqGrid', function () {
-        $(contact_history_grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+        $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
     })
 
     //resize on sidebar collapse/expand
@@ -16,7 +17,7 @@ jQuery(function($) {
         if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
             //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
             setTimeout(function() {
-                $(contact_history_grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+                $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
             }, 20);
         }
     })
@@ -24,14 +25,14 @@ jQuery(function($) {
     //if your grid is inside another element, for example a tab pane, you should use its parent's width:
     /**
      $(window).on('resize.jqGrid', function () {
-					var parent_width = $(contact_history_grid_selector).closest('.tab-pane').width();
-					$(contact_history_grid_selector).jqGrid( 'setGridWidth', parent_width );
+					var parent_width = $(grid_selector).closest('.tab-pane').width();
+					$(grid_selector).jqGrid( 'setGridWidth', parent_width );
 				})
      //and also set width when tab pane becomes visible
      $('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 				  if($(e.target).attr('href') == '#mygrid') {
-					var parent_width = $(contact_history_grid_selector).closest('.tab-pane').width();
-					$(contact_history_grid_selector).jqGrid( 'setGridWidth', parent_width );
+					var parent_width = $(grid_selector).closest('.tab-pane').width();
+					$(grid_selector).jqGrid( 'setGridWidth', parent_width );
 				  }
 				})
      */
@@ -40,45 +41,74 @@ jQuery(function($) {
 
 
 
-    jQuery(contact_history_grid_selector).jqGrid({
+    jQuery(grid_selector).jqGrid({
         //direction: "rtl",
 
-        //subgrid options
+        /*//subgrid options
         subGrid : true,
         //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
         //datatype: "xml",
         subGridOptions : {
-            minusicon  : "ace-icon fa fa-minus center bigger-110 blue",
-            openicon : "ace-icon fa fa-chevron-right center orange"
-        },
-        url:"/contactHistory/list?customerId="+customerId,
+            minusicon  : "ace-icon fa fa-minus center bigger-110 blue"
+            /!* openicon : "ace-icon fa fa-chevron-right center orange"*!/
+        },*/
+        url: "/salesOppotunity/list",
         datatype: "json",
-        mtype:"GET",
+        mtype:"get",
         height: 250,
-        colNames:[' ', 'ID','客户ID','时间','地点','概要','详细信息','备注'],
+        colNames:[' ', 'ID','客户名称','概要','联系人', '联系人电话', '机会描述','成功几率','机会来源','指派给','指派给','状态','指派时间','创建人','创建时间'],
         colModel:[
             {name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
                 formatter:'actions',
                 formatoptions:{
                     keys:true,
                     //delbutton: false,//disable delete button
+
                     delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
                     //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
                 }
             },
-            {name:'contactHistId',index:'contactHistId', width:60,hidden:true, editable: true},
-            {name:'customerId',index:'customerId', hidden:true, width:60, editable: true},
-            {name:'noteDate',index:'noteDate', width:60, editable: true,editrules:{requierd:true},formatter:'date',formatoptions:{srcformat: 'U/1000', newformat:'Y-m-d'},unformat:pickDate},
-            {name:'address',index:'address', width:150,editable: true,editrules:{required:true}},
-            {name:'contactBrief',index:'contactBrief', width:150,editable: true,editrules:{required:true}},
-            {name:'contactContent',index:'contactContent',edittype:'textarea', width:150,editable: true,editrules:{required:false}},
-            {name:'remark',index:'remark', width:150,editable: true,editrules:{required:false}}
+            {name:'saleOppId',index:'saleOppId',hidden:true,width:90, editable:true,},
+            {name:'customerName',index:'customerName',width:90, editable:true,},
+            {name:'brief',index:'brief',hidden:false,width:90, editable:true},
+            {name:'contact',index:'contact', width:90,editable: true,editoptions:{size:"20",maxlength:"30"}},
+            {name:'contactPhone',index:'contactPhone', width:90, editable: true,edittype:"text"},
+            {name:'oppDesc',index:'oppDesc', width:90, editable: true,edittype:"text"},
+            {name:'successRate',index:'successRate', width:90, sortable:false,editable: true},
+            {name:'oppFrom',index:'oppFrom', width:90, editable: true,edittype:"text"},
+            {name:'assignToName',index:'assignToName', width:90, editable: false,edittype:"text"},
+            {name:'assignTo',index:'assignTo', width:90, hidden:true, sortable:false,edittype:'select',editable: true,editrules:{edithidden:true},
+                editoptions:{dataUrl:"/user/listAll",buildSelect:function(list){
+                    var data = jQuery.parseJSON(list);
+                    var selectContent = "<select><option value=''>--请选择</option>";
+                    if(data && data.length){
+                        for(var i in data){
+                            selectContent+= "<option value='"+data[i].userId+"'>"+data[i].userName+"</option>";
+                        }
+                    }
+                    selectContent = selectContent + "</select>";
+                    return selectContent;
+                }}},
+            {name:'state',index:'state', width:90, editable: false,edittype:"text",formatter: function (cellValue, options, rowObject) {
+                if (cellValue == 0) {
+                    return '未分配';
+                }else if(cellValue == 1) {
+                    return '已分配';
+                }else if(cellValue==2){
+                    return "开发成功";
+                } else if(cellValue==3){
+                    return "开发失败";
+                }
+            }},
+            {name:'assignDate',index:'assignDate', editable: true,width:90,edittype:"text",formatter:'date',formatoptions:{srcformat: 'U/1000', newformat:'Y-m-d'},unformat:pickDate},
+            {name:'createBy',index:'createBy', width:90, editable: false,edittype:"text"},
+            {name:'createTime',index:'createTime', width:90, editable: false,edittype:"text",formatter:'date',formatoptions:{srcformat: 'U/1000', newformat:'Y-m-d'}}
         ],
 
         viewrecords : true,
         rowNum:10,
         rowList:[10,20,30],
-        pager : contact_history_pager_selector,
+        pager : pager_selector,
         altRows: true,
         //toppager: true,
 
@@ -97,8 +127,8 @@ jQuery(function($) {
             }, 0);
         },
 
-        editurl: "/contactHistory/update",//nothing is saved
-        caption: "交往记录"
+        editurl: "/salesOppotunity/update",//nothing is saved
+        caption: "销售机会列表"
 
         //,autowidth: true,
 
@@ -121,8 +151,8 @@ jQuery(function($) {
 
 
     //enable search/filter toolbar
-    //jQuery(contact_history_grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
-    //jQuery(contact_history_grid_selector).filterToolbar({});
+    //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
+    //jQuery(grid_selector).filterToolbar({});
 
 
     //switch element when editing inline
@@ -143,7 +173,7 @@ jQuery(function($) {
 
 
     //navButtons
-    jQuery(contact_history_grid_selector).jqGrid('navGrid',contact_history_pager_selector,
+    jQuery(grid_selector).jqGrid('navGrid',pager_selector,
         { 	//navbar options
             edit: true,
             editicon : 'ace-icon fa fa-pencil blue',
@@ -162,8 +192,7 @@ jQuery(function($) {
             //edit record form
             //closeAfterEdit: true,
             //width: 700,
-            url:"/contactHistory/update",
-            closeAfterEdit: true,
+            url:"/salesOppotunity/update",
             recreateForm: true,
             beforeShowForm : function(e) {
                 var form = $(e[0]);
@@ -174,7 +203,7 @@ jQuery(function($) {
         {
             //new record form
             //width: 700,
-            url:"/contactHistory/save",
+            url:"/salesOppotunity/save",
             closeAfterAdd: true,
             recreateForm: true,
             viewPagerButtons: false,
@@ -187,6 +216,7 @@ jQuery(function($) {
         },
         {
             //delete record form
+            url:"/salesOppotunity/deleteByIds",
             recreateForm: true,
             beforeShowForm : function(e) {
                 var form = $(e[0]);
@@ -203,6 +233,7 @@ jQuery(function($) {
         },
         {
             //search form
+            url:"/salesOppotunity/list",
             recreateForm: true,
             afterShowSearch: function(e){
                 var form = $(e[0]);
@@ -227,29 +258,29 @@ jQuery(function($) {
                 form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
             }
         }
-    ).navButtonAdd(contact_history_pager_selector,{//删除
+    ).navButtonAdd(pager_selector,{
             caption:"",
             buttonicon:"ace-icon fa fa-trash-o red",
             onClickButton:function(){
-                var rows = $(contact_history_grid_selector).jqGrid("getGridParam","selarrrow");
+                var rows = $(grid_selector).jqGrid("getGridParam","selarrrow");
                 var selectData = new Array();
                 var ids = '';
                 var rowData;
                 for(var i in rows){
-                    rowData = $(contact_history_grid_selector).jqGrid("getRowData", rows[i]);
-                    ids = ids+rowData.contactHistId+",";
+                    rowData = $(grid_selector).jqGrid("getRowData", rows[i]);
+                    ids = ids+rowData.saleOppId+",";
                 }
                 if(ids !=''){
                     if(!confirm("确定删除这些记录？"))return;
                     $.ajax({
-                        url:"/contactHistory/deleteByIds",
+                        url:"/salesOppotunity/deleteByIds",
                         type:"POST",
                         data:{ids:ids},
                         dataType:"json",
                         success:function(data){
                             if(data.success){
                                 alert(data.msg);
-                                $(contact_history_grid_selector).trigger("reloadGrid");
+                                $(grid_selector).trigger("reloadGrid");
                             } else alert(data.msg);
                         }
                     })
@@ -257,14 +288,14 @@ jQuery(function($) {
                     alert("请选择记录!");
                 }
             },
-            position:"first"
+            position:"last"
         })
 
 
 
     function style_edit_form(form) {
         //enable datepicker on "sdate" field and switches for "stock" field
-        form.find('input[name=noteDate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+        form.find('input[name=assignDate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
         //
         //form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
         //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
@@ -380,10 +411,10 @@ jQuery(function($) {
         $(table).find('.ui-pg-div').tooltip({container:'body'});
     }
 
-    //var selr = jQuery(contact_history_grid_selector).jqGrid('getGridParam','selrow');
+    //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 
     $(document).one('ajaxloadstart.page', function(e) {
-        $.jgrid.gridDestroy(contact_history_grid_selector);
+        $.jgrid.gridDestroy(grid_selector);
         $('.ui-jqdialog').remove();
     });
 });

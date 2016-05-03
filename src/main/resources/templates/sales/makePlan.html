@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/htmlhead :: htmlHead">
+
+</head>
+<body class="no-skin">
+    <!--导航栏-->
+    <div class="navbar" id="navbar" th:include="common/header :: header">
+    </div>
+    <!--页面主体-->
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        </script>
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+            <span class="sr-only">切换菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!--侧边栏 include sidebar-->
+        <div th:replace="common/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <div class="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-user user-icon"></i>
+                        <a href="#">客户开发计划</a>
+                    </li>
+
+                    <li class="active">
+                        <a href="#">制定计划</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="right">
+                            <a class="btn btn-success btn-xs" th:href="@{/customerDevPlan/execPlan(salesOppId=${oppo.saleOppId})}">执行计划</a>
+                            <a class="btn btn-default btn-xs" href="/customerDevPlan/main">返回</a>
+                        </div>
+                        <table class="table table-bordered">
+                            <input id="saleOppId" th:value="${oppo.saleOppId}" type="hidden"/>
+                            <tr>
+                                <td class="info">客户名称</td>
+                                <td th:text="${oppo.customerName}"></td>
+                                <td class="info">成功几率(%)</td>
+                                <td th:text="${oppo.successRate}"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">概要</td>
+                                <td colspan="3" th:text="${oppo.brief}"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">联系人</td>
+                                <td th:text="${oppo.contact}"></td>
+                                <td class="info">联系电话</td>
+                                <td th:text="${oppo.contactPhone}"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">机会描述</td>
+                                <td colspan="3" th:text="${oppo.oppDesc}"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">创建人</td>
+                                <td th:text="${oppo.createBy}"></td>
+                                <td class="info">创建时间</td>
+                                <td th:text="*{oppo.createTime==null}  ? '' : *{#dates.format(oppo.createTime,'yyyy-MM-dd')}"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">指派给</td>
+                                <td th:text="${oppo.assignToName}"></td>
+                                <td class="info">指派时间</td>
+                                <td th:text="${#dates.format(oppo.assignDate,'yyyy-MM-dd')}"></td>
+                            </tr>
+                        </table>
+                        <div class="center">
+                            <span></span>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <th>日期</th>
+                                <th>计划项</th>
+                            </thead>
+                            <tbody>
+                                <tr th:each="devPlan : ${planList}">
+                                    <td><input type='text' name='planDate' th:value="${#dates.format(devPlan.planDate,'yyyy/MM/dd')}"/></td>
+                                    <td style='text-align:center'>
+                                        <input type='text' name='planItem' th:value="${devPlan.planItem}"/>
+                                        <button class='btn btn-success btn-xs' onclick='CustomerDevPlanTable.method.elements.save(this)' th:attr='data-id=${devPlan.getCustomerDevPlanId()}'>保存</button>
+                                        <button class='btn btn-danger btn-xs' th:attr='data-id=${devPlan.customerDevPlanId}' onclick='CustomerDevPlanTable.method.elements.deleteTr(this)'>删除</button>
+                                    </td>
+                                </tr>
+                                <tr id="trAdd">
+                                    <td colspan="2" style="text-align:center">
+                                        <button class="btn btn-success btn-xs" type="button" id="btnAddDevPlan" onclick="CustomerDevPlanTable.method.elements.addTr(this)">
+                                            <i class="ace-icon fa fa-plus"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><!--/.col-->
+                </div><!--/.row-->
+            </div><!--/.page-content-->
+            <!--footer area -->
+        </div><!--/.main-content-->
+    </div>
+
+    <div th:replace="common/htmlfoot :: htmlfoot"></div>
+    <script th:src="@{/js/sales/customer-dev-plan.js}"></script>
+</body>
+</html>

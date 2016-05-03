@@ -14,7 +14,7 @@
         <File>crm-app.log</File>
     </appender>
 
-    <logger name="com.zhuojh" level="INFO"/>
+    <logger name="com.zhuojh" level="debug"/>
     <logger name="org.springframework" level="WARN"/>
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.xml.bind" level="WARN"/>

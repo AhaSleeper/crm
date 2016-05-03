@@ -1,14 +1,13 @@
 /**
- * Created by Administrator on 2016/4/26.
+ * Created by Administrator on 2016/4/30.
  */
 jQuery(function($) {
-    var contact_history_grid_selector = "#grid-table";
-    var contact_history_pager_selector = "#grid-pager";
-    var customerId = $("#customerId").val();
-    var parent_column = $(contact_history_grid_selector).closest('[class*="col-"]');
+    var grid_selector = "#sales-oppo-grid-table";
+    var pager_selector = "#sales-oppo-grid-pager";
+    var parent_column = $(grid_selector).closest('[class*="col-"]');
     //resize to fit page size
     $(window).on('resize.jqGrid', function () {
-        $(contact_history_grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+        $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
     })
 
     //resize on sidebar collapse/expand
@@ -16,7 +15,7 @@ jQuery(function($) {
         if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
             //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
             setTimeout(function() {
-                $(contact_history_grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+                $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
             }, 20);
         }
     })
@@ -24,14 +23,14 @@ jQuery(function($) {
     //if your grid is inside another element, for example a tab pane, you should use its parent's width:
     /**
      $(window).on('resize.jqGrid', function () {
-					var parent_width = $(contact_history_grid_selector).closest('.tab-pane').width();
-					$(contact_history_grid_selector).jqGrid( 'setGridWidth', parent_width );
+					var parent_width = $(grid_selector).closest('.tab-pane').width();
+					$(grid_selector).jqGrid( 'setGridWidth', parent_width );
 				})
      //and also set width when tab pane becomes visible
      $('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 				  if($(e.target).attr('href') == '#mygrid') {
-					var parent_width = $(contact_history_grid_selector).closest('.tab-pane').width();
-					$(contact_history_grid_selector).jqGrid( 'setGridWidth', parent_width );
+					var parent_width = $(grid_selector).closest('.tab-pane').width();
+					$(grid_selector).jqGrid( 'setGridWidth', parent_width );
 				  }
 				})
      */
@@ -40,45 +39,52 @@ jQuery(function($) {
 
 
 
-    jQuery(contact_history_grid_selector).jqGrid({
+    jQuery(grid_selector).jqGrid({
         //direction: "rtl",
 
-        //subgrid options
-        subGrid : true,
-        //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
-        //datatype: "xml",
-        subGridOptions : {
-            minusicon  : "ace-icon fa fa-minus center bigger-110 blue",
-            openicon : "ace-icon fa fa-chevron-right center orange"
-        },
-        url:"/contactHistory/list?customerId="+customerId,
+        /*//subgrid options
+         subGrid : true,
+         //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
+         //datatype: "xml",
+         subGridOptions : {
+         minusicon  : "ace-icon fa fa-minus center bigger-110 blue"
+         /!* openicon : "ace-icon fa fa-chevron-right center orange"*!/
+         },*/
+        url: "/salesOppotunity/assignList",
         datatype: "json",
-        mtype:"GET",
+        mtype:"get",
         height: 250,
-        colNames:[' ', 'ID','客户ID','时间','地点','概要','详细信息','备注'],
+        colNames:['ID','客户名称','概要','联系人', '联系人电话', '机会描述','成功几率','机会来源','指派给','状态','指派时间','创建人','创建时间'],
         colModel:[
-            {name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
-                formatter:'actions',
-                formatoptions:{
-                    keys:true,
-                    //delbutton: false,//disable delete button
-                    delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
-                    //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+            {name:'saleOppId',index:'saleOppId',hidden:true,width:90, editable:true,},
+            {name:'customerName',index:'customerName',width:90, editable:true,},
+            {name:'brief',index:'brief',hidden:false,width:90, editable:true},
+            {name:'contact',index:'contact', width:90,editable: true,editoptions:{size:"20",maxlength:"30"}},
+            {name:'contactPhone',index:'contactPhone', width:90, editable: true,edittype:"text"},
+            {name:'oppDesc',index:'oppDesc', width:90, editable: true,edittype:"text"},
+            {name:'successRate',index:'successRate', width:90, sortable:false,editable: true},
+            {name:'oppFrom',index:'oppFrom', width:90, editable: true,edittype:"text"},
+            {name:'assignToName',index:'assignToName', width:90, editable: false,edittype:"text"},
+            {name:'state',index:'state', width:90, editable: false,edittype:"text",formatter: function (cellValue, options, rowObject) {
+                if (cellValue == 0) {
+                    return '未分配';
+                }else if(cellValue == 1) {
+                    return '已分配';
+                }else if(cellValue==2){
+                    return "开发成功";
+                } else if(cellValue==3){
+                    return "开发失败";
                 }
-            },
-            {name:'contactHistId',index:'contactHistId', width:60,hidden:true, editable: true},
-            {name:'customerId',index:'customerId', hidden:true, width:60, editable: true},
-            {name:'noteDate',index:'noteDate', width:60, editable: true,editrules:{requierd:true},formatter:'date',formatoptions:{srcformat: 'U/1000', newformat:'Y-m-d'},unformat:pickDate},
-            {name:'address',index:'address', width:150,editable: true,editrules:{required:true}},
-            {name:'contactBrief',index:'contactBrief', width:150,editable: true,editrules:{required:true}},
-            {name:'contactContent',index:'contactContent',edittype:'textarea', width:150,editable: true,editrules:{required:false}},
-            {name:'remark',index:'remark', width:150,editable: true,editrules:{required:false}}
+            }},
+            {name:'assignDate',index:'assignDate', editable: true,width:90,edittype:"text",formatter:'date',formatoptions:{srcformat: 'U/1000', newformat:'Y-m-d'},unformat:pickDate},
+            {name:'createBy',index:'createBy', width:90, editable: false,edittype:"text"},
+            {name:'createTime',index:'createTime', width:90, editable: false,edittype:"text",formatter:'date',formatoptions:{srcformat: 'U/1000', newformat:'Y-m-d'}}
         ],
 
         viewrecords : true,
         rowNum:10,
         rowList:[10,20,30],
-        pager : contact_history_pager_selector,
+        pager : pager_selector,
         altRows: true,
         //toppager: true,
 
@@ -97,8 +103,8 @@ jQuery(function($) {
             }, 0);
         },
 
-        editurl: "/contactHistory/update",//nothing is saved
-        caption: "交往记录"
+        editurl: "/salesOppotunity/update",//nothing is saved
+        caption: "销售机会列表"
 
         //,autowidth: true,
 
@@ -121,8 +127,8 @@ jQuery(function($) {
 
 
     //enable search/filter toolbar
-    //jQuery(contact_history_grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
-    //jQuery(contact_history_grid_selector).filterToolbar({});
+    //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
+    //jQuery(grid_selector).filterToolbar({});
 
 
     //switch element when editing inline
@@ -143,11 +149,11 @@ jQuery(function($) {
 
 
     //navButtons
-    jQuery(contact_history_grid_selector).jqGrid('navGrid',contact_history_pager_selector,
+    jQuery(grid_selector).jqGrid('navGrid',pager_selector,
         { 	//navbar options
-            edit: true,
+            edit: false,
             editicon : 'ace-icon fa fa-pencil blue',
-            add: true,
+            add: false,
             addicon : 'ace-icon fa fa-plus-circle purple',
             del: false,
             delicon : 'ace-icon fa fa-trash-o red',
@@ -162,8 +168,6 @@ jQuery(function($) {
             //edit record form
             //closeAfterEdit: true,
             //width: 700,
-            url:"/contactHistory/update",
-            closeAfterEdit: true,
             recreateForm: true,
             beforeShowForm : function(e) {
                 var form = $(e[0]);
@@ -174,7 +178,6 @@ jQuery(function($) {
         {
             //new record form
             //width: 700,
-            url:"/contactHistory/save",
             closeAfterAdd: true,
             recreateForm: true,
             viewPagerButtons: false,
@@ -203,6 +206,7 @@ jQuery(function($) {
         },
         {
             //search form
+            url:"/salesOppotunity/list",
             recreateForm: true,
             afterShowSearch: function(e){
                 var form = $(e[0]);
@@ -227,44 +231,29 @@ jQuery(function($) {
                 form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
             }
         }
-    ).navButtonAdd(contact_history_pager_selector,{//删除
+    ).navButtonAdd(pager_selector,{
             caption:"",
-            buttonicon:"ace-icon fa fa-trash-o red",
+            buttonicon:"ace-icon fa fa-cog",
             onClickButton:function(){
-                var rows = $(contact_history_grid_selector).jqGrid("getGridParam","selarrrow");
-                var selectData = new Array();
-                var ids = '';
-                var rowData;
-                for(var i in rows){
-                    rowData = $(contact_history_grid_selector).jqGrid("getRowData", rows[i]);
-                    ids = ids+rowData.contactHistId+",";
-                }
-                if(ids !=''){
-                    if(!confirm("确定删除这些记录？"))return;
-                    $.ajax({
-                        url:"/contactHistory/deleteByIds",
-                        type:"POST",
-                        data:{ids:ids},
-                        dataType:"json",
-                        success:function(data){
-                            if(data.success){
-                                alert(data.msg);
-                                $(contact_history_grid_selector).trigger("reloadGrid");
-                            } else alert(data.msg);
-                        }
-                    })
-                } else {
+                var rows = $(grid_selector).jqGrid("getGridParam","selarrrow");
+                if(rows.length==0){
                     alert("请选择记录!");
+                    return;
                 }
+                if(rows.length>1){
+                    alert("每次只能选择一条记录!");
+                    return;
+                }
+                window.location.href="/customerDevPlan/makePlan?salesOppId="+$(grid_selector).jqGrid("getRowData", rows[0]).saleOppId;
             },
-            position:"first"
+            position:"last"
         })
 
 
 
     function style_edit_form(form) {
         //enable datepicker on "sdate" field and switches for "stock" field
-        form.find('input[name=noteDate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+        form.find('input[name=assignDate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
         //
         //form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
         //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
@@ -380,10 +369,116 @@ jQuery(function($) {
         $(table).find('.ui-pg-div').tooltip({container:'body'});
     }
 
-    //var selr = jQuery(contact_history_grid_selector).jqGrid('getGridParam','selrow');
+    //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 
     $(document).one('ajaxloadstart.page', function(e) {
-        $.jgrid.gridDestroy(contact_history_grid_selector);
+        $.jgrid.gridDestroy(grid_selector);
         $('.ui-jqdialog').remove();
     });
 });
+if(typeof (CustomerDevPlanTable) === 'undefined' || CustomerDevPlanTable == null)
+    CustomerDevPlanTable={};
+CustomerDevPlanTable.setting = {
+    elements:{
+        baseTrElement:"<tr><td><input type='date' name='planDate' value=''/></td> <td style='text-align:center'>" +
+        "<input type='text' name='planItem'/>"+
+        "<button class='btn btn-success btn-xs' onclick='CustomerDevPlanTable.method.elements.save(this)'data-id=''>保存</button>"+
+        "<button class='btn btn-danger btn-xs' data-id='' onclick='CustomerDevPlanTable.method.elements.deleteTr(this)'>删除</button>"+
+        "</td></tr>"
+    }
+}
+
+CustomerDevPlanTable.method = {
+    elements:{
+        addTr:function(obj){
+            var thisTr = $(obj).parent().parent();
+            $(thisTr).before(CustomerDevPlanTable.setting.elements.baseTrElement);
+        },
+        deleteTr:function(obj){
+            if(!confirm("确定删除?"))return;
+            var id = $(obj).attr("data-id");
+            if(id!=undefined && id!=''){
+                $.ajax({
+                    url:"/customerDevPlan/deleteByIds",
+                    type:"post",
+                    data:{ids:id},
+                    success:function(data){
+                        $(obj).parent().parent().remove();
+                    }
+                })
+            }
+        },
+
+        save:function(obj){
+            var saleOppId = $("#saleOppId").val();
+            var dataTr = $(obj).parent().parent();
+            var date = $(dataTr).find("input[name='planDate']").val();
+            if(date==undefined || date == ''){
+                alert("日期不能为空!");
+                $(dataTr).find("input[name='planDate']").focus();
+                return;
+            }
+            var dateStrArr = date.split("/");
+            var formatDate = dateStrArr[0]+"-"+dateStrArr[1]+"-"+dateStrArr[2];
+            console.log("formaDate="+formatDate);
+            var planItem = $(dataTr).find("input[name='planItem']").val();
+            if(planItem==undefined || planItem==''){
+                alert("计划项不能为空!");
+                $(dataTr).find("input[name='planItem']").focus();
+                return;
+            }
+            var devPlanId = $(obj).attr("data-id");
+            var url;
+            if(devPlanId!=undefined && devPlanId!=''){
+                url = "/customerDevPlan/update";
+            } else url = "/customerDevPlan/save";
+            $.ajax({
+                url:url,
+                type:"post",
+                data:{customerDevPlanId:devPlanId,saleOppId:saleOppId,planDate:formatDate,planItem:planItem},
+                dataType:"json",
+                success:function(data){
+                    if(data.success) window.location.reload();
+                }
+            })
+        },
+        saveExec:function(obj){
+            var devPlanId = $(obj).attr("data-id");
+            var dataTr = $(obj).parent().parent();
+            var execResult = $(dataTr).find("input[name='execResult']").val();
+            if(execResult==undefined || execResult==''){
+                alert("执行结果不能为空!");
+                $(dataTr).find("input[name='execResult']").focus();
+                return;
+            }
+            $.ajax({
+                url:"/customerDevPlan/update",
+                type:'post',
+                data:{customerDevPlanId:devPlanId,execResult:execResult},
+                dataType:"json",
+                success:function(data){
+                    if(data.success) window.location.reload();
+                    else alert(data.msg);
+                }
+            })
+        }
+    }
+}
+function changeState(state){
+    if(state==2){
+        if(!confirm("确定开发成功?"))return;
+    }
+    if(state==3){
+        if(!confirm("确定终止开发?"))return;
+    }
+    var id=$("#saleOppId").val();
+    $.ajax({
+        url:"/salesOppotunity/update",
+        type:"post",
+        data:{saleOppId:id,state:state},
+        dataType:"json",
+        success:function(data){
+            alert(data.msg);
+        }
+    })
+}

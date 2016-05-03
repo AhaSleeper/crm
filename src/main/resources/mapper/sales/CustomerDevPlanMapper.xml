@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.sales.CustomerDevPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.sales.CustomerDevPlan" >
+    <id column="CUSTOMER_DEV_PLAN_ID" property="customerDevPlanId" jdbcType="VARCHAR" />
+    <result column="SALE_OPP_ID" property="saleOppId" jdbcType="VARCHAR" />
+    <result column="PLAN_ITEM" property="planItem" jdbcType="VARCHAR" />
+    <result column="PLAN_DATE" property="planDate" jdbcType="TIMESTAMP" />
+    <result column="EXEC_RESULT" property="execResult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CUSTOMER_DEV_PLAN_ID, SALE_OPP_ID, PLAN_ITEM, PLAN_DATE, EXEC_RESULT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer_dev_plan
+    where CUSTOMER_DEV_PLAN_ID = #{customerDevPlanId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhuojh.model.sales.CustomerDevPlan">
+    select <include refid="Base_Column_List" /> from t_customer_dev_plan
+  </select>
+  <select id="selectByOppId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> from t_customer_dev_plan
+    where SALE_OPP_ID = #{salesOppId, jdbcType=VARCHAR} order by PLAN_DATE asc
+  </select>
+  <delete id="deleteByIds" parameterType="java.util.List">
+    delete from t_customer_dev_plan where 1=1 and CUSTOMER_DEV_PLAN_ID IN
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_customer_dev_plan
+    where CUSTOMER_DEV_PLAN_ID = #{customerDevPlanId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.sales.CustomerDevPlan" >
+    insert into t_customer_dev_plan (CUSTOMER_DEV_PLAN_ID, SALE_OPP_ID, PLAN_ITEM, 
+      PLAN_DATE, EXEC_RESULT)
+    values (#{customerDevPlanId,jdbcType=VARCHAR}, #{saleOppId,jdbcType=VARCHAR}, #{planItem,jdbcType=VARCHAR}, 
+      #{planDate,jdbcType=TIMESTAMP}, #{execResult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.sales.CustomerDevPlan" >
+    insert into t_customer_dev_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerDevPlanId != null" >
+        CUSTOMER_DEV_PLAN_ID,
+      </if>
+      <if test="saleOppId != null" >
+        SALE_OPP_ID,
+      </if>
+      <if test="planItem != null" >
+        PLAN_ITEM,
+      </if>
+      <if test="planDate != null" >
+        PLAN_DATE,
+      </if>
+      <if test="execResult != null" >
+        EXEC_RESULT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerDevPlanId != null" >
+        #{customerDevPlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOppId != null" >
+        #{saleOppId,jdbcType=VARCHAR},
+      </if>
+      <if test="planItem != null" >
+        #{planItem,jdbcType=VARCHAR},
+      </if>
+      <if test="planDate != null" >
+        #{planDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="execResult != null" >
+        #{execResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.sales.CustomerDevPlan" >
+    update t_customer_dev_plan
+    <set >
+      <if test="saleOppId != null" >
+        SALE_OPP_ID = #{saleOppId,jdbcType=VARCHAR},
+      </if>
+      <if test="planItem != null" >
+        PLAN_ITEM = #{planItem,jdbcType=VARCHAR},
+      </if>
+      <if test="planDate != null" >
+        PLAN_DATE = #{planDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="execResult != null" >
+        EXEC_RESULT = #{execResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CUSTOMER_DEV_PLAN_ID = #{customerDevPlanId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.sales.CustomerDevPlan" >
+    update t_customer_dev_plan
+    set SALE_OPP_ID = #{saleOppId,jdbcType=VARCHAR},
+      PLAN_ITEM = #{planItem,jdbcType=VARCHAR},
+      PLAN_DATE = #{planDate,jdbcType=TIMESTAMP},
+      EXEC_RESULT = #{execResult,jdbcType=VARCHAR}
+    where CUSTOMER_DEV_PLAN_ID = #{customerDevPlanId,jdbcType=VARCHAR}
+  </update>
+</mapper>

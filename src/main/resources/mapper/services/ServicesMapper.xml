@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.services.ServicesMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.services.Services" >
+    <id column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="INTEGER" />
+    <result column="SERVICE_TYPE" property="serviceType" jdbcType="VARCHAR" />
+    <result column="BRIEF" property="brief" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="INTEGER" />
+    <result column="CUSTOMER" property="customer" jdbcType="VARCHAR" />
+    <result column="SERVICE_REQUIREMENT" property="serviceRequirement" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="ASSIGN_TO" property="assignTo" jdbcType="VARCHAR" />
+    <result column="ASSIGN_DATE" property="assignDate" jdbcType="TIMESTAMP" />
+    <result column="SERVICE_HANDLING" property="serviceHandling" jdbcType="VARCHAR" />
+    <result column="HANDLE_BY" property="handleBy" jdbcType="VARCHAR" />
+    <result column="HANDLE_DATE" property="handleDate" jdbcType="TIMESTAMP" />
+    <result column="HANDLE_RESULT" property="handleResult" jdbcType="VARCHAR" />
+    <result column="SATISFY_RATE" property="satisfyRate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SERVICE_ID, CODE, SERVICE_TYPE, BRIEF, STATE, CUSTOMER, SERVICE_REQUIREMENT, CREATE_BY, 
+    CREATE_DATE, ASSIGN_TO, ASSIGN_DATE, SERVICE_HANDLING, HANDLE_BY, HANDLE_DATE, HANDLE_RESULT, 
+    SATISFY_RATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_services
+    where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_services
+    where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.services.Services" >
+    insert into t_services (SERVICE_ID, CODE, SERVICE_TYPE, 
+      BRIEF, STATE, CUSTOMER, 
+      SERVICE_REQUIREMENT, CREATE_BY, CREATE_DATE, 
+      ASSIGN_TO, ASSIGN_DATE, SERVICE_HANDLING, 
+      HANDLE_BY, HANDLE_DATE, HANDLE_RESULT, 
+      SATISFY_RATE)
+    values (#{serviceId,jdbcType=VARCHAR}, #{code,jdbcType=INTEGER}, #{serviceType,jdbcType=VARCHAR}, 
+      #{brief,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{customer,jdbcType=VARCHAR}, 
+      #{serviceRequirement,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{assignTo,jdbcType=VARCHAR}, #{assignDate,jdbcType=TIMESTAMP}, #{serviceHandling,jdbcType=VARCHAR}, 
+      #{handleBy,jdbcType=VARCHAR}, #{handleDate,jdbcType=TIMESTAMP}, #{handleResult,jdbcType=VARCHAR}, 
+      #{satisfyRate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.services.Services" >
+    insert into t_services
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceId != null" >
+        SERVICE_ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="serviceType != null" >
+        SERVICE_TYPE,
+      </if>
+      <if test="brief != null" >
+        BRIEF,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="customer != null" >
+        CUSTOMER,
+      </if>
+      <if test="serviceRequirement != null" >
+        SERVICE_REQUIREMENT,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="assignTo != null" >
+        ASSIGN_TO,
+      </if>
+      <if test="assignDate != null" >
+        ASSIGN_DATE,
+      </if>
+      <if test="serviceHandling != null" >
+        SERVICE_HANDLING,
+      </if>
+      <if test="handleBy != null" >
+        HANDLE_BY,
+      </if>
+      <if test="handleDate != null" >
+        HANDLE_DATE,
+      </if>
+      <if test="handleResult != null" >
+        HANDLE_RESULT,
+      </if>
+      <if test="satisfyRate != null" >
+        SATISFY_RATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceId != null" >
+        #{serviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=INTEGER},
+      </if>
+      <if test="serviceType != null" >
+        #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="brief != null" >
+        #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="customer != null" >
+        #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceRequirement != null" >
+        #{serviceRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assignTo != null" >
+        #{assignTo,jdbcType=VARCHAR},
+      </if>
+      <if test="assignDate != null" >
+        #{assignDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceHandling != null" >
+        #{serviceHandling,jdbcType=VARCHAR},
+      </if>
+      <if test="handleBy != null" >
+        #{handleBy,jdbcType=VARCHAR},
+      </if>
+      <if test="handleDate != null" >
+        #{handleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handleResult != null" >
+        #{handleResult,jdbcType=VARCHAR},
+      </if>
+      <if test="satisfyRate != null" >
+        #{satisfyRate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.services.Services" >
+    update t_services
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=INTEGER},
+      </if>
+      <if test="serviceType != null" >
+        SERVICE_TYPE = #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="brief != null" >
+        BRIEF = #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="customer != null" >
+        CUSTOMER = #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceRequirement != null" >
+        SERVICE_REQUIREMENT = #{serviceRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assignTo != null" >
+        ASSIGN_TO = #{assignTo,jdbcType=VARCHAR},
+      </if>
+      <if test="assignDate != null" >
+        ASSIGN_DATE = #{assignDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceHandling != null" >
+        SERVICE_HANDLING = #{serviceHandling,jdbcType=VARCHAR},
+      </if>
+      <if test="handleBy != null" >
+        HANDLE_BY = #{handleBy,jdbcType=VARCHAR},
+      </if>
+      <if test="handleDate != null" >
+        HANDLE_DATE = #{handleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handleResult != null" >
+        HANDLE_RESULT = #{handleResult,jdbcType=VARCHAR},
+      </if>
+      <if test="satisfyRate != null" >
+        SATISFY_RATE = #{satisfyRate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.services.Services" >
+    update t_services
+    set CODE = #{code,jdbcType=INTEGER},
+      SERVICE_TYPE = #{serviceType,jdbcType=VARCHAR},
+      BRIEF = #{brief,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=INTEGER},
+      CUSTOMER = #{customer,jdbcType=VARCHAR},
+      SERVICE_REQUIREMENT = #{serviceRequirement,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      ASSIGN_TO = #{assignTo,jdbcType=VARCHAR},
+      ASSIGN_DATE = #{assignDate,jdbcType=TIMESTAMP},
+      SERVICE_HANDLING = #{serviceHandling,jdbcType=VARCHAR},
+      HANDLE_BY = #{handleBy,jdbcType=VARCHAR},
+      HANDLE_DATE = #{handleDate,jdbcType=TIMESTAMP},
+      HANDLE_RESULT = #{handleResult,jdbcType=VARCHAR},
+      SATISFY_RATE = #{satisfyRate,jdbcType=VARCHAR}
+    where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

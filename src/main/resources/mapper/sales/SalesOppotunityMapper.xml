@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.sales.SalesOppotunityMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.sales.SalesOppotunity" >
+    <id column="SALE_OPP_ID" property="saleOppId" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="OPP_FROM" property="oppFrom" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_NAME" property="customerName" jdbcType="VARCHAR" />
+    <result column="SUCCESS_RATE" property="successRate" jdbcType="DOUBLE" />
+    <result column="BRIEF" property="brief" jdbcType="VARCHAR" />
+    <result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+    <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="OPP_DESC" property="oppDesc" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ASSIGN_TO" property="assignTo" jdbcType="VARCHAR" />
+    <result column="ASSIGN_DATE" property="assignDate" jdbcType="TIMESTAMP" />
+    <result column="STATE" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="BaseResultMapNext" type="com.zhuojh.model.sales.SalesOppotunity" extends="BaseResultMap">
+    <result column="ASSIGN_TO_NAME" property="assignToName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SALE_OPP_ID, CODE, OPP_FROM, CUSTOMER_NAME, SUCCESS_RATE, BRIEF, CONTACT, CONTACT_PHONE, 
+    OPP_DESC, CREATE_BY, CREATE_TIME, ASSIGN_TO, ASSIGN_DATE, STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMapNext" parameterType="java.lang.String" >
+    select
+    t.SALE_OPP_ID as SALE_OPP_ID, t.CODE as CODE, t.OPP_FROM as OPP_FROM, t.CUSTOMER_NAME as CUSTOMER_NAME, t.SUCCESS_RATE as SUCCESS_RATE, t.BRIEF as BRIEF, t.CONTACT as CONTACT, t.CONTACT_PHONE as CONTACT_PHONE,
+    t.OPP_DESC as OPP_DESC, t.CREATE_BY as CREATE_BY, t.CREATE_TIME as CREATE_TIME, t.ASSIGN_TO as ASSIGN_TO, u.USER_NAME as ASSIGN_TO_NAME, t.ASSIGN_DATE as ASSIGN_DATE, t.STATE as STATE
+    from t_sales_oppotunity t left join t_user u on t.ASSIGN_TO = u.USER_ID
+    where t.SALE_OPP_ID = #{saleOppId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMapNext" parameterType="com.zhuojh.model.sales.SalesOppotunity">
+    select  t.SALE_OPP_ID as SALE_OPP_ID, t.CODE as CODE, t.OPP_FROM as OPP_FROM, t.CUSTOMER_NAME as CUSTOMER_NAME, t.SUCCESS_RATE as SUCCESS_RATE, t.BRIEF as BRIEF, t.CONTACT as CONTACT, t.CONTACT_PHONE as CONTACT_PHONE,
+    t.OPP_DESC as OPP_DESC, t.CREATE_BY as CREATE_BY, t.CREATE_TIME as CREATE_TIME, t.ASSIGN_TO as ASSIGN_TO, u.USER_NAME as ASSIGN_TO_NAME, t.ASSIGN_DATE as ASSIGN_DATE, t.STATE as STATE
+    from t_sales_oppotunity t left join t_user u on t.ASSIGN_TO = u.USER_ID where 1=1 order by t.CREATE_TIME
+  </select>
+  <select id="selectByAssignToPage" resultMap="BaseResultMapNext" parameterType="com.zhuojh.model.sales.SalesOppotunity">
+    select  t.SALE_OPP_ID as SALE_OPP_ID, t.CODE as CODE, t.OPP_FROM as OPP_FROM, t.CUSTOMER_NAME as CUSTOMER_NAME, t.SUCCESS_RATE as SUCCESS_RATE, t.BRIEF as BRIEF, t.CONTACT as CONTACT, t.CONTACT_PHONE as CONTACT_PHONE,
+    t.OPP_DESC as OPP_DESC, t.CREATE_BY as CREATE_BY, t.CREATE_TIME as CREATE_TIME, t.ASSIGN_TO as ASSIGN_TO, u.USER_NAME as ASSIGN_TO_NAME, t.ASSIGN_DATE as ASSIGN_DATE, t.STATE as STATE
+    from t_sales_oppotunity t left join t_user u on t.ASSIGN_TO = u.USER_ID where t.ASSIGN_TO = #{salesOppotunity.assignTo, jdbcType=VARCHAR} order by t.CREATE_TIME
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_sales_oppotunity
+    where SALE_OPP_ID = #{saleOppId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByIds" parameterType="java.util.List">
+    delete from t_sales_oppotunity where 1=1 and
+    SALE_OPP_ID in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.sales.SalesOppotunity" >
+    insert into t_sales_oppotunity (SALE_OPP_ID, CODE, OPP_FROM, 
+      CUSTOMER_NAME, SUCCESS_RATE, BRIEF, 
+      CONTACT, CONTACT_PHONE, OPP_DESC, 
+      CREATE_BY, CREATE_TIME, ASSIGN_TO, 
+      ASSIGN_DATE, STATE)
+    values (#{saleOppId,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{oppFrom,jdbcType=VARCHAR}, 
+      #{customerName,jdbcType=VARCHAR}, #{successRate,jdbcType=DOUBLE}, #{brief,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{oppDesc,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{assignTo,jdbcType=VARCHAR}, 
+      #{assignDate,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.sales.SalesOppotunity" >
+    insert into t_sales_oppotunity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="saleOppId != null" >
+        SALE_OPP_ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="oppFrom != null" >
+        OPP_FROM,
+      </if>
+      <if test="customerName != null" >
+        CUSTOMER_NAME,
+      </if>
+      <if test="successRate != null" >
+        SUCCESS_RATE,
+      </if>
+      <if test="brief != null" >
+        BRIEF,
+      </if>
+      <if test="contact != null" >
+        CONTACT,
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE,
+      </if>
+      <if test="oppDesc != null" >
+        OPP_DESC,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="assignTo != null" >
+        ASSIGN_TO,
+      </if>
+      <if test="assignDate != null" >
+        ASSIGN_DATE,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="saleOppId != null" >
+        #{saleOppId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="oppFrom != null" >
+        #{oppFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="successRate != null" >
+        #{successRate,jdbcType=DOUBLE},
+      </if>
+      <if test="brief != null" >
+        #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="oppDesc != null" >
+        #{oppDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assignTo != null" >
+        #{assignTo,jdbcType=VARCHAR},
+      </if>
+      <if test="assignDate != null" >
+        #{assignDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.sales.SalesOppotunity" >
+    update t_sales_oppotunity
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="oppFrom != null" >
+        OPP_FROM = #{oppFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="successRate != null" >
+        SUCCESS_RATE = #{successRate,jdbcType=DOUBLE},
+      </if>
+      <if test="brief != null" >
+        BRIEF = #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        CONTACT = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="oppDesc != null" >
+        OPP_DESC = #{oppDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assignTo != null" >
+        ASSIGN_TO = #{assignTo,jdbcType=VARCHAR},
+      </if>
+      <if test="assignDate != null" >
+        ASSIGN_DATE = #{assignDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where SALE_OPP_ID = #{saleOppId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.sales.SalesOppotunity" >
+    update t_sales_oppotunity
+    set CODE = #{code,jdbcType=VARCHAR},
+      OPP_FROM = #{oppFrom,jdbcType=VARCHAR},
+      CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      SUCCESS_RATE = #{successRate,jdbcType=DOUBLE},
+      BRIEF = #{brief,jdbcType=VARCHAR},
+      CONTACT = #{contact,jdbcType=VARCHAR},
+      CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      OPP_DESC = #{oppDesc,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ASSIGN_TO = #{assignTo,jdbcType=VARCHAR},
+      ASSIGN_DATE = #{assignDate,jdbcType=TIMESTAMP},
+      STATE = #{state,jdbcType=INTEGER}
+    where SALE_OPP_ID = #{saleOppId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -7,6 +7,8 @@ public class ContactHistory {
 
     private String customerId;
 
+    private String contactBrief;
+
     private String contactContent;
 
     private String contactCustomer;
@@ -19,6 +21,8 @@ public class ContactHistory {
 
     private String ourPerson;
 
+    private String address;
+
     private Date noteDate;
 
     private String noteBy;
@@ -30,6 +34,8 @@ public class ContactHistory {
     private String modifyBy;
 
     private Date modifyTime;
+
+    private String remark;
 
     public String getContactHistId() {
         return contactHistId;
@@ -141,5 +147,29 @@ public class ContactHistory {
 
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public String getContactBrief() {
+        return contactBrief;
+    }
+
+    public void setContactBrief(String contactBrief) {
+        this.contactBrief = contactBrief;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }
