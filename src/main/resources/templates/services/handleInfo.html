@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/htmlhead :: htmlHead">
+
+</head>
+<body class="no-skin">
+    <!--导航栏-->
+    <div class="navbar" id="navbar" th:include="common/header :: header">
+    </div>
+    <!--页面主体-->
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        </script>
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+            <span class="sr-only">切换菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!--侧边栏 include sidebar-->
+        <div th:replace="common/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <div class="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-user user-icon"></i>
+                        <a href="#">服务管理</a>
+                    </li>
+
+                    <li>
+                        <a href="#">服务处理</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">详情</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="right">
+                            <a class="btn btn-success btn-xs" onclick="save()">保存</a>
+                            <a class="btn btn-default btn-xs" th:href="@{/services/handleList}">返回</a>
+                        </div>
+                        <table class="table table-bordered">
+                            <input id="serviceId" type="hidden" th:value="${service.serviceId}"/>
+                            <tr>
+                                <td class="info">客户名称</td>
+                                <td th:text="${service.customer}"></td>
+                                <td class="info">服务类型</td>
+                                <td th:text="${service.serviceType}"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">概要</td>
+                                <td colspan="3" th:text="${service.brief}"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">状态</td>
+                                <td colspan="3">
+                                   已分配
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="info">服务请求</td>
+                                <td colspan="3" th:text="${service.serviceRequirement}"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">创建人</td>
+                                <td th:text="${service.createBy}"></td>
+                                <td class="info">创建时间</td>
+                                <td th:text="${#dates.format(service.createDate,'yyyy-MM-dd')}"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">分配给</td>
+                                <td th:text="${service.assignToName}"></td>
+                                <td class="info">分配时间</td>
+                                <td th:text="${#dates.format(service.assignDate,'yyyy-MM-dd')}"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">服务处理</td>
+                                <td colspan="3">
+                                    <textarea name="serviceHandling" id="serviceHandling" cols="60" rows="6" th:text="${service.serviceHandling}"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div><!--/.col-->
+                </div><!--/.row-->
+            </div><!--/.page-content-->
+            <!--footer area -->
+        </div><!--/.main-content-->
+    </div>
+
+    <div th:replace="common/htmlfoot :: htmlfoot"></div>
+    <script>
+        function save(){
+            var serviceId = $("#serviceId").val();
+            var serviceHandling = $("#serviceHandling").val();
+            if(serviceHandling == undefined || serviceHandling == ''){
+                alert("服务处理不能为空!");
+                return;
+            }
+            $.ajax({
+                url:"/services/handle",
+                type:"post",
+                data:{serviceId:serviceId,serviceHandling:serviceHandling},
+                dataType:"json",
+                success:function(data){
+                    alert(data.msg);
+                }
+            })
+        }
+    </script>
+</body>
+</html>

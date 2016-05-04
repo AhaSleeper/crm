@@ -73,6 +73,7 @@
         <mapper resource="mapper/customer/ContactHistoryMapper.xml"/>
         <mapper resource="mapper/sales/SalesOppotunityMapper.xml"/>
         <mapper resource="mapper/sales/CustomerDevPlanMapper.xml" />
+        <mapper resource="mapper/services/ServicesMapper.xml" />
     </mappers>
 
 </configuration>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/htmlhead :: htmlHead">
+
+</head>
+<body class="no-skin">
+    <!--导航栏-->
+    <div class="navbar" id="navbar" th:include="common/header :: header">
+    </div>
+    <!--页面主体-->
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        </script>
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+            <span class="sr-only">切换菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!--侧边栏 include sidebar-->
+        <div th:replace="common/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <div class="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-user user-icon"></i>
+                        <a href="#">服务管理</a>
+                    </li>
+
+                    <li class="active">
+                        <a href="#">服务分配</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form>
+                        <table class="table table-bordered">
+                            <thead>
+                                <th>客户名称</th>
+                                <th>概要</th>
+                                <th>服务类型</th>
+                                <th>创建人</th>
+                                <th>创建日期</th>
+                                <th>分配给</th>
+                            </thead>
+                            <tbody>
+                                <tr th:each="service : ${page.list}">
+                                    <td th:text="${service.customer}"></td>
+                                    <td th:text="${service.brief}"></td>
+                                    <td th:text="${service.serviceType}"></td>
+                                    <td th:text="${service.createBy}"></td>
+                                    <td th:text="${#dates.format(service.createDate,'yyyy-MM-dd')}"></td>
+                                    <td>
+                                        <select>
+                                            <option value="">--请选择--</option>
+                                            <option th:each="user : ${userList}" th:value="${user.userId}" th:text="${user.userName}" th:selected="(${service.assignTo} == ${user.userId})"></option>
+                                        </select>
+                                        <button type="button" class="btn btn-success btn-xs" onclick="assign(this)" th:attr="data-service-id=${service.serviceId}">分配</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="page"></div>
+                        <input id="tempPageNo" type="hidden" th:value="${page.pageNo}" />
+                        <input id="tempPageSize" type="hidden" th:value="${page.pageSize}" />
+                        <input id="tempTotalPage" type="hidden" th:value="${page.totalPage}" />
+                        </form>
+                    </div><!--/.col-->
+                </div><!--/.row-->
+            </div><!--/.page-content-->
+            <!--footer area -->
+        </div><!--/.main-content-->
+    </div>
+
+    <div th:replace="common/htmlfoot :: htmlfoot"></div>
+    <link rel="stylesheet" href="../assets/css/bootstrap.css" th:href="@{/css/page/x_pagination.css}"/>
+    <script th:src="@{/js/common.js}"></script>
+    <script>
+        $(document).ready(function() {
+            var pageNo = $("#tempPageNo").val();
+            var pageSize = $("#tempPageSize").val();
+            var totalPage = $("#tempTotalPage").val();
+            Common.method.pages.genPageNumber('searchForm',pageNo,pageSize, totalPage);
+        })
+        function assign(obj){
+            var userId = $(obj).parent().find("select").val();
+            var serviceId = $(obj).attr("data-service-id");
+            $.ajax({
+                url:"/services/update",
+                type:"post",
+                data:{serviceId:serviceId,assignTo:userId,state:1},
+                dataType:"json",
+                success:function(data){
+                    alert(data.msg);
+                }
+            })
+        }
+    </script>
+</body>
+</html>

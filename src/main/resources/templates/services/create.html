@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/htmlhead :: htmlHead">
+
+</head>
+<body class="no-skin">
+    <!--导航栏-->
+    <div class="navbar" id="navbar" th:include="common/header :: header">
+    </div>
+    <!--页面主体-->
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        </script>
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+            <span class="sr-only">切换菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!--侧边栏 include sidebar-->
+        <div th:replace="common/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <div class="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-user user-icon"></i>
+                        <a href="#">服务管理</a>
+                    </li>
+
+                    <li class="active">
+                        <a href="#">服务创建</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table id="services-grid-table"></table>
+                        <div id="services-grid-pager"></div>
+                    </div><!--/.col-->
+                </div><!--/.row-->
+            </div><!--/.page-content-->
+            <!--footer area -->
+        </div><!--/.main-content-->
+    </div>
+
+    <div th:replace="common/htmlfoot :: htmlfoot"></div>
+    <script th:src="@{/js/services/services.js}"></script>
+</body>
+</html>

@@ -23,6 +23,8 @@ public class Services {
 
     private String assignTo;
 
+    private String assignToName;
+
     private Date assignDate;
 
     private String serviceHandling;
@@ -161,5 +163,13 @@ public class Services {
 
     public void setSatisfyRate(String satisfyRate) {
         this.satisfyRate = satisfyRate == null ? null : satisfyRate.trim();
+    }
+
+    public String getAssignToName() {
+        return assignToName;
+    }
+
+    public void setAssignToName(String assignToName) {
+        this.assignToName = assignToName;
     }
 }

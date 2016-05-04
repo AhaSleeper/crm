@@ -19,20 +19,44 @@
     <result column="HANDLE_RESULT" property="handleResult" jdbcType="VARCHAR" />
     <result column="SATISFY_RATE" property="satisfyRate" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="BaseResultMapNext" type="com.zhuojh.model.services.Services" extends="BaseResultMap">
+    <result column="ASSIGN_TO_NAME" property="assignToName" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     SERVICE_ID, CODE, SERVICE_TYPE, BRIEF, STATE, CUSTOMER, SERVICE_REQUIREMENT, CREATE_BY, 
     CREATE_DATE, ASSIGN_TO, ASSIGN_DATE, SERVICE_HANDLING, HANDLE_BY, HANDLE_DATE, HANDLE_RESULT, 
     SATISFY_RATE
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMapNext" parameterType="java.lang.String" >
     select 
-    <include refid="Base_Column_List" />
-    from t_services
-    where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+    S.SERVICE_ID as SERVICE_ID, S.CODE as CODE, S.SERVICE_TYPE as SERVICE_TYPE, S.BRIEF as BRIEF, S.STATE as STATE, S.CUSTOMER as CUSTOMER, S.SERVICE_REQUIREMENT as SERVICE_REQUIREMENT, S.CREATE_BY as CREATE_BY,
+    S.CREATE_DATE as CREATE_DATE, S.ASSIGN_TO as ASSIGN_TO,U.USER_NAME as ASSIGN_TO_NAME, S.ASSIGN_DATE as ASSIGN_DATE, S.SERVICE_HANDLING as SERVICE_HANDLING, S.HANDLE_BY as HANDLE_BY, S.HANDLE_DATE as HANDLE_DATE, S.HANDLE_RESULT as HANDLE_RESULT,
+    S.SATISFY_RATE from t_services S LEFT JOIN t_user U on S.ASSIGN_TO = U.USER_ID
+    where S.SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhuojh.model.services.Services">
+    select <include refid="Base_Column_List" />
+    from t_services where 1=1
+    <if test="services.state!=null">
+      and STATE = #{services.state, jdbcType=INTEGER}
+    </if>
+    <if test="services.assignTo!=null and '' != services.assignTo">
+      and ASSIGN_TO = #{services.assignTo, jdbcType=VARCHAR}
+    </if>
+    order by CREATE_DATE
+  </select>
+  <select id="listAll" resultMap="BaseResultMap" parameterType="com.zhuojh.model.services.Services">
+    select <include refid="Base_Column_List" /> from t_services
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_services
     where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByIds" parameterType="java.util.List">
+    delete from t_services where SERVICE_ID in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.zhuojh.model.services.Services" >
     insert into t_services (SERVICE_ID, CODE, SERVICE_TYPE, 
