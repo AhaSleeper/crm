@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.product.ProductStoreMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.product.ProductStore" >
+    <id column="STORE_ID" property="storeId" jdbcType="INTEGER" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="INTEGER" />
+    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+    <result column="STORE_NUM" property="storeNum" jdbcType="INTEGER" />
+    <result column="WAREHOUSE" property="warehouse" jdbcType="VARCHAR" />
+    <result column="ALLOCATION" property="allocation" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    STORE_ID, PRODUCT_ID, STORE_NUM, WAREHOUSE, ALLOCATION
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_product_store
+    where STORE_ID = #{storeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhuojh.model.product.ProductStore">
+    select ps.STORE_ID as STORE_ID, ps.PRODUCT_ID as PRODUCT_ID,p.PRODUCT_NAME as PRODUCT_NAME, ps.STORE_NUM as STORE_NUM, ps.WAREHOUSE as WAREHOUSE, ps.ALLOCATION as ALLOCATION
+    from t_product_store ps left join t_product p on ps.PRODUCT_ID = p.PRODUCT_ID order by ps.STORE_ID
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_product_store
+    where STORE_ID = #{storeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.product.ProductStore" >
+    insert into t_product_store (STORE_ID, PRODUCT_ID, STORE_NUM, 
+      WAREHOUSE, ALLOCATION)
+    values (#{storeId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{storeNum,jdbcType=INTEGER}, 
+      #{warehouse,jdbcType=VARCHAR}, #{allocation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.product.ProductStore" >
+    insert into t_product_store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        STORE_ID,
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="storeNum != null" >
+        STORE_NUM,
+      </if>
+      <if test="warehouse != null" >
+        WAREHOUSE,
+      </if>
+      <if test="allocation != null" >
+        ALLOCATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="storeNum != null" >
+        #{storeNum,jdbcType=INTEGER},
+      </if>
+      <if test="warehouse != null" >
+        #{warehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="allocation != null" >
+        #{allocation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.product.ProductStore" >
+    update t_product_store
+    <set >
+      <if test="productId != null" >
+        PRODUCT_ID = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="storeNum != null" >
+        STORE_NUM = #{storeNum,jdbcType=INTEGER},
+      </if>
+      <if test="warehouse != null" >
+        WAREHOUSE = #{warehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="allocation != null" >
+        ALLOCATION = #{allocation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where STORE_ID = #{storeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.product.ProductStore" >
+    update t_product_store
+    set PRODUCT_ID = #{productId,jdbcType=INTEGER},
+      STORE_NUM = #{storeNum,jdbcType=INTEGER},
+      WAREHOUSE = #{warehouse,jdbcType=VARCHAR},
+      ALLOCATION = #{allocation,jdbcType=VARCHAR}
+    where STORE_ID = #{storeId,jdbcType=INTEGER}
+  </update>
+</mapper>

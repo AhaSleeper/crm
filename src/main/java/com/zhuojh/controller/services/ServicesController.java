@@ -72,11 +72,11 @@ public class ServicesController {
         List<SysUser> userList = sysUserService.listAll();
         map.addAttribute("page", pagination);
         map.addAttribute("userList", userList);
-        if(services.getState().equals(0)){
+        if(services.getState().equals(0)){//服务分配
             return "services/assign";
-        } else if(services.getState().equals(3)){
+        } else if(services.getState().equals(3)){//服务反馈
             return "services/feedBack";
-        } else  if(services.getState().equals(4)){
+        } else  if(services.getState().equals(4)){//服务归档
             return "services/file";
         } else return null;
     }
@@ -175,6 +175,12 @@ public class ServicesController {
         else return new JsonData(true, "删除失败", null);
     }
 
+    /**
+     * 客户服务分析
+     * @param services
+     * @param modelMap
+     * @return
+     */
     @RequestMapping("/statistics")
     public String statistics(Services services, ModelMap modelMap){
         List<Services> list = servicesService.listAll(services);

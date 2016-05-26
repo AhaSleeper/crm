@@ -26,7 +26,7 @@
                 <ul class="breadcrumb">
                     <li class="active">
                         <i class="ace-icon fa fa-user user-icon"></i>
-                        <a href="#">客户服务分析</a>
+                        <a href="#">客户构成分析</a>
                     </li>
                 </ul>
             </div>
@@ -37,13 +37,13 @@
                         <form>
                         <table class="table table-bordered">
                             <thead>
-                                <th>服务类型</th>
-                                <th>服务数量</th>
+                                <th>客户等级</th>
+                                <th>客户数量</th>
                             </thead>
                             <tbody>
-                                <tr th:each="service : ${map}">
-                                    <td th:text="${service.key}"></td>
-                                    <td th:text="${service.value}"></td>
+                                <tr th:each="customer : ${map}">
+                                    <td th:text="${customer.key}"></td>
+                                    <td th:text="${customer.value}"></td>
                                 </tr>
                             </tbody>
                         </table>

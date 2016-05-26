@@ -12,7 +12,6 @@ $(function(){
             data:data,
             success:function(data){
                 if(data.success){
-                    alert(data.msg);
                     window.location.href="/loadUserMenu";
                 } else alert(data.msg);
             }

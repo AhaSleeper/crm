@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.order.OrderDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.order.OrderDetails" >
+    <id column="ORDER_DETAIL_ID" property="orderDetailId" jdbcType="INTEGER" />
+    <result column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="INTEGER" />
+    <result column="ACCOUNT" property="account" jdbcType="INTEGER" />
+    <result column="UNIT" property="unit" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="DOUBLE" />
+    <result column="TOTAL_PRICE" property="totalPrice" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ORDER_DETAIL_ID, ORDER_ID, PRODUCT_NAME, PRODUCT_ID, ACCOUNT, UNIT, PRICE, TOTAL_PRICE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_details
+    where ORDER_DETAIL_ID = #{orderDetailId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByOrderId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select od.ORDER_DETAIL_ID, od.ORDER_ID, od.PRODUCT_NAME, od.PRODUCT_ID, od.ACCOUNT, od.UNIT, od.PRICE, od.TOTAL_PRICE from t_order_details od left join t_order o
+    on od.ORDER_ID = o.ORDER_ID where o.ORDER_ID = #{id, jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_order_details
+    where ORDER_DETAIL_ID = #{orderDetailId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.order.OrderDetails" >
+    insert into t_order_details (ORDER_DETAIL_ID, ORDER_ID, PRODUCT_NAME, 
+      PRODUCT_ID, ACCOUNT, UNIT, 
+      PRICE, TOTAL_PRICE)
+    values (#{orderDetailId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, 
+      #{productId,jdbcType=INTEGER}, #{account,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{totalPrice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.order.OrderDetails" >
+    insert into t_order_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderDetailId != null" >
+        ORDER_DETAIL_ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME,
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="account != null" >
+        ACCOUNT,
+      </if>
+      <if test="unit != null" >
+        UNIT,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="totalPrice != null" >
+        TOTAL_PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderDetailId != null" >
+        #{orderDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.order.OrderDetails" >
+    update t_order_details
+    <set >
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        ACCOUNT = #{account,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        UNIT = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPrice != null" >
+        TOTAL_PRICE = #{totalPrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ORDER_DETAIL_ID = #{orderDetailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.order.OrderDetails" >
+    update t_order_details
+    set ORDER_ID = #{orderId,jdbcType=INTEGER},
+      PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      PRODUCT_ID = #{productId,jdbcType=INTEGER},
+      ACCOUNT = #{account,jdbcType=INTEGER},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=DOUBLE},
+      TOTAL_PRICE = #{totalPrice,jdbcType=DOUBLE}
+    where ORDER_DETAIL_ID = #{orderDetailId,jdbcType=INTEGER}
+  </update>
+</mapper>

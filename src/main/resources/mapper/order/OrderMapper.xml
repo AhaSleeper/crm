@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuojh.mapper.order.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuojh.model.order.Order" >
+    <id column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+    <result column="CUSTOMER_ID" property="customerId" jdbcType="VARCHAR" />
+    <result column="ORDER_DATE" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="INTEGER" />
+    <result column="TOTAL_PRICE" property="totalPrice" jdbcType="DOUBLE" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ORDER_ID, CUSTOMER_ID, ORDER_DATE, ADDRESS, STATE, TOTAL_PRICE, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where ORDER_ID = #{orderId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhuojh.model.order.Order">
+    select <include refid="Base_Column_List" /> from t_order where CUSTOMER_ID = #{order.customerId, jdbcType=VARCHAR} order by ORDER_DATE
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_order
+    where ORDER_ID = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhuojh.model.order.Order" >
+    insert into t_order (ORDER_ID, CUSTOMER_ID, ORDER_DATE, 
+      STATE, TOTAL_PRICE, REMARK
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{customerId,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER}, #{totalPrice,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuojh.model.order.Order" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID,
+      </if>
+      <if test="orderDate != null" >
+        ORDER_DATE,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="totalPrice != null" >
+        TOTAL_PRICE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuojh.model.order.Order" >
+    update t_order
+    <set >
+      <if test="customerId != null" >
+        CUSTOMER_ID = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        ORDER_DATE = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null" >
+        TOTAL_PRICE = #{totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDER_ID = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuojh.model.order.Order" >
+    update t_order
+    set CUSTOMER_ID = #{customerId,jdbcType=VARCHAR},
+      ORDER_DATE = #{orderDate,jdbcType=TIMESTAMP},
+      STATE = #{state,jdbcType=INTEGER},
+      TOTAL_PRICE = #{totalPrice,jdbcType=DOUBLE},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ORDER_ID = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>

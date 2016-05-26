@@ -7,6 +7,7 @@ import common.page.Pagination;
 import common.web.JsonData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,6 +80,11 @@ public class CustomerController {
         else return new JsonData(true, "删除失败", null);
     }
 
+    @RequestMapping("/statisticsByType")
+    public String statisticsByType(ModelMap model){
+        model.addAttribute("map",customerService.staticsByType());
+        return "statistics/customerType";
+    }
     @InitBinder
     protected void initBinder(WebDataBinder binder) throws ServletException {
         binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {

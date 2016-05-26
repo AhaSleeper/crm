@@ -24,9 +24,13 @@
         <div class="main-content">
             <div class="breadcrumbs">
                 <ul class="breadcrumb">
-                    <li class="active">
+                    <li>
                         <i class="ace-icon fa fa-user user-icon"></i>
-                        <a href="#">客户服务分析</a>
+                        <a href="#">客户管理</a>
+                    </li>
+
+                    <li class="active">
+                        <a href="#">订单列表</a>
                     </li>
                 </ul>
             </div>
@@ -37,16 +41,30 @@
                         <form>
                         <table class="table table-bordered">
                             <thead>
-                                <th>服务类型</th>
-                                <th>服务数量</th>
+                                <th>订单编号</th>
+                                <th>日期</th>
+                                <th>送货地址</th>
+                                <th>订单总价</th>
+                                <th>状态</th>
+                                <th>操作</th>
                             </thead>
                             <tbody>
-                                <tr th:each="service : ${map}">
-                                    <td th:text="${service.key}"></td>
-                                    <td th:text="${service.value}"></td>
+                                <tr th:each="order : ${page.list}">
+                                    <td th:text="${order.orderId}"></td>
+                                    <td th:text="${#dates.format(order.orderDate,'yyyy-MM-dd')}"></td>
+                                    <td th:text="${order.address}"></td>
+                                    <td th:text="${order.totalPrice}"></td>
+                                    <td th:text="*{order.state==1}  ? '已回款':'未回款'"></td>
+                                    <td>
+                                        <a type="button" class="btn btn-success btn-xs" th:href="@{/orders/getOrderDetails(orderId=${order.orderId})}">详情</a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="page"></div>
+                        <input id="tempPageNo" type="hidden" th:value="${page.pageNo}" />
+                        <input id="tempPageSize" type="hidden" th:value="${page.pageSize}" />
+                        <input id="tempTotalPage" type="hidden" th:value="${page.totalPage}" />
                         </form>
                     </div><!--/.col-->
                 </div><!--/.row-->
@@ -57,5 +75,14 @@
 
     <div th:replace="common/htmlfoot :: htmlfoot"></div>
     <link rel="stylesheet" href="../assets/css/bootstrap.css" th:href="@{/css/page/x_pagination.css}"/>
+    <script th:src="@{/js/common.js}"></script>
+    <script>
+        $(document).ready(function() {
+            var pageNo = $("#tempPageNo").val();
+            var pageSize = $("#tempPageSize").val();
+            var totalPage = $("#tempTotalPage").val();
+            Common.method.pages.genPageNumber('searchForm',pageNo,pageSize, totalPage);
+        })
+    </script>
 </body>
 </html>

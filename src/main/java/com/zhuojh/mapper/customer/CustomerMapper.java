@@ -22,4 +22,6 @@ public interface CustomerMapper {
     int deleteByIds(List<String> idList);
 
     List<Customer> selectByPage(@Param("customer") Customer customer, @Param("page") Pagination pagination);
+
+    List<Customer> selectAll();
 }

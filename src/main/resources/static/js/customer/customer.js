@@ -367,6 +367,29 @@ jQuery(function($) {
                 }
             },
             position:"last"
+        }).navButtonAdd(pager_selector,{
+            caption:"",
+            buttonicon:"ace-icon fa fa-comments",
+            onClickButton:function(){
+                var rows = $(grid_selector).jqGrid("getGridParam","selarrrow");
+                if(rows.length>1){
+                    alert("每次只能选择一条记录");
+                    return;
+                }
+                var selectData = new Array();
+                var ids = '';
+                var rowData;
+                for(var i in rows){
+                    rowData = $(grid_selector).jqGrid("getRowData", rows[i]);
+                    ids = ids+rowData.customerId+",";
+                }
+                if(ids !=''){
+                    window.open("/orders/list?customerId="+$(grid_selector).jqGrid("getRowData", rows[0]).customerId,"_self");
+                } else {
+                    alert("请选择记录!");
+                }
+            },
+            position:"last"
         })
 
 

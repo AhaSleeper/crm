@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/4/24.
@@ -46,5 +48,25 @@ public class CustomerServiceImpl implements CustomerService{
         List<Customer> list = customerMapper.selectByPage(customer, pagination);
         pagination.setList(list);
         return pagination;
+    }
+
+    /**
+     * 统计客户构成
+     * @return
+     */
+    @Override
+    public Map staticsByType() {
+        List<Customer> list = customerMapper.selectAll();
+        Map<String, Integer> map = new HashMap<>();
+        String rank = null;
+        for(Customer customer : list){
+            rank = customer.getRank();
+            if(map.containsKey(rank)){
+                map.put(rank,(map.get(rank)));
+            } else {
+                map.put(rank,1);
+            }
+        }
+        return map;
     }
 }

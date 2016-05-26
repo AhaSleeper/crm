@@ -50,6 +50,10 @@
     select <include refid="Base_Column_List" />
     from t_customer order by CREATE_TIME
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from t_customer order by CREATE_TIME
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_customer
     where CUSTOMER_ID = #{customerId,jdbcType=VARCHAR}

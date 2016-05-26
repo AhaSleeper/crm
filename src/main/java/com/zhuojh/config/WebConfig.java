@@ -20,7 +20,8 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     @Bean
     public MappedInterceptor getMappedInterceptor() {
         MappedInterceptor interceptor = new MappedInterceptor(new String[]{"/","/user/**","/data/**","/role/**","/menu/**","/loadUserMenu",
-                "/customer/**","/contact/**","/contactHistory/**","/customerDevPlan/**","/salesOppotunity/**","/services/**"}, authInterceptor);
+                "/customer/**","/contact/**","/contactHistory/**","/customerDevPlan/**",
+                "/salesOppotunity/**","/services/**","/orders/**","/products/**"}, authInterceptor);
         return interceptor;
     }
 }

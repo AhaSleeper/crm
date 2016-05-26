@@ -74,6 +74,10 @@
         <mapper resource="mapper/sales/SalesOppotunityMapper.xml"/>
         <mapper resource="mapper/sales/CustomerDevPlanMapper.xml" />
         <mapper resource="mapper/services/ServicesMapper.xml" />
+        <mapper resource="mapper/product/ProductMapper.xml" />
+        <mapper resource="mapper/product/ProductStoreMapper.xml" />
+        <mapper resource="mapper/order/OrderMapper.xml" />
+        <mapper resource="mapper/order/OrderDetailsMapper.xml" />
     </mappers>
 
 </configuration>
